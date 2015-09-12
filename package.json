@@ -1,12 +1,7 @@
 {
   "name": "basebuild-angular",
-  "private": "true",
-  "version": "0.0.1",
-  "dependencies": {},
-  "scripts": {
-    "test": "gulp test"
-  },
-  "devDependencies": {
+  "version": "0.0.2",
+  "dependencies": {
     "browser-sync": "~2.1.4",
     "browser-sync-spa": "~1.0.2",
     "chalk": "~0.5.1",
@@ -56,6 +51,12 @@
     "uglify-save-license": "~0.4.1",
     "wiredep": "~2.2.0",
     "wrench": "~1.5.8"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "devDependencies": {
+
   },
   "optionalDependencies": {
     "karma-notification-reporter": "0.0.1",
