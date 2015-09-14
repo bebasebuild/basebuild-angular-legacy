@@ -1,0 +1,20 @@
+@mixin no-box-shadow() {
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+@mixin single-box-shadow($color : #333333, $hoff : 0px, $voff : 0px, $blur : 5px, $spread : false, $inset : false) {
+	@if ($inset == true) { $inset : inset; } @else { $inset : null; }
+	-webkit-box-shadow: $inset $hoff $voff $blur $spread $color;
+  -moz-box-shadow: $inset $hoff $voff $blur $spread $color;
+  box-shadow: $inset $hoff $voff $blur $spread $color;
+}
+
+@mixin boxShadow($val){
+  box-shadow         : $val;
+  -webkit-box-shadow : $val;
+  -moz-box-shadow    : $val;
+  -ms-box-shadow     : $val;
+  -o-box-shadow      : $val;
+}
