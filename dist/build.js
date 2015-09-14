@@ -1,12 +1,12 @@
 'use strict';
 
-var gulp = require('gulp');
-
 var $ = require('gulp-load-plugins')({
-  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
+  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del', '!gulp']
 });
 
 module.exports = function(options) {
+  var gulp = require(options.modules.gulp);
+
   gulp.task('partials', function () {
     return gulp.src([
       options.src + '/app/**/*.html',

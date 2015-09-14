@@ -1,9 +1,9 @@
 'use strict';
 
-var gulp          = require('gulp');
 var browserSync   = require('browser-sync');
 var path          = require('path');
-var scriptsModule = null
+var scriptsModule = null;
+var gulp          = null;
 
 function isOnlyChange(event) {
   return event.type === 'changed';
@@ -30,7 +30,7 @@ function watchFiles (options){
     if(isOnlyChange(event)) {
       var fullDest  = options.tmp + '/serve/' + path.relative(options.src, event.path).replace(/\.\.\//g, '');
       fullDest      = path.dirname( fullDest );
-      scriptsModule.buildScripts({ src: event.path, dest: fullDest, options: options })
+      scriptsModule.buildScripts({ src: event.path, dest: fullDest, buildOptions: options })
     } else {
       gulp.start('inject');
     }
@@ -46,7 +46,7 @@ function watchFiles (options){
     if(isOnlyChange(event)) {
       var fullDest  = options.tmp + '/serve/' + path.relative(options.src, event.path).replace(/\.\.\//g, '');
       fullDest      = path.dirname( fullDest );
-      scriptsModule.buildCJSX({ src: event.path, dest: fullDest, options: options })
+      scriptsModule.buildCJSX({ src: event.path, dest: fullDest, buildOptions: options })
     } else {
       gulp.start('inject');
     }
@@ -55,6 +55,7 @@ function watchFiles (options){
 
 module.exports = function(options) {
   scriptsModule = require(options.modules.scripts)(options);
+  gulp = require(options.modules.gulp);
 
   gulp.task('watch', ['inject'], function(){
     watchFiles(options);

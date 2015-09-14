@@ -1,14 +1,15 @@
 'use strict';
 
-var gulp = require('gulp');
+
 var browserSync = require('browser-sync');
 var browserSyncSpa = require('browser-sync-spa');
 
 var util = require('util');
-
 var middleware = require('./proxy')();
 
 module.exports = function(options) {
+
+  var gulp = require(options.modules.gulp);
 
   function browserSyncInit(baseDir, browser) {
     browser = browser === undefined ? 'default' : browser;
@@ -17,7 +18,7 @@ module.exports = function(options) {
     if(baseDir === options.src || (util.isArray(baseDir) && baseDir.indexOf(options.src) !== -1)) {
       routes = {
         '/bower_components': 'bower_components',
-        '/environment'     : 'dev/serve/app/project/scripts/environment'
+        '/environment'     : 'builds/dev/serve/app/project/scripts/environment'
       };
     }
 

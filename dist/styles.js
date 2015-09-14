@@ -1,6 +1,5 @@
 'use strict';
 
-var gulp = require('gulp');
 var browserSync = require('browser-sync');
 
 var $ = require('gulp-load-plugins')();
@@ -8,6 +7,8 @@ var $ = require('gulp-load-plugins')();
 var wiredep = require('wiredep').stream;
 
 module.exports = function(options) {
+  var gulp = require(options.modules.gulp);
+
   gulp.task('styles', function () {
     var sassOptions = {
       style: 'expanded'

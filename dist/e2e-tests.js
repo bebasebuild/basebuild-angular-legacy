@@ -1,12 +1,13 @@
 'use strict';
 
-var gulp = require('gulp');
-
 var $ = require('gulp-load-plugins')();
 
 var browserSync = require('browser-sync');
 
 module.exports = function(options) {
+
+  var gulp = require(options.modules.gulp);
+
   // Downloads the selenium webdriver
   gulp.task('webdriver-update', $.protractor.webdriver_update);
 

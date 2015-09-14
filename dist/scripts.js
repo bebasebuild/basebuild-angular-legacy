@@ -1,6 +1,5 @@
 'use strict';
 
-var gulp = require('gulp');
 var browserSync = require('browser-sync');
 
 var $    = require('gulp-load-plugins')();
@@ -9,9 +8,10 @@ var cjsx = require('gulp-cjsx');
 
 
 function buildScripts (params) {
-
   var params  = params         || {};
-  var options = params.options || {};
+  var options = params.buildOptions || {};
+  // console.log('params.options', params);
+  var gulp    = require(options.modules.gulp);
   var dest    = params.dest    || options.tmp + '/serve/app';
   var src     = params.src     || options.src + '/app/**/*.coffee';
 
@@ -30,6 +30,7 @@ function buildScripts (params) {
 function buildCJSX (params) {
   var params  = params              || {};
   var options = params.buildOptions || {};
+  var gulp    = require(options.modules.gulp);
   var dest    = params.dest    || options.tmp + '/serve/app';
   var src     = params.src     || options.src + '/app/**/*.cjsx';
 
@@ -42,6 +43,8 @@ function buildCJSX (params) {
 
 
 var Scripts = function(buildOptions) {
+
+  var gulp    = require(buildOptions.modules.gulp);
 
   gulp.task('scripts', function(){
     return buildScripts({buildOptions: buildOptions});

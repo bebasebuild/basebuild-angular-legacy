@@ -1,6 +1,5 @@
 'use strict';
 
-var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
 
@@ -10,6 +9,8 @@ var concat = require('concat-stream');
 var _ = require('lodash');
 
 module.exports = function(options) {
+  var gulp = require(options.modules.gulp);
+
   function listFiles(callback) {
     var wiredepOptions = _.extend({}, options.wiredep, {
       dependencies: true,
