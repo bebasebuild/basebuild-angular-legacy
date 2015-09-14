@@ -79,7 +79,9 @@ module.exports = function(){
     scripts   : './scripts.js',
     styles    : './styles.js',
     unitTests : './unit-tests.js',
-    watch     : './watch.js'
+    watch     : './watch.js',
+    server    : './server.js',
+    gulp      : 'gulp'
   }
 
 
