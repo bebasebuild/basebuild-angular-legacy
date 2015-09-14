@@ -1,6 +1,6 @@
 {
   "name": "basebuild-angular",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "dependencies": {
     "browser-sync": "~2.1.4",
     "browser-sync-spa": "~1.0.2",
@@ -55,9 +55,7 @@
   "scripts": {
     "test": "gulp test"
   },
-  "devDependencies": {
-
-  },
+  "devDependencies": {},
   "optionalDependencies": {
     "karma-notification-reporter": "0.0.1",
     "karma-verbose-reporter": "0.0.2",
