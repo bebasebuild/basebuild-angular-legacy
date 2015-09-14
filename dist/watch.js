@@ -39,6 +39,18 @@ function watchFiles (options){
   gulp.watch(options.src + '/app/**/*.html', function(event) {
     browserSync.reload(event.path);
   });
+
+  gulp.watch([
+    options.src + '/app/**/*.cjsx',
+  ], function(event) {
+    if(isOnlyChange(event)) {
+      var fullDest  = options.tmp + '/serve/' + path.relative(options.src, event.path).replace(/\.\.\//g, '');
+      fullDest      = path.dirname( fullDest );
+      scriptsModule.buildCJSX({ src: event.path, dest: fullDest, options: options })
+    } else {
+      gulp.start('inject');
+    }
+  });
 }
 
 module.exports = function(options) {
@@ -48,7 +60,7 @@ module.exports = function(options) {
     watchFiles(options);
   });
 
-  gulp.task('watchTests', ['scripts'],  function(){
+  gulp.task('watchTests', ['scripts', 'cjsx'],  function(){
     watchFiles(options);
   });
 };

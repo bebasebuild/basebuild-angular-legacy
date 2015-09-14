@@ -5,6 +5,7 @@ var browserSync = require('browser-sync');
 
 var $    = require('gulp-load-plugins')();
 var _    = require('lodash');
+var cjsx = require('gulp-cjsx');
 
 
 function buildScripts (params) {
@@ -26,13 +27,36 @@ function buildScripts (params) {
 
 }
 
+function buildCJSX (params) {
+  var params  = params              || {};
+  var options = params.buildOptions || {};
+  var dest    = params.dest    || options.tmp + '/serve/app';
+  var src     = params.src     || options.src + '/app/**/*.cjsx';
 
-var Scripts = function(options) {
+  return gulp.src(src)
+    .pipe(cjsx({bare: true}).on('error', options.errorHandler('CoffeeScriptX')))
+    .pipe(gulp.dest(dest))
+    .pipe(browserSync.reload({ stream: true }))
+    .pipe($.size());
+}
+
+
+var Scripts = function(buildOptions) {
+
   gulp.task('scripts', function(){
-    return buildScripts({options: options});
+    return buildScripts({buildOptions: buildOptions});
   });
 
-  return { buildScripts: buildScripts }
+  gulp.task('cjsx', function() {
+    return buildCJSX({buildOptions: buildOptions})
+  });
+
+  var exports = {
+    buildScripts: buildScripts,
+    buildCJSX   : buildCJSX
+  };
+
+  return exports;
 };
 
-module.exports = Scripts
+module.exports = Scripts;
