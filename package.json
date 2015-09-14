@@ -1,8 +1,10 @@
 {
   "name": "basebuild-angular",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "main": "./dist/main.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "browser-sync": "~2.1.4",
     "browser-sync-spa": "~1.0.2",
