@@ -81,22 +81,20 @@ module.exports = function(){
     styles    : { defaultValue : './styles.js'     },
     unitTests : { defaultValue : './unit-tests.js' },
     watch     : { defaultValue : './watch.js'      },
-    server    : { defaultValue : './server.js'     },
+    server    : {
+      defaultValue : './server.js',
+      routes       : {
+        '/bower_components': 'bower_components'
+      }
+    },
     gulp      : { defaultValue : 'gulp'            }
   }
 
 
-  defaultOptions.modules = {
-    build     : defaultOptions.modulesData.build.defaultValue,
-    e2eTest   : defaultOptions.modulesData.e2eTest.defaultValue,
-    inject    : defaultOptions.modulesData.inject.defaultValue,
-    proxy     : defaultOptions.modulesData.proxy.defaultValue,
-    scripts   : defaultOptions.modulesData.scripts.defaultValue,
-    styles    : defaultOptions.modulesData.styles.defaultValue,
-    unitTests : defaultOptions.modulesData.unitTests.defaultValue,
-    watch     : defaultOptions.modulesData.watch.defaultValue,
-    server    : defaultOptions.modulesData.server.defaultValue,
-    gulp      : defaultOptions.modulesData.gulp.defaultValue
+  defaultOptions.modules = {}
+
+  for(key in defaultOptions.modulesData){
+    defaultOptions.modules[key] = defaultOptions.modulesData[key].defaultValue;
   }
 
 
