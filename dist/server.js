@@ -16,10 +16,7 @@ module.exports = function(options) {
 
     var routes = null;
     if(baseDir === options.src || (util.isArray(baseDir) && baseDir.indexOf(options.src) !== -1)) {
-      routes = {
-        '/bower_components': 'bower_components',
-        '/environment'     : 'builds/dev/serve/app/project/scripts/environment'
-      };
+      routes = options.modulesData.server.routes || {};
     }
 
     var server = {
