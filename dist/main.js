@@ -15,14 +15,15 @@ module.exports = function(options){
   */
   for(key in options.modules){
     var value    = options.modules[key];
-    var category = '';
+    var category = chalk.green(' external ');
 
-    if(value === defaultOptions.modulesData[key].defaultValue){
-      category = chalk.cyan(' default ');
+    if(value === defaultOptions.modulesData[key].defaultValue && key != 'gulp'){
+      category = chalk.cyan(' built-in ');
       require(value)(options);
-    } else if(key != 'gulp'){
-      category = chalk.blue(' external ');
-      require( process.cwd() + value )
+    } else if(key === 'gulp') {
+      require(value);
+    } else {
+      require( process.cwd() + value );
     }
 
     console.log( baseBuildName + ' required' + category + chalk.magenta(value) + ' module');
