@@ -1,17 +1,33 @@
 
+angular.module 'BaseBuildWrapper.vendors' , [
+  'ngAnimate'
+  'ngCookies'
+  'ngTouch'
+  'ngSanitize'
+  'ngResource'
+  'ui.router'
+  'ui.bootstrap'
+  'oitozero.ngSweetAlert'
+  'hQueue'
+  'hAnalytics'
+  'ngToast'
+  'angular-loading-bar'
+  'objectToArray'
+]
+
 # =============================================
 # Modules
 # =============================================
-angular.module 'BaseBuildWrapper.controllers' , []
-angular.module 'BaseBuildWrapper.filters'     , []
-angular.module 'BaseBuildWrapper.factories'   , ['oitozero.ngSweetAlert']
-angular.module 'BaseBuildWrapper.constants'   , []
-angular.module 'BaseBuildWrapper.services'    , []
-angular.module 'BaseBuildWrapper.directives'  , []
-angular.module 'BaseBuildWrapper.mocks'       , []
-angular.module 'BaseBuildWrapper.i18n'        , []
-angular.module 'BaseBuildWrapper.configs'     , ['angular-loading-bar']
-angular.module 'BaseBuildWrapper.providers'   , []
+angular.module 'BaseBuildWrapper.controllers' , ['BaseBuildWrapper.vendors']
+angular.module 'BaseBuildWrapper.filters'     , ['BaseBuildWrapper.vendors']
+angular.module 'BaseBuildWrapper.factories'   , ['BaseBuildWrapper.vendors']
+angular.module 'BaseBuildWrapper.constants'   , ['BaseBuildWrapper.vendors']
+angular.module 'BaseBuildWrapper.services'    , ['BaseBuildWrapper.vendors']
+angular.module 'BaseBuildWrapper.directives'  , ['BaseBuildWrapper.vendors']
+angular.module 'BaseBuildWrapper.mocks'       , ['BaseBuildWrapper.vendors']
+angular.module 'BaseBuildWrapper.i18n'        , ['BaseBuildWrapper.vendors']
+angular.module 'BaseBuildWrapper.configs'     , ['BaseBuildWrapper.vendors']
+angular.module 'BaseBuildWrapper.providers'   , ['BaseBuildWrapper.vendors']
 
 
 
@@ -36,18 +52,6 @@ angular.module 'BaseBuildWrapper.scripts'     , [
 # Main Module
 # =============================================
 angular.module 'BaseBuildWrapper', [
-  'ngAnimate'
-  'ngCookies'
-  'ngTouch'
-  'ngSanitize'
-  'ngResource'
-  'ui.router'
-  'ui.bootstrap'
-  'oitozero.ngSweetAlert'
   'BaseBuildWrapper.scripts'
-  'hQueue'
-  'hAnalytics'
-  'ngToast'
-  'angular-loading-bar'
-  'objectToArray'
-  ]
+  'BaseBuildWrapper.vendors'
+]
