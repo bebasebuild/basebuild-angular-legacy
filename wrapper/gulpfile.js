@@ -68,7 +68,20 @@ options.excludes = {
 };
 
 options.modules = {
-  gulp    : '../wrapper/node_modules/gulp'
+  gulp : '../wrapper/node_modules/gulp'
+}
+
+if(gutil.env.prod){
+  options.modules.gulp = 'gulp'
+}
+
+options.modulesData = {
+  server : {
+    routes : {
+      '/bower_components': 'bower_components',
+      '/environment'     : 'builds/dev/serve/app/project/scripts/environment'
+    }
+  }
 }
 
 /*
@@ -76,8 +89,12 @@ options.modules = {
   Read gulp files
   ==========================
 */
-require('../dist/main.js')(options);
+var basebuildMainFile = '../dist/main.js';
+if(gutil.env.prod){
+  basebuildMainFile = 'basebuild-angular';
+}
 
+require(basebuildMainFile)(options);
 
 
 /*
