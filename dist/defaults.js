@@ -71,17 +71,32 @@ module.exports = function(){
     modules
     ==========================
   */
+
+  defaultOptions.modulesData = {
+    build     : { defaultValue : './build.js'      },
+    e2eTest   : { defaultValue : './e2e-tests.js'  },
+    inject    : { defaultValue : './inject.js'     },
+    proxy     : { defaultValue : './proxy.js'      },
+    scripts   : { defaultValue : './scripts.js'    },
+    styles    : { defaultValue : './styles.js'     },
+    unitTests : { defaultValue : './unit-tests.js' },
+    watch     : { defaultValue : './watch.js'      },
+    server    : { defaultValue : './server.js'     },
+    gulp      : { defaultValue : 'gulp'            }
+  }
+
+
   defaultOptions.modules = {
-    build     : './build.js',
-    e2eTest   : './e2e-tests.js',
-    inject    : './inject.js',
-    proxy     : './proxy.js',
-    scripts   : './scripts.js',
-    styles    : './styles.js',
-    unitTests : './unit-tests.js',
-    watch     : './watch.js',
-    server    : './server.js',
-    gulp      : 'gulp'
+    build     : defaultOptions.modulesData.build.defaultValue,
+    e2eTest   : defaultOptions.modulesData.e2eTest.defaultValue,
+    inject    : defaultOptions.modulesData.inject.defaultValue,
+    proxy     : defaultOptions.modulesData.proxy.defaultValue,
+    scripts   : defaultOptions.modulesData.scripts.defaultValue,
+    styles    : defaultOptions.modulesData.styles.defaultValue,
+    unitTests : defaultOptions.modulesData.unitTests.defaultValue,
+    watch     : defaultOptions.modulesData.watch.defaultValue,
+    server    : defaultOptions.modulesData.server.defaultValue,
+    gulp      : defaultOptions.modulesData.gulp.defaultValue
   }
 
 

@@ -68,7 +68,6 @@ options.excludes = {
 };
 
 options.modules = {
-  scripts : './scripts',
   gulp    : '../wrapper/node_modules/gulp'
 }
 
