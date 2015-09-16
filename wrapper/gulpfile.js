@@ -68,7 +68,8 @@ options.excludes = {
 };
 
 options.modules = {
-  gulp : '../wrapper/node_modules/gulp'
+  gulp  : '../wrapper/node_modules/gulp'
+  //karma : 'karma.conf.js'
 }
 
 if(gutil.env.prod){
