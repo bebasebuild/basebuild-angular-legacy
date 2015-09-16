@@ -61,7 +61,6 @@
   },
   "devDependencies": {},
   "optionalDependencies": {
-    "karma-notification-reporter": "0.0.1",
     "karma-verbose-reporter": "0.0.2",
     "karma-dhtml-reporter": "^0.2.5",
     "karma-html-reporter": "^0.2.6",
