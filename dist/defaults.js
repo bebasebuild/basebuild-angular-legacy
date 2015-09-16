@@ -73,27 +73,29 @@ module.exports = function(){
   */
 
   defaultOptions.modulesData = {
-    build     : { defaultValue : './build.js'      },
-    e2eTest   : { defaultValue : './e2e-tests.js'  },
-    inject    : { defaultValue : './inject.js'     },
-    proxy     : { defaultValue : './proxy.js'      },
-    scripts   : { defaultValue : './scripts.js'    },
-    styles    : { defaultValue : './styles.js'     },
-    unitTests : { defaultValue : './unit-tests.js' },
-    watch     : { defaultValue : './watch.js'      },
+    build     : { defaultValue : './build.js'     },
+    e2eTest   : { defaultValue : './e2e-tests.js' },
+    inject    : { defaultValue : './inject.js'    },
+    proxy     : { defaultValue : './proxy.js'     },
+    scripts   : { defaultValue : './scripts.js'   },
+    styles    : { defaultValue : './styles.js'    },
+    unitTests : { defaultValue : './unit-tests.js'},
+    watch     : { defaultValue : './watch.js'     },
     server    : {
       defaultValue : './server.js',
       routes       : {
         '/bower_components': 'bower_components'
       }
     },
-    gulp      : { defaultValue : 'gulp'            }
+    gulp      : { defaultValue : 'gulp'            },
+    karma     : { defaultValue : './karma.conf.js' , notStart: true}
   }
 
 
   defaultOptions.modules = {}
 
   for(key in defaultOptions.modulesData){
+    defaultOptions.modulesData[key].isDefault = true;
     defaultOptions.modules[key] = defaultOptions.modulesData[key].defaultValue;
   }
 

@@ -9,7 +9,7 @@ var concat = require('concat-stream');
 var _ = require('lodash');
 
 module.exports = function(options) {
-  var gulp = require(options.modules.gulp);
+  var gulp        = require(options.modules.gulp);
 
   function listFiles(callback) {
     var wiredepOptions = _.extend({}, options.wiredep, {
@@ -48,13 +48,17 @@ module.exports = function(options) {
 
   function runTests (testOptions) {
     listFiles(function(files) {
+      var karmaModuleData   =  options.modulesData['karma'];
+      var karmaConfFileName = karmaModuleData.isDefault ? __dirname  + karmaModuleData.requireName.replace(/^./, '') : karmaModuleData.requireName;
+
       karma.server.start({
-        configFile: __dirname + '/../karma.conf.js',
+        configFile:  karmaConfFileName,
         files: files,
         singleRun: testOptions.singleRun,
         autoWatch: !testOptions.singleRun,
-        browsers : testOptions.browsers
-      }, function() { testOptions.done(); });
+        browsers : testOptions.browsers,
+        basePath : process.cwd()
+      }, testOptions.done );
     });
   }
 
