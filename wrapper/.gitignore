@@ -6,3 +6,4 @@ dist/
 dev/
 tests/
 builds/
+coverage/
