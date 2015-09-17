@@ -1,6 +1,6 @@
 {
   "name": "basebuild-angular",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "main": "./dist/main.js",
   "files": [
     "dist"
@@ -55,9 +55,7 @@
     "test": "gulp test"
   },
   "devDependencies": {},
-  "optionalDependencies": {
-
-  },
+  "optionalDependencies": {},
   "engines": {
     "node": ">=0.10.0"
   }
