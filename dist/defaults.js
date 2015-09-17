@@ -8,20 +8,21 @@ module.exports = function(){
     ==========================
   */
   var defaultOptions = {
-    src          : 'src',
-    dist         : 'builds/release',
-    tmp          : 'builds/dev',
-    e2e          : 'e2e',
+    mainAngularModule : 'MainAngularModule',
+    src               : 'src',
+    dist              : 'builds/release',
+    tmp               : 'builds/dev',
+    e2e               : 'e2e',
 
-    srcEnv       : 'builds/dev/serve/app/project/scripts/environment',
-    distEnv      : 'builds/release',
+    srcEnv            : 'builds/dev/serve/app/project/scripts/environment',
+    distEnv           : 'builds/release',
 
-    componentSrc : '',
-    componentDest: '',
-    componentDist: '',
-    componentName: '',
+    componentSrc      : '',
+    componentDest     : '',
+    componentDist     : '',
+    componentName     : '',
 
-    errorHandler : function(title) {
+    errorHandler      : function(title) {
       return function(err) {
         gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
         this.emit('end');
@@ -60,7 +61,7 @@ module.exports = function(){
     stylesFromIndexImport: [
       defaultOptions.src + '/app/index.scss',
       defaultOptions.src + '/app/vendor.scss',
-      defaultOptions.src + '/app/' + defaultOptions.componentName,
+      //defaultOptions.src + '/app/' + defaultOptions.componentName,
       defaultOptions.src + '/app/project/styles/**/*.scss'
     ]
   };
@@ -81,6 +82,7 @@ module.exports = function(){
     styles    : { defaultValue : './styles.js'    },
     unitTests : {
       defaultValue : './unit-tests.js',
+      addDeps      : [],
       testConfig   : {
         singleRun : true,
         browsers  : ['Chrome']
@@ -97,11 +99,12 @@ module.exports = function(){
         '/bower_components': 'bower_components'
       }
     },
-    gulp      : { defaultValue : 'gulp'  , notStart: true},
+    gulp      : { defaultValue : 'gulp'  , notStart: true, isExternal: true},
     karma     : {
       defaultValue : 'karma' ,
       notStart     : true,
-      configFile   : 'karma.conf.js'
+      configFile   : 'karma.conf.js',
+      isExternal   : true
    }
   }
 

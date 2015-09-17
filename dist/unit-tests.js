@@ -2,9 +2,7 @@
 
 
 var $ = require('gulp-load-plugins')();
-
 var wiredep = require('wiredep');
-
 var concat = require('concat-stream');
 var _ = require('lodash');
 
@@ -19,9 +17,7 @@ module.exports = function(options) {
     });
     var bowerDeps = wiredep(wiredepOptions);
 
-    var additionalDeps = [
-      'bower_components/angular-input-masks/angular-input-masks-standalone.js'
-    ]
+    var additionalDeps = options.modulesData['unitTests'].addDeps || [];
 
     var specFiles = options.specFiles || [];
 

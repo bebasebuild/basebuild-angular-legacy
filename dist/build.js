@@ -8,6 +8,7 @@ module.exports = function(options) {
   var gulp = require(options.modules.gulp);
 
   gulp.task('partials', function () {
+
     return gulp.src([
       options.src + '/app/**/*.html',
       options.tmp + '/serve/app/**/*.html'
@@ -18,7 +19,7 @@ module.exports = function(options) {
         quotes: true
       }))
       .pipe($.angularTemplatecache('templateCacheHtml.js', {
-        module: 'HolmesScanAssistant',
+        module: options.mainAngularModule,
         root: 'app'
       }))
       .pipe(gulp.dest(options.tmp + '/partials/'));

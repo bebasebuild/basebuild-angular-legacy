@@ -10,13 +10,14 @@ var wrench = require('wrench');
   ==========================
 */
 var options = {
-  src          : 'src',
-  dist         : '../server/src/main/resources/static',
-  tmp          : 'builds/dev',
-  e2e          : 'e2e',
+  mainAngularModule : 'BaseBuildWrapper',
+  src               : 'src',
+  dist              : 'builds/release',
+  tmp               : 'builds/dev',
+  e2e               : 'e2e',
 
-  srcEnv       : 'dev/serve/app/project/scripts/environment',
-  distEnv      : '../server/src/main/resources/static/',
+  srcEnv            : 'dev/serve/app/project/scripts/environment',
+  distEnv           : 'builds/release/',
 
 
   errorHandler : function(title) {
