@@ -11,7 +11,6 @@ describe '\nConfig: Angular Loading Bar\n', ()->
   # =============================================
   beforeEach module('ui.router')
   beforeEach module('ngToast')
-  beforeEach module('pascalprecht.translate')
   beforeEach module('angular-loading-bar')
 
 
