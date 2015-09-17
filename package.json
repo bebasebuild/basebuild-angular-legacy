@@ -51,6 +51,17 @@
     "wiredep": "~2.2.0",
     "wrench": "~1.5.8"
   },
+  "keywords": [
+    "basebuild",
+    "build",
+    "base",
+    "angularJS",
+    "angular",
+    "timeoutzero",
+    "tz",
+    "basebuild-angular"
+  ],
+  "license": "MIT",
   "scripts": {
     "test": "gulp test"
   },
