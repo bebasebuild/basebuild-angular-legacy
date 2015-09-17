@@ -5,7 +5,21 @@ module.exports = function(config) {
   var configuration = {
     autoWatch : false,
 
+    logLevel: config.LOG_ERROR,
+
     frameworks: ['jasmine'],
+
+    // files : [
+    //   "builds/dev/serve/app/**/*.js"
+    // ],
+
+
+    phantomjsLauncher: {
+      debug: true,
+
+      // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
+      exitOnResourceError: true
+    },
 
     // reporter options
     nyanReporter: {
@@ -31,7 +45,7 @@ module.exports = function(config) {
     },
 
     dhtmlReporter: {
-      'outputFile' : '/tests/result/dhtmlReport.html',
+      'outputFile' : '/tests/dhtmlReport.html',
       'exclusiveSections': true,
       'openReportInBrowser': false
     },
@@ -56,10 +70,7 @@ module.exports = function(config) {
       'karma-ng-html2js-preprocessor',
       'karma-coverage',
       "karma-chrome-launcher",
-      // "karma-notification-reporter",
-      // "karma-verbose-reporter",
       "karma-dhtml-reporter",
-      'karma-html-reporter',
       'karma-nyan-reporter'
     ],
 
@@ -72,11 +83,8 @@ module.exports = function(config) {
     reporters: [
       // 'progress',
       'coverage',
-      // 'say',
-      // 'notification',
-      // 'verbose',
       'nyan',
-      'html',
+      // 'html',
       'DHTML'
     ],
 
@@ -85,7 +93,7 @@ module.exports = function(config) {
       type   : 'lcov',
       subdir : 'report-lcov',
       // output path
-      dir : 'tests/coverage/',
+      dir : 'coverage/',
       instrumenterOptions: {
         istanbul: { noCompact: true }
       }
@@ -94,15 +102,7 @@ module.exports = function(config) {
 
     exclude: [
       'app/i18n/pt-BR.json'
-    ],
-
-    osxReporter: {
-      host: "localhost",
-      port: 1337,
-      activate: function(results, browser) {
-        return results.failed > 0 ? 'com.apple.Terminal' : 'com.apple.Safari';
-      }
-    }
+    ]
 
   };
 

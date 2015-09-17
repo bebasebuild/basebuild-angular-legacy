@@ -13,7 +13,7 @@ module.exports = function(){
     tmp          : 'builds/dev',
     e2e          : 'e2e',
 
-    srcEnv       : 'dev/serve/app/project/scripts/environment',
+    srcEnv       : 'builds/dev/serve/app/project/scripts/environment',
     distEnv      : 'builds/release',
 
     componentSrc : '',
@@ -79,7 +79,17 @@ module.exports = function(){
     proxy     : { defaultValue : './proxy.js'     },
     scripts   : { defaultValue : './scripts.js'   },
     styles    : { defaultValue : './styles.js'    },
-    unitTests : { defaultValue : './unit-tests.js'},
+    unitTests : {
+      defaultValue : './unit-tests.js',
+      testConfig   : {
+        singleRun : true,
+        browsers  : ['Chrome']
+      },
+      testAutoConfig : {
+        singleRun : false,
+        browsers  : ['Chrome']
+      }
+    },
     watch     : { defaultValue : './watch.js'     },
     server    : {
       defaultValue : './server.js',
@@ -87,8 +97,12 @@ module.exports = function(){
         '/bower_components': 'bower_components'
       }
     },
-    gulp      : { defaultValue : 'gulp'            },
-    karma     : { defaultValue : './karma.conf.js' , notStart: true}
+    gulp      : { defaultValue : 'gulp'  , notStart: true},
+    karma     : {
+      defaultValue : 'karma' ,
+      notStart     : true,
+      configFile   : 'karma.conf.js'
+   }
   }
 
 

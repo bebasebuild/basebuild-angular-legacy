@@ -4,12 +4,13 @@
 var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep');
-var karma = require('karma');
+
 var concat = require('concat-stream');
 var _ = require('lodash');
 
 module.exports = function(options) {
   var gulp        = require(options.modules.gulp);
+  var karma       = require(options.modules.karma);
 
   function listFiles(callback) {
     var wiredepOptions = _.extend({}, options.wiredep, {
@@ -48,8 +49,8 @@ module.exports = function(options) {
 
   function runTests (testOptions) {
     listFiles(function(files) {
-      var karmaModuleData   =  options.modulesData['karma'];
-      var karmaConfFileName = karmaModuleData.isDefault ? __dirname  + karmaModuleData.requireName.replace(/^./, '') : karmaModuleData.requireName;
+      var karmaModuleData   = options.modulesData['karma'];
+      var karmaConfFileName = process.cwd() + '/' + karmaModuleData.configFile;
 
       karma.server.start({
         configFile:  karmaConfFileName,
@@ -63,19 +64,13 @@ module.exports = function(options) {
   }
 
   gulp.task('test', ['scripts'], function(done) {
-    runTests({
-      singleRun : true,
-      done      : done,
-      browsers  : ['PhantomJS']
-    });
+    var testConfig = _.extend(options.modulesData['unitTests'].testConfig, {done : done});
+    runTests(testConfig);
   });
 
   gulp.task('test:auto', ['watchTests'], function(done) {
-    runTests({
-      singleRun : false,
-      done      : done,
-      browsers  : ['Chrome']
-    });
+    var testAutoConfig = _.extend(options.modulesData['unitTests'].testAutoConfig, {done : done});
+    runTests(testAutoConfig);
   });
 
 };

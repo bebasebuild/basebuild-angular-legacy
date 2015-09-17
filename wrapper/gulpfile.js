@@ -18,10 +18,6 @@ var options = {
   srcEnv       : 'dev/serve/app/project/scripts/environment',
   distEnv      : '../server/src/main/resources/static/',
 
-  componentSrc : '',
-  componentDest: '',
-  componentDist: '',
-  componentName: '',
 
   errorHandler : function(title) {
     return function(err) {
@@ -62,18 +58,18 @@ options.excludes = {
   stylesFromIndexImport: [
     options.src + '/app/index.scss',
     options.src + '/app/vendor.scss',
-    options.src + '/app/' + options.componentName,
     options.src + '/app/project/styles/**/*.scss'
   ]
 };
 
 options.modules = {
-  gulp  : '../wrapper/node_modules/gulp'
-  //karma : 'karma.conf.js'
+  gulp  : '../wrapper/node_modules/gulp',
+  karma : '../wrapper/node_modules/karma'
 }
 
 if(gutil.env.prod){
-  options.modules.gulp = 'gulp'
+  options.modules.gulp  = 'gulp'
+  options.modules.karma = 'karma'
 }
 
 options.modulesData = {
