@@ -7,7 +7,7 @@ var $ = require('gulp-load-plugins')();
 var wiredep = require('wiredep').stream;
 
 module.exports = function(options) {
-  var gulp = require(options.modules.gulp);
+  var gulp = require(options.modulesData['gulp'].uses);
 
   gulp.task('styles', function () {
     var sassOptions = {

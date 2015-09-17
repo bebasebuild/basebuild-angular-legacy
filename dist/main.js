@@ -13,8 +13,8 @@ module.exports = function(options){
     Read gulp files
     ==========================
   */
-  for(key in options.modules){
-    var value      = options.modules[key];
+  for(key in options.modulesData){
+    var value      = options.modulesData[key].uses;
     var category   = chalk.green(' external ');
     var useMode    = '';
 
@@ -22,7 +22,6 @@ module.exports = function(options){
     var moduleData = options.modulesData[key];
 
     !moduleData.notStart ? (useMode = 'required') : (useMode = 'using');
-
     moduleData.requireName = value;
 
     if(defaultOptions.modulesData[key] && value === defaultOptions.modulesData[key].defaultValue && !moduleData.isExternal){

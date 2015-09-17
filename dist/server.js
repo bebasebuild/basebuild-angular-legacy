@@ -9,7 +9,7 @@ var middleware = require('./proxy')();
 
 module.exports = function(options) {
 
-  var gulp = require(options.modules.gulp);
+  var gulp = require(options.modulesData['gulp'].uses);
 
   function browserSyncInit(baseDir, browser) {
     browser = browser === undefined ? 'default' : browser;

@@ -5,7 +5,7 @@ var $ = require('gulp-load-plugins')({
 });
 
 module.exports = function(options) {
-  var gulp = require(options.modules.gulp);
+  var gulp = require(options.modulesData['gulp'].uses);
 
   gulp.task('partials', function () {
 

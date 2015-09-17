@@ -113,7 +113,8 @@ module.exports = function(){
 
   for(key in defaultOptions.modulesData){
     defaultOptions.modulesData[key].isDefault = true;
-    defaultOptions.modules[key] = defaultOptions.modulesData[key].defaultValue;
+    defaultOptions.modulesData[key].uses = defaultOptions.modulesData[key].defaultValue;
+
   }
 
 

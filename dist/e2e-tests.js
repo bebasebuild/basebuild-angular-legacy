@@ -6,7 +6,7 @@ var browserSync = require('browser-sync');
 
 module.exports = function(options) {
 
-  var gulp = require(options.modules.gulp);
+  var gulp = require(options.modulesData['gulp'].uses);
 
   // Downloads the selenium webdriver
   gulp.task('webdriver-update', $.protractor.webdriver_update);

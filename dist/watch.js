@@ -54,8 +54,9 @@ function watchFiles (options){
 }
 
 module.exports = function(options) {
-  scriptsModule = require(options.modules.scripts)(options);
-  gulp = require(options.modules.gulp);
+
+  scriptsModule = require(options.modulesData['scripts'].uses)(options);
+  gulp          = require(options.modulesData['gulp'].uses);
 
   gulp.task('watch', ['inject'], function(){
     watchFiles(options);

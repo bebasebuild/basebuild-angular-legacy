@@ -7,8 +7,8 @@ var concat = require('concat-stream');
 var _ = require('lodash');
 
 module.exports = function(options) {
-  var gulp        = require(options.modules.gulp);
-  var karma       = require(options.modules.karma);
+  var gulp  = require(options.modulesData['gulp'].uses);
+  var karma = require(options.modulesData['karma'].uses);
 
   function listFiles(callback) {
     var wiredepOptions = _.extend({}, options.wiredep, {

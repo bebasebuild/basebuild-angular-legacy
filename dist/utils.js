@@ -3,7 +3,7 @@ var defaultOptions = require('./defaults.js');
 var options        = null;
 
 function requireModule (key) {
-  var moduleName = options.modules[key];
+  var moduleName = options.modulesData[key].uses;
   var data       = options.modulesData[key];
   var module     = null;
 
@@ -12,6 +12,8 @@ function requireModule (key) {
   } else {
     module = require(process.cwd() + moduleName);
   }
+
+  return module;
 }
 
 

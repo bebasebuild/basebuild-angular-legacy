@@ -63,23 +63,25 @@ options.excludes = {
   ]
 };
 
-options.modules = {
-  gulp  : '../wrapper/node_modules/gulp',
-  karma : '../wrapper/node_modules/karma'
-}
-
-if(gutil.env.prod){
-  options.modules.gulp  = 'gulp'
-  options.modules.karma = 'karma'
-}
 
 options.modulesData = {
+  gulp : {
+    uses: '../wrapper/node_modules/gulp'
+  },
+  karma: {
+    uses: '../wrapper/node_modules/karma'
+  },
   server : {
     routes : {
       '/bower_components': 'bower_components',
       '/environment'     : 'builds/dev/serve/app/project/scripts/environment'
     }
   }
+}
+
+if(gutil.env.prod){
+  options.modulesData.gulp  = 'gulp'
+  options.modulesData.karma = 'karma'
 }
 
 /*
