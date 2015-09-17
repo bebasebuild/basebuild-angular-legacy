@@ -77,7 +77,7 @@ module.exports = function(){
     build     : { defaultValue : './build.js'     },
     e2eTest   : { defaultValue : './e2e-tests.js' },
     inject    : { defaultValue : './inject.js'    },
-    proxy     : { defaultValue : './proxy.js'     },
+    proxy     : { defaultValue : './proxy.js', isEnabled : true },
     scripts   : { defaultValue : './scripts.js'   },
     styles    : { defaultValue : './styles.js'    },
     unitTests : {

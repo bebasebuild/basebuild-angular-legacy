@@ -5,11 +5,11 @@ var browserSync = require('browser-sync');
 var browserSyncSpa = require('browser-sync-spa');
 
 var util = require('util');
-var middleware = require('./proxy')();
 
 module.exports = function(options) {
 
-  var gulp = require(options.modulesData['gulp'].uses);
+  var gulp       = require(options.modulesData['gulp'].uses);
+  var middleware = require(options.modulesData['proxy'].uses)(options);
 
   function browserSyncInit(baseDir, browser) {
     browser = browser === undefined ? 'default' : browser;

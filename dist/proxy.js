@@ -70,6 +70,11 @@ function proxyMiddleware(req, res, next) {
  */
 
 // module.exports = [proxyMiddleware];
-module.exports = function() {
-  return [proxyMiddleware];
+module.exports = function(options) {
+  var proxies = [];
+  if(options.modulesData['proxy'].isEnabled){
+    proxies = [proxyMiddleware];
+  }
+
+  return proxies;
 };
