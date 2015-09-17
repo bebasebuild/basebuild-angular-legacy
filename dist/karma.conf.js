@@ -5,9 +5,21 @@ module.exports = function(config) {
   var configuration = {
     autoWatch : false,
 
-    logLevel: config.LOG_DEBUG,
+    logLevel: config.LOG_ERROR,
 
     frameworks: ['jasmine'],
+
+    // files : [
+    //   "builds/dev/serve/app/**/*.js"
+    // ],
+
+
+    phantomjsLauncher: {
+      debug: true,
+
+      // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
+      exitOnResourceError: true
+    },
 
     // reporter options
     nyanReporter: {
@@ -58,10 +70,8 @@ module.exports = function(config) {
       'karma-ng-html2js-preprocessor',
       'karma-coverage',
       "karma-chrome-launcher",
-      // "karma-notification-reporter",
-      // "karma-verbose-reporter",
       "karma-dhtml-reporter",
-      'karma-html-reporter',
+      // 'karma-html-reporter',
       'karma-nyan-reporter'
     ],
 
@@ -75,7 +85,7 @@ module.exports = function(config) {
       // 'progress',
       'coverage',
       'nyan',
-      'html',
+      // 'html',
       'DHTML'
     ],
 

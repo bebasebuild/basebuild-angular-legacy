@@ -58,7 +58,7 @@ module.exports = function(options) {
         autoWatch: !testOptions.singleRun,
         browsers : testOptions.browsers,
         basePath : process.cwd()
-      }, testOptions.done );
+      }, function(){ testOptions.done() });
     });
   }
 
