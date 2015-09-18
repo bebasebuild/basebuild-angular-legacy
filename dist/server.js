@@ -41,20 +41,24 @@ module.exports = function(options) {
   }));
 
   gulp.task('serve', ['watch'], function () {
+    console.log('Starting BrowserSync...');
     browserSyncInit([options.tmp + '/serve', options.src]);
   });
 
   gulp.task('dev', ['serve']);
 
   gulp.task('serve:dist', ['build'], function () {
+    console.log('Starting BrowserSync...');
     browserSyncInit(options.dist);
   });
 
   gulp.task('serve:e2e', ['inject'], function () {
+    console.log('Starting BrowserSync...');
     browserSyncInit([options.tmp + '/serve', options.src], []);
   });
 
   gulp.task('serve:e2e-dist', ['build'], function () {
+    console.log('Starting BrowserSync...');
     browserSyncInit(options.dist, []);
   });
 };
