@@ -5,6 +5,10 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimeoutZero/BaseBuildAngular.git"
+  },
   "dependencies": {
     "browser-sync": "~2.1.4",
     "browser-sync-spa": "~1.0.2",
@@ -63,7 +67,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "test": "gulp test"
+    "test" : "echo no tests! && exit 1"
   },
   "devDependencies": {},
   "optionalDependencies": {},
