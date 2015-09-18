@@ -27,7 +27,8 @@ module.exports = function(options){
     if(defaultOptions.modulesData[key] && value === defaultOptions.modulesData[key].defaultValue && !moduleData.isExternal){
       category = chalk.cyan(' built-in ');
     } else {
-      moduleData.isDefault = false;
+      moduleData.isDefault  = false;
+      moduleData.isExternal = true;
       moduleData.requireName = process.cwd() + "/" + value;
     }
 
