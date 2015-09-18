@@ -8,8 +8,13 @@ var util = require('util');
 
 module.exports = function(options) {
 
-  var gulp       = require(options.modulesData['gulp'].uses);
-  var middleware = require(options.modulesData['proxy'].uses)(options);
+  var gulp           = require(options.modulesData['gulp'].uses);
+  var middleware     = require(options.modulesData['proxy'].uses)(options);
+  var baseBuildUtils = require(options.modulesData['utils'].uses)(options);
+
+  function logBSStart (argument) {
+    console.log(baseBuildUtils.getBaseBuildName() + 'Starting BrowserSync...');
+  }
 
   function browserSyncInit(baseDir, browser) {
     browser = browser === undefined ? 'default' : browser;
@@ -41,24 +46,24 @@ module.exports = function(options) {
   }));
 
   gulp.task('serve', ['watch'], function () {
-    console.log('Starting BrowserSync...');
+    logBSStart();
     browserSyncInit([options.tmp + '/serve', options.src]);
   });
 
   gulp.task('dev', ['serve']);
 
   gulp.task('serve:dist', ['build'], function () {
-    console.log('Starting BrowserSync...');
+    logBSStart();
     browserSyncInit(options.dist);
   });
 
   gulp.task('serve:e2e', ['inject'], function () {
-    console.log('Starting BrowserSync...');
+    logBSStart();
     browserSyncInit([options.tmp + '/serve', options.src], []);
   });
 
   gulp.task('serve:e2e-dist', ['build'], function () {
-    console.log('Starting BrowserSync...');
+    logBSStart();
     browserSyncInit(options.dist, []);
   });
 };

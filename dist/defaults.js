@@ -74,6 +74,7 @@ module.exports = function(){
   */
 
   defaultOptions.modulesData = {
+    utils     : { defaultValue : './utils.js'   , notLogOnStart: true },
     build     : { defaultValue : './build.js'     },
     e2eTest   : { defaultValue : './e2e-tests.js' },
     inject    : { defaultValue : './inject.js'    },

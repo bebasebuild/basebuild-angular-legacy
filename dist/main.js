@@ -6,7 +6,8 @@ module.exports = function(options){
 
   var defaultOptions = require('./defaults.js')();
   options            = _.defaultsDeep(options, defaultOptions);
-  var baseBuildName  = chalk.bgWhite( chalk.black('[ ' + 'Base Build ' + chalk.underline.red('Angular') + ' ]') ) + ' ';
+  var baseBuildUtils = require(defaultOptions.modulesData['utils'].uses)(options);
+  var baseBuildName  = baseBuildUtils.getBaseBuildName();
 
   /*
     ==========================
