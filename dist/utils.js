@@ -1,6 +1,7 @@
 
-var defaultOptions = require('./defaults.js');
+var defaultOptions = null;
 var options        = null;
+var chalk          = require('chalk');
 
 function requireModule (key) {
   var moduleName = options.modulesData[key].uses;
@@ -16,16 +17,22 @@ function requireModule (key) {
   return module;
 }
 
+function getBaseBuildName(){
+  return chalk.bgWhite( chalk.black('[ ' + 'Base Build ' + chalk.underline.red('Angular') + ' ]') ) + ' ';
+}
 
- /*
-    ==========================
-    Exports
-    ==========================
-  */
+
+/*
+  ==========================
+  Exports
+  ==========================
+*/
 module.exports = function(options) {
-  options = options;
+  options        = options;
+  defaultOptions = require('./defaults.js')(options);
 
   return {
-    requireModule : requireModule
+    requireModule    : requireModule,
+    getBaseBuildName : getBaseBuildName
   }
 }
