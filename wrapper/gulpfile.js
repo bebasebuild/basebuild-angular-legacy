@@ -21,9 +21,9 @@ var options = {
 */
 
 options.modulesData = {
-  newModule: {
-    uses: 'newModule.js'
-  },
+  // newModule: {
+  //   uses: 'newModule.js'
+  // },
   gulp : {
     uses: '../wrapper/node_modules/gulp'
   },
