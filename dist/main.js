@@ -26,14 +26,14 @@ module.exports = function(options){
 
     if(defaultOptions.modulesData[key] && value === defaultOptions.modulesData[key].defaultValue && !moduleData.isExternal){
       category = chalk.cyan(' built-in ');
-      !moduleData.notStart && require(value)(options);
-    } else if(key === 'gulp') {
-      moduleData.isDefault = false;
-      !moduleData.notStart && require(value);
     } else {
       moduleData.isDefault = false;
       moduleData.requireName = process.cwd() + "/" + value;
-      !moduleData.notStart && require( moduleData.requireName );
+    }
+
+    if(!moduleData.notStart){
+      var module = require( moduleData.requireName );
+      _.isFunction(module) && module(options);
     }
 
     console.log( baseBuildName + useMode + category + chalk.magenta(value) + ' module');
