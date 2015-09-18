@@ -38,7 +38,8 @@ module.exports = function(options){
       _.isFunction(module) && module(options);
     }
 
-    console.log( baseBuildName + useMode + category + chalk.magenta(value) + ' module');
+
+    !moduleData.notLogOnStart && console.log( baseBuildName + useMode + category + chalk.magenta(value) + ' module');
 
   }
 }
