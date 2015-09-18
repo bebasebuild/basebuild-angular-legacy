@@ -36,7 +36,7 @@ module.exports = function(){
         /bootstrap\.css/,
         'bower_components/angular-input-masks'
       ]
-    },
+    }
 
   };
 
@@ -109,7 +109,9 @@ module.exports = function(){
   }
 
 
-  defaultOptions.modules = {}
+  defaultOptions.modules = {
+    // deprecated
+  }
 
   for(key in defaultOptions.modulesData){
     defaultOptions.modulesData[key].isDefault = true;
