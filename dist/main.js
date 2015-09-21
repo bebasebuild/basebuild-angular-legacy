@@ -4,10 +4,19 @@ var chalk = require('chalk');
 
 module.exports = function(options){
 
+
   var defaultOptions = require('./defaults.js')();
   options            = _.defaultsDeep(options, defaultOptions);
   var baseBuildUtils = require(defaultOptions.modulesData['utils'].uses)(options);
   var baseBuildName  = baseBuildUtils.getBaseBuildName();
+
+  /*
+    ==========================
+    Imaginations
+    ==========================
+  */
+  console.log( '\n   ' + baseBuildUtils.getTimeoutZeroName() + ' is a ' + baseBuildUtils.getRedsparkName() + ' imagination,'  );
+  console.log( '   ' + baseBuildUtils.getBaseBuildName(true) + ' is a ' + baseBuildUtils.getTimeoutZeroName() + ' imagination...\n');
 
   /*
     ==========================

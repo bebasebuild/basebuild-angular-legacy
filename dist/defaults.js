@@ -106,6 +106,14 @@ module.exports = function(){
       notStart     : true,
       configFile   : 'karma.conf.js',
       isExternal   : true
+   },
+   docs: {
+    defaultValue : './docs.js',
+    files        : [
+      defaultOptions.src + '/**/*.coffee',
+      defaultOptions.src + '/**/*.scss',
+    ],
+    out: 'docs'
    }
   }
 
