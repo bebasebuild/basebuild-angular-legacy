@@ -12,7 +12,7 @@ module.exports = function (options) {
 
   gulp.task('docs', ['scripts', 'clean:docs'], function(done){
     if(shelljs.which('groc')){
-      var grocArgs = 'groc --glob ' + docsData.files.join(' ') + ' --out ' + docsData.out;
+      var grocArgs = 'groc --glob ' + [].concat(docsData.files.join(' '))  + ' --out ' + docsData.out;
       shelljs.exec(grocArgs, done);
     } else {
       var errorMessage = chalk.red('ERROR: Groc is not installed as a global dependencie, please execute: ') + chalk.underline('npm install -g groc');
