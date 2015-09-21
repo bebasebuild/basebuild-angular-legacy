@@ -17,8 +17,22 @@ function requireModule (key) {
   return module;
 }
 
-function getBaseBuildName(){
-  return chalk.bgWhite( chalk.black('[ ' + 'Base Build ' + chalk.underline.red('Angular') + ' ]') ) + ' ';
+function getBaseBuildName(onlyText){
+  var text = chalk.bgWhite( chalk.black('[ ' + 'Base Build ' + chalk.underline.red('Angular') + ' ]') ) + ' ';
+
+  if(onlyText){
+    text = chalk.white( 'Base Build ' + chalk.underline.red('Angular') );
+  }
+
+  return text;
+}
+
+function getTimeoutZeroName(){
+  return chalk.white('Timeout') + chalk.cyan('Zero');
+}
+
+function getRedsparkName(){
+  return chalk.white( chalk.red('red')  + 'spark' )
 }
 
 
@@ -33,6 +47,8 @@ module.exports = function(options) {
 
   return {
     requireModule    : requireModule,
-    getBaseBuildName : getBaseBuildName
+    getBaseBuildName : getBaseBuildName,
+    getTimeoutZeroName : getTimeoutZeroName,
+    getRedsparkName : getRedsparkName
   }
 }
