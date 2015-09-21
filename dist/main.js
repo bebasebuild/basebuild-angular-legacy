@@ -51,4 +51,6 @@ module.exports = function(options){
     !moduleData.notLogOnStart && console.log( baseBuildName + useMode + category + chalk.magenta(value) + ' module');
 
   }
+
+  console.log('\n');
 }
