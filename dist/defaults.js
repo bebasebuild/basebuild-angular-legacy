@@ -78,7 +78,12 @@ module.exports = function(){
     build     : { defaultValue : './build.js'     },
     e2eTest   : { defaultValue : './e2e-tests.js' },
     inject    : { defaultValue : './inject.js'    },
-    proxy     : { defaultValue : './proxy.js', isEnabled : true },
+    proxy     : {
+      defaultValue : './proxy.js',
+      isEnabled : true,
+      target    : 'http://localhost:8080',
+      regexNext : /\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff|woff2|cur|json)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/
+    },
     scripts   : { defaultValue : './scripts.js'   },
     styles    : { defaultValue : './styles.js'    },
     unitTests : {
