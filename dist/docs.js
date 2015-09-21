@@ -10,7 +10,7 @@ module.exports = function (options) {
   var gulp     = require(options.modulesData['gulp'].uses);
   var shelljs  = require('shelljs');
 
-  gulp.task('docs', ['scripts', 'clean:docs'], function(done){
+  gulp.task('docs', ['clean:docs'], function(done){
     if(shelljs.which('groc')){
       var grocArgs = 'groc --glob ' + [].concat(docsData.files.join(' '))  + ' --out ' + docsData.out;
       shelljs.exec(grocArgs, done);
