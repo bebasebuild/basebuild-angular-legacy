@@ -9,12 +9,12 @@ var chalk = require('chalk');
 module.exports = function(options) {
 
   'use strict';
+  var moduleOptions = options.modulesData['proxy'];
 
   /*
    * Location of your backend server
    */
-  var proxyTarget   = 'http://localhost:8080';
-  var moduleOptions = options.modulesData['proxy'];
+  var proxyTarget   = moduleOptions.target;
 
 
   if(!proxy){
