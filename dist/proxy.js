@@ -19,8 +19,6 @@ module.exports = function(options) {
 
   if(!proxy){
 
-    console.log('módulo de proxy');
-
     proxy = httpProxy.createProxyServer({
       target: proxyTarget
     });
