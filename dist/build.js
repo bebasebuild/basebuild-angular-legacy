@@ -75,6 +75,12 @@ module.exports = function(options) {
       .pipe($.size({ title: options.dist + '/', showFiles: true }));
   });
 
+   gulp.task('templates:tmp', function () {
+    return gulp.src([ options.src + '/app/**/*.html'])
+      .pipe(gulp.dest(options.tmp + '/serve/app/'));
+  });
+
+
   // Only applies for fonts from bower dependencies
   // Custom fonts are handled by the "other" task
   gulp.task('fonts', function () {

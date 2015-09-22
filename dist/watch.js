@@ -42,7 +42,7 @@ function watchFiles (options){
     if(serverModule.isEnabled){
       browserSync.reload(event.path);
     } else {
-      gulp.start('partials');
+      gulp.start('templates:tmp');
     }
   });
 
@@ -65,7 +65,7 @@ module.exports = function(options) {
   gulp          = require(options.modulesData['gulp'].uses);
   serverModule  = require(options.modulesData['server'].uses);
 
-  gulp.task('watch', ['inject', 'fonts:tmp', 'other:tmp', 'partials', 'copyEnviroments:tmp'], function(){
+  gulp.task('watch', ['inject', 'fonts:tmp', 'other:tmp', 'templates:tmp', 'copyEnviroments:tmp'], function(){
     watchFiles(options);
   });
 
