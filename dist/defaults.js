@@ -13,6 +13,7 @@ module.exports = function(){
     dist              : 'builds/release',
     tmp               : 'builds/dev',
     e2e               : 'e2e',
+    bowerComponents   : 'bower_components',
 
     srcEnv            : 'builds/dev/serve/app/project/scripts/environment',
     tmpEnv            : 'builds/dev/serve/',

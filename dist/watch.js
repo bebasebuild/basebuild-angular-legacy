@@ -64,8 +64,12 @@ module.exports = function(options) {
   scriptsModule = require(options.modulesData['scripts'].uses)(options);
   gulp          = require(options.modulesData['gulp'].uses);
   serverModule  = require(options.modulesData['server'].uses);
+  var watchDeps = ['inject', 'fonts:tmp', 'other:tmp', 'templates:tmp', 'copyEnviroments:tmp'];
 
-  gulp.task('watch', ['inject', 'fonts:tmp', 'other:tmp', 'templates:tmp', 'copyEnviroments:tmp'], function(){
+  !serverModule.isEnabled && watchDeps.push('bower:tmp');
+
+
+  gulp.task('watch', watchDeps , function(){
     watchFiles(options);
   });
 

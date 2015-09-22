@@ -75,9 +75,14 @@ module.exports = function(options) {
       .pipe($.size({ title: options.dist + '/', showFiles: true }));
   });
 
-   gulp.task('templates:tmp', function () {
+  gulp.task('templates:tmp', function () {
     return gulp.src([ options.src + '/app/**/*.html'])
       .pipe(gulp.dest(options.tmp + '/serve/app/'));
+  });
+
+  gulp.task('bower:tmp', function () {
+    return gulp.src([ options.bowerComponents + '**/*' ])
+      .pipe(gulp.dest(options.tmp + '/serve/'));
   });
 
 
