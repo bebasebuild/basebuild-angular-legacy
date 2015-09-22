@@ -5,7 +5,8 @@ var $ = require('gulp-load-plugins')();
 var wiredep = require('wiredep').stream;
 
 module.exports = function(options) {
-  var gulp = require(options.modulesData['gulp'].uses);
+  var gulp         = require(options.modulesData['gulp'].uses);
+  var serverConfig = options.modulesData['server'];
 
   gulp.task('inject', ['scripts', 'styles'], function () {
     var injectStyles = gulp.src([
@@ -33,6 +34,7 @@ module.exports = function(options) {
       .pipe($.inject(injectStyles, injectOptions))
       .pipe($.inject(injectScripts, injectOptions))
       .pipe(wiredep(options.wiredep))
+      .pipe( $.if(!serverConfig.isEnabled, $.replace('../' + options.bowerComponents, options.bowerComponents)) )
       .pipe(gulp.dest(options.tmp + '/serve'));
 
   });
