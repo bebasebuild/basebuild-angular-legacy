@@ -15,6 +15,7 @@ module.exports = function(){
     e2e               : 'e2e',
 
     srcEnv            : 'builds/dev/serve/app/project/scripts/environment',
+    tmpEnv            : 'builds/dev/serve/',
     distEnv           : 'builds/release',
 
     componentSrc      : '',
@@ -80,7 +81,6 @@ module.exports = function(){
     inject    : { defaultValue : './inject.js'    },
     proxy     : {
       defaultValue : './proxy.js',
-      isEnabled : true,
       target    : 'http://localhost:8080',
       regexNext : /\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff|woff2|cur|json)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/
     },
@@ -103,7 +103,7 @@ module.exports = function(){
       defaultValue : './server.js',
       routes       : {
         '/bower_components': 'bower_components'
-      }
+      },
     },
     gulp      : { defaultValue : 'gulp'  , notStart: true, isExternal: true},
     karma     : {
@@ -129,6 +129,7 @@ module.exports = function(){
 
   for(key in defaultOptions.modulesData){
     defaultOptions.modulesData[key].isDefault = true;
+    defaultOptions.modulesData[key].isEnabled = true;
     defaultOptions.modulesData[key].uses = defaultOptions.modulesData[key].defaultValue;
 
   }

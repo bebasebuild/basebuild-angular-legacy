@@ -34,7 +34,8 @@ options.modulesData = {
     routes : {
       '/bower_components': 'bower_components',
       '/environment'     : 'builds/dev/serve/app/project/scripts/environment'
-    }
+    },
+    isEnabled: true
   }
 }
 

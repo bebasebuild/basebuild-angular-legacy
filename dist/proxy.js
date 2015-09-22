@@ -17,7 +17,7 @@ module.exports = function(options) {
   var proxyTarget   = moduleOptions.target;
 
 
-  if(!proxy){
+  if(!proxy && moduleOptions.isEnabled){
 
     proxy = httpProxy.createProxyServer({
       target: proxyTarget

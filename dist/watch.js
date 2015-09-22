@@ -3,6 +3,7 @@
 var browserSync   = require('browser-sync');
 var path          = require('path');
 var scriptsModule = null;
+var serverModule  = null;
 var gulp          = null;
 
 function isOnlyChange(event) {
@@ -11,6 +12,7 @@ function isOnlyChange(event) {
 
 function watchFiles (options){
   gulp.watch([options.src + '/*.html', 'bower.json'], ['inject']);
+
 
   gulp.watch([
     options.src + '/app/**/*.css',
@@ -37,7 +39,11 @@ function watchFiles (options){
   });
 
   gulp.watch(options.src + '/app/**/*.html', function(event) {
-    browserSync.reload(event.path);
+    if(serverModule.isEnabled){
+      browserSync.reload(event.path);
+    } else {
+      gulp.start('partials');
+    }
   });
 
   gulp.watch([
@@ -57,8 +63,9 @@ module.exports = function(options) {
 
   scriptsModule = require(options.modulesData['scripts'].uses)(options);
   gulp          = require(options.modulesData['gulp'].uses);
+  serverModule  = require(options.modulesData['server'].uses);
 
-  gulp.task('watch', ['inject'], function(){
+  gulp.task('watch', ['inject', 'fonts:tmp', 'other:tmp', 'partials', 'copyEnviroments:tmp'], function(){
     watchFiles(options);
   });
 

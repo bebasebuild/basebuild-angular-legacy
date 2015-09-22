@@ -30,6 +30,11 @@ module.exports = function(options) {
       .pipe( gulp.dest(options.distEnv) )
   });
 
+  gulp.task('copyEnviroments:tmp', ['scripts'], function(){
+    return gulp.src([options.srcEnv + '**/*.env.js'])
+      .pipe( gulp.dest(options.tmpEnv) )
+  });
+
   gulp.task('html', ['inject', 'partials', 'copyEnviroments'], function () {
     var partialsInjectFile = gulp.src(options.tmp + '/partials/templateCacheHtml.js', { read: false });
     var partialsInjectOptions = {
@@ -79,12 +84,27 @@ module.exports = function(options) {
       .pipe(gulp.dest(options.dist + '/assets/fonts/'));
   });
 
+  gulp.task('fonts:tmp', function () {
+    return gulp.src($.mainBowerFiles())
+      .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
+      .pipe($.flatten())
+      .pipe(gulp.dest(options.tmp + '/serve/assets/fonts/'));
+  });
+
   gulp.task('other', function () {
     return gulp.src([
       options.src + '/**/*',
       '!' + options.src + '/**/*.{html,css,js,scss,coffee}'
     ])
       .pipe(gulp.dest(options.dist + '/'));
+  });
+
+  gulp.task('other:tmp', function () {
+    return gulp.src([
+      options.src + '/**/*',
+      '!' + options.src + '/**/*.{html,css,js,scss,coffee}'
+    ])
+      .pipe(gulp.dest(options.tmp + '/serve/'));
   });
 
   gulp.task('clean', function (done) {

@@ -42,13 +42,14 @@ module.exports = function(options){
       moduleData.requireName = process.cwd() + "/" + value;
     }
 
-    if(!moduleData.notStart){
+    if(!moduleData.notStart && moduleData.isEnabled ){
       var module = require( moduleData.requireName );
       _.isFunction(module) && module(options);
+
     }
 
+    !moduleData.notLogOnStart && moduleData.isEnabled && console.log( baseBuildName + useMode + category + chalk.magenta(value) + ' module');
 
-    !moduleData.notLogOnStart && console.log( baseBuildName + useMode + category + chalk.magenta(value) + ' module');
 
   }
 
