@@ -81,8 +81,8 @@ module.exports = function(options) {
   });
 
   gulp.task('bower:tmp', function () {
-    return gulp.src([ options.bowerComponents + '**/*' ])
-      .pipe(gulp.dest(options.tmp + '/serve/'));
+    return gulp.src([ options.bowerComponents + '/**/*' ])
+      .pipe(gulp.dest(options.tmp + '/serve/' + options.bowerComponents));
   });
 
 
