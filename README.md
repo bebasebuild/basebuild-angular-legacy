@@ -1,4 +1,4 @@
-Component build as a node module for frontend projects based on AngularJS
+> Component build as a node module for frontend projects based on AngularJS
 
 ## Inspiration
 Take a generic build solution as a component to never stop the build evolution, only change the version ;)
