@@ -1,4 +1,3 @@
-# Base Build Angular `beta phase`
 Component build as a node module for frontend projects based on AngularJS
 
 ## Inspiration
