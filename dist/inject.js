@@ -1,6 +1,7 @@
 'use strict';
 
 var $ = require('gulp-load-plugins')();
+var _ = require('lodash');
 
 var wiredep = require('wiredep').stream;
 
@@ -21,6 +22,9 @@ module.exports = function(options) {
       '!{' + options.src + ',' + options.tmp + '/serve}/app/**/*mock.js',
       '!{' + options.src + ',' + options.tmp + '/serve}/app/**/*.env.js'
     ];
+
+    // console.log("injectPaths: ", injectPaths);
+
     var injectScripts = gulp.src(injectPaths).pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'));
 
     // console.log("injectScripts: ", injectScripts);
@@ -30,10 +34,26 @@ module.exports = function(options) {
       addRootSlash: false
     };
 
+    var explicitInjectScripts = null;
+    var explicitInjectOptions = _.clone(injectOptions);
+    var isDevTask             = _.contains(options.devTasks, $.util.env._[0]);
+
+    if( isDevTask ){
+      explicitInjectScripts = gulp.src(options.modulesData.scripts.devScripts);
+      explicitInjectOptions.starttag = '<!-- inject:dev -->';
+    } else {
+      explicitInjectScripts = gulp.src(options.modulesData.scripts.prodScripts);
+      explicitInjectOptions.starttag = '<!-- inject:prod -->';
+    }
+
+    console.log('options.modulesData.scripts.devScripts', options.modulesData.scripts.devScripts);
+    console.log('explicitInjectOptions', explicitInjectOptions);
+
     return gulp.src(options.src + '/*.html')
       .pipe($.inject(injectStyles, injectOptions))
       .pipe($.inject(injectScripts, injectOptions))
       .pipe(wiredep(options.wiredep))
+      .pipe($.inject(explicitInjectScripts, explicitInjectOptions))
       .pipe( $.if(!serverConfig.isEnabled, $.replace('../' + options.bowerComponents, options.bowerComponents)) )
       .pipe(gulp.dest(options.tmp + '/serve'));
 

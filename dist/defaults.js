@@ -27,6 +27,7 @@ module.exports = function(){
     errorHandler      : function(title) {
       return function(err) {
         gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
+        gutil.beep();
         this.emit('end');
       };
     },
@@ -38,7 +39,9 @@ module.exports = function(){
         /bootstrap\.css/,
         'bower_components/angular-input-masks'
       ]
-    }
+    },
+
+    devTasks: ['dev', 'watch', 'watchTests', 'serve', 'serve:e2e']
 
   };
 
@@ -76,17 +79,33 @@ module.exports = function(){
   */
 
   defaultOptions.modulesData = {
+
     utils     : { defaultValue : './utils.js'   , notLogOnStart: true },
+
     build     : { defaultValue : './build.js'     },
+
     e2eTest   : { defaultValue : './e2e-tests.js' },
+
     inject    : { defaultValue : './inject.js'    },
+
     proxy     : {
       defaultValue : './proxy.js',
       target    : 'http://localhost:8080',
       regexNext : /\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff|woff2|cur|json)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/
     },
-    scripts   : { defaultValue : './scripts.js'   },
+
+    scripts   : {
+      defaultValue : './scripts.js',
+      devScripts: [
+        defaultOptions.tmp + '/serve/app/**/*.dev*.js',
+      ],
+      prodScripts: [
+        defaultOptions.tmp + '/serve/app/**/*.prod*.js',
+      ]
+    },
+
     styles    : { defaultValue : './styles.js'    },
+
     unitTests : {
       defaultValue : './unit-tests.js',
       addDeps      : [],
@@ -99,28 +118,33 @@ module.exports = function(){
         browsers  : ['Chrome']
       }
     },
+
     watch     : { defaultValue : './watch.js'     },
+
     server    : {
       defaultValue : './server.js',
       routes       : {
         '/bower_components': 'bower_components'
       },
     },
+
     gulp      : { defaultValue : 'gulp'  , notStart: true, isExternal: true},
+
     karma     : {
       defaultValue : 'karma' ,
       notStart     : true,
       configFile   : 'karma.conf.js',
       isExternal   : true
-   },
-   docs: {
-    defaultValue : './docs.js',
-    files        : [
-      defaultOptions.src + '/**/*.coffee',
-      defaultOptions.src + '/**/*.scss',
-    ],
-    out: 'docs'
-   }
+    },
+
+    docs: {
+      defaultValue : './docs.js',
+      files        : [
+        defaultOptions.src + '/**/*.coffee',
+        defaultOptions.src + '/**/*.scss',
+      ],
+      out: 'docs'
+    }
   }
 
 

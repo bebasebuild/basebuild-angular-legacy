@@ -1,6 +1,7 @@
 
 var _     = require('lodash');
 var chalk = require('chalk');
+var gutil = require('gulp-util');
 
 module.exports = function(options){
 
