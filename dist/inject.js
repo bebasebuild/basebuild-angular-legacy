@@ -46,9 +46,6 @@ module.exports = function(options) {
       explicitInjectOptions.starttag = '<!-- inject:prod -->';
     }
 
-    console.log('options.modulesData.scripts.devScripts', options.modulesData.scripts.devScripts);
-    console.log('explicitInjectOptions', explicitInjectOptions);
-
     return gulp.src(options.src + '/*.html')
       .pipe($.inject(injectStyles, injectOptions))
       .pipe($.inject(injectScripts, injectOptions))
