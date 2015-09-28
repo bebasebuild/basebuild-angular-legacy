@@ -6,7 +6,7 @@ Take a generic build solution as a component to never stop the build evolution, 
 ## References
 Base build angular is based at 0.11.0 version of [gulp-angular](https://github.com/Swiip/generator-gulp-angular/releases) yeoman generator with some improvements.
 
-## Install 
+## Installation
 `[sudo] npm install basebuild-angular`
 
 
