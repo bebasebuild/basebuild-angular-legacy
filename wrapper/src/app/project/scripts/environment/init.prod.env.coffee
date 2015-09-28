@@ -8,6 +8,7 @@ $(document).ready ->
 
   # Bootstrap da aplicação
   bootstrap = ->
+    console.log('init.prod')
     angular.bootstrap(document, ['BaseBuildWrapper'])
     return
 
