@@ -18,10 +18,14 @@ module.exports = function(options) {
 
     var injectPaths   = [
       '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.js',
-      '!{' + options.src + ',' + options.tmp + '/serve}/app/**/*spec.js',
-      '!{' + options.src + ',' + options.tmp + '/serve}/app/**/*mock.js',
       '!{' + options.src + ',' + options.tmp + '/serve}/app/**/*.env.js'
     ];
+
+    var exceptFiles = _.map(options.specFiles, function(file){
+      return '!' + file;
+    });
+
+    injectPaths = injectPaths.concat(exceptFiles);
 
     // console.log("injectPaths: ", injectPaths);
 
