@@ -11,10 +11,14 @@ module.exports = function(options) {
   var karma = require(options.modulesData['karma'].uses);
 
   function listFiles(callback) {
+
+
     var wiredepOptions = _.extend({}, options.wiredep, {
       dependencies: true,
-      devDependencies: true
+      devDependencies: true,
+      stream: null
     });
+
     var bowerDeps = wiredep(wiredepOptions);
 
     var additionalDeps = options.modulesData['unitTests'].addDeps || [];
