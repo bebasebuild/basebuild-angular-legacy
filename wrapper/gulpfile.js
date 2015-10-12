@@ -36,6 +36,18 @@ options.modulesData = {
       '/environment'     : 'builds/dev/serve/app/project/scripts/environment'
     },
     isEnabled: true
+  },
+
+  sonar: {
+    host         : {
+      url : 'http://192.168.99.100:9000'
+    },
+    jdbc : {
+      url      : 'jdbc:h2:tcp://192.168.99.100/sonar'
+    },
+    projectKey     : 'io.timeoutzero:basebuild-angular-wrapper',
+    projectName    : 'basebuild angular wrapper',
+    projectVersion : '1.0.2',
   }
 }
 
