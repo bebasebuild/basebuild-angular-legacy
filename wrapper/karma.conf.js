@@ -76,27 +76,28 @@ module.exports = function(config) {
 
     preprocessors: {
       'src/**/*.html': ['ng-html2js'],
-      'dev/serve/{app,components}/**/!(*spec|*mock).js' : ['coverage']
+      'builds/dev/serve/{app,components}/**/!(*spec|*mock).js' : ['coverage']
     },
 
     // generates the coverage
     reporters: [
       // 'progress',
-      'coverage',
       'nyan',
       // 'html',
-      'DHTML'
+      'DHTML',
+      'coverage'
     ],
 
     // Output coverage file
     coverageReporter: {
-      type   : 'lcov',
-      subdir : 'report-lcov',
-      // output path
       dir : 'coverage/',
       instrumenterOptions: {
         istanbul: { noCompact: true }
-      }
+      },
+      reporters: [
+        { type: 'html', subdir: 'html' },
+        { type: 'lcovonly', subdir: '.', file: 'report-lcov.lcov'}
+      ]
 
     },
 
