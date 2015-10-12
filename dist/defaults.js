@@ -45,6 +45,8 @@ module.exports = function(){
 
   };
 
+  defaultOptions.wiredep.src = defaultOptions.tmp + '/serve/index.html'
+
   /*
     ==========================
     Specs
@@ -144,6 +146,30 @@ module.exports = function(){
         defaultOptions.src + '/**/*.scss',
       ],
       out: 'docs'
+    },
+
+    sonar: {
+      defaultValue : './sonar.js',
+      login        : null,
+      password     : null,
+      host         : {
+        url : ''
+      },
+      jdbc : {
+        url      : ''
+      },
+      projectKey     : '',
+      projectName    : '',
+      projectVersion : '1.0.0',
+      sources        : defaultOptions.tmp,
+      language       : 'js',
+      sourceEncoding : 'UTF-8',
+      exclusions     : defaultOptions.specFiles,
+      javascript : {
+        lcov : {
+          reportPath: 'coverage/report-lcov.lcov'
+        }
+      }
     }
   }
 
