@@ -7,8 +7,8 @@ var scriptsModule = null;
 var serverConfig  = null;
 var gulp          = null;
 
-function isOnlyChange(event) {
-  return event.type === 'changed';
+function isOnlyChange(file) {
+  return file.event === 'change';
 }
 
 function watchFiles (options){
