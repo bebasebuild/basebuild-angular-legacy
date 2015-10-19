@@ -4,6 +4,7 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del', '!gulp']
 });
 var _ = require('lodash');
+var defaultOptions = require('./defaults.js')();
 
 module.exports = function(options) {
   var gulp = require(options.modulesData['gulp'].uses);
@@ -28,7 +29,7 @@ module.exports = function(options) {
 
   gulp.task('copyEnviroments', ['scripts'], function(){
     var isDevTask = _.contains(options.devTasks, $.util.env._[0]);
-    return gulp.src([options.srcEnv + '**/*.env.js'])
+    return gulp.src([options.srcEnv + '**/*.env.js', '!' + options.srcEnv + '**/*.dev.env.js'])
       .pipe( $.if(!isDevTask, gulp.dest(options.distEnv) ) );
   });
 
@@ -46,8 +47,8 @@ module.exports = function(options) {
     };
 
     var htmlFilter = $.filter('*.html');
-    var jsFilter = $.filter(['**/*.js', '!**/*.env.js']);
-    var cssFilter = $.filter('**/*.css');
+    var jsFilter   = $.filter(['**/*.js', '!**/*.env.js']);
+    var cssFilter  = $.filter('**/*.css');
     var assets;
 
     return gulp.src(options.tmp + '/serve/*.html')
