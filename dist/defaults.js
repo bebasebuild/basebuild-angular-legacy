@@ -103,6 +103,8 @@ module.exports = function(){
       ],
       prodScripts: [
         defaultOptions.tmp + '/serve/app/**/*.prod*.js',
+        '!' + defaultOptions.tmpEnv + '/**/*.prod*.js',
+        defaultOptions.distEnv + '/**/*.prod*.js'
       ]
     },
 

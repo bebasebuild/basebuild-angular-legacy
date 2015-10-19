@@ -3,6 +3,7 @@
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del', '!gulp']
 });
+var _ = require('lodash');
 
 module.exports = function(options) {
   var gulp = require(options.modulesData['gulp'].uses);
@@ -26,8 +27,9 @@ module.exports = function(options) {
   });
 
   gulp.task('copyEnviroments', ['scripts'], function(){
+    var isDevTask = _.contains(options.devTasks, $.util.env._[0]);
     return gulp.src([options.srcEnv + '**/*.env.js'])
-      .pipe( gulp.dest(options.distEnv) )
+      .pipe( $.if(!isDevTask, gulp.dest(options.distEnv) ) );
   });
 
   gulp.task('copyEnviroments:tmp', ['scripts'], function(){
