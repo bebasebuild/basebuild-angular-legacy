@@ -2,19 +2,22 @@
 
 var browserSync   = require('browser-sync');
 var path          = require('path');
+var watch          = require('gulp-watch');
 var scriptsModule = null;
 var serverConfig  = null;
 var gulp          = null;
 
-function isOnlyChange(event) {
-  return event.type === 'changed';
+function isOnlyChange(file) {
+  return file.event === 'change';
 }
 
 function watchFiles (options){
-  gulp.watch([options.src + '/*.html', 'bower.json'], ['inject']);
+  watch([options.src + '/*.html', 'bower.json'], function(){
+    gulp.start('inject');
+  });
 
 
-  gulp.watch([
+  watch([
     options.src + '/app/**/*.css',
     options.src + '/app/**/*.scss'
   ], function(event) {
@@ -25,7 +28,7 @@ function watchFiles (options){
     }
   });
 
-  gulp.watch([
+  watch([
     options.src + '/app/**/*.js',
     options.src + '/app/**/*.coffee'
   ], function(event) {
@@ -38,7 +41,7 @@ function watchFiles (options){
     }
   });
 
-  gulp.watch(options.src + '/app/**/*.html', function(event) {
+  watch(options.src + '/app/**/*.html', function(event) {
     if(serverConfig.isEnabled){
       browserSync.reload(event.path);
     } else {
@@ -46,7 +49,7 @@ function watchFiles (options){
     }
   });
 
-  gulp.watch([
+  watch([
     options.src + '/app/**/*.cjsx',
   ], function(event) {
     if(isOnlyChange(event)) {
