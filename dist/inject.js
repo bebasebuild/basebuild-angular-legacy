@@ -9,7 +9,7 @@ module.exports = function(options) {
   var gulp         = require(options.modulesData['gulp'].uses);
   var serverConfig = options.modulesData['server'];
 
-  gulp.task('inject', ['scripts', 'styles'], function () {
+  gulp.task('inject', ['scripts', 'styles', 'copyEnviroments'], function () {
     var injectStyles = gulp.src([
       options.tmp + '/serve/app/**/*.css',
       '!' + options.tmp + '/serve/app/vendor.css'

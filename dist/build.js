@@ -3,6 +3,8 @@
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del', '!gulp']
 });
+var _ = require('lodash');
+var defaultOptions = require('./defaults.js')();
 
 module.exports = function(options) {
   var gulp = require(options.modulesData['gulp'].uses);
@@ -22,12 +24,13 @@ module.exports = function(options) {
         module: options.mainAngularModule,
         root: 'app'
       }))
-      .pipe(gulp.dest(options.tmp + '/partials/'));
+      .pipe(gulp.dest(options.tmp + '/serve/partials/'));
   });
 
   gulp.task('copyEnviroments', ['scripts'], function(){
-    return gulp.src([options.srcEnv + '**/*.env.js'])
-      .pipe( gulp.dest(options.distEnv) )
+    var isDevTask = _.contains(options.devTasks, $.util.env._[0]);
+    return gulp.src([options.srcEnv + '**/*.env.js', '!' + options.srcEnv + '**/*.dev.env.js'])
+      .pipe( $.if(!isDevTask, gulp.dest(options.distEnv) ) );
   });
 
   gulp.task('copyEnviroments:tmp', ['scripts'], function(){
@@ -36,16 +39,16 @@ module.exports = function(options) {
   });
 
   gulp.task('html', ['inject', 'partials', 'copyEnviroments'], function () {
-    var partialsInjectFile = gulp.src(options.tmp + '/partials/templateCacheHtml.js', { read: false });
+    var partialsInjectFile = gulp.src(options.tmp + '/serve/partials/templateCacheHtml.js', { read: false });
     var partialsInjectOptions = {
       starttag: '<!-- inject:partials -->',
-      ignorePath: options.tmp + '/partials',
+      ignorePath: options.tmp + '/serve/',
       addRootSlash: false
     };
 
     var htmlFilter = $.filter('*.html');
-    var jsFilter = $.filter(['**/*.js', '!**/*.env.js']);
-    var cssFilter = $.filter('**/*.css');
+    var jsFilter   = $.filter(['**/*.js', '!**/*.env.js']);
+    var cssFilter  = $.filter('**/*.css');
     var assets;
 
     return gulp.src(options.tmp + '/serve/*.html')
@@ -104,7 +107,7 @@ module.exports = function(options) {
 
   gulp.task('other', function () {
     return gulp.src([
-      options.src + '/**/*',
+      options.src + '/**/*.*',
       '!' + options.src + '/**/*.{html,css,js,scss,coffee}'
     ])
       .pipe(gulp.dest(options.dist + '/'));

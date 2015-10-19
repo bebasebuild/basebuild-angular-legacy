@@ -15,9 +15,9 @@ module.exports = function(){
     e2e               : 'e2e',
     bowerComponents   : 'bower_components',
 
-    srcEnv            : 'builds/dev/serve/app/project/scripts/environment',
+    srcEnv            : 'builds/dev/serve/',
     tmpEnv            : 'builds/dev/serve/',
-    distEnv           : 'builds/release',
+    distEnv           : 'builds/release/',
 
     componentSrc      : '',
     componentDest     : '',
@@ -102,7 +102,7 @@ module.exports = function(){
         defaultOptions.tmp + '/serve/app/**/*.dev*.js',
       ],
       prodScripts: [
-        defaultOptions.tmp + '/serve/app/**/*.prod*.js',
+        defaultOptions.tmp + '/serve/app/**/*.prod*.js'
       ]
     },
 
