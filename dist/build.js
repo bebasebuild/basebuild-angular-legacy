@@ -23,7 +23,7 @@ module.exports = function(options) {
         module: options.mainAngularModule,
         root: 'app'
       }))
-      .pipe(gulp.dest(options.tmp + '/partials/'));
+      .pipe(gulp.dest(options.tmp + '/serve/partials/'));
   });
 
   gulp.task('copyEnviroments', ['scripts'], function(){
@@ -38,10 +38,10 @@ module.exports = function(options) {
   });
 
   gulp.task('html', ['inject', 'partials', 'copyEnviroments'], function () {
-    var partialsInjectFile = gulp.src(options.tmp + '/partials/templateCacheHtml.js', { read: false });
+    var partialsInjectFile = gulp.src(options.tmp + '/serve/partials/templateCacheHtml.js', { read: false });
     var partialsInjectOptions = {
       starttag: '<!-- inject:partials -->',
-      ignorePath: options.tmp + '/partials',
+      ignorePath: options.tmp + '/serve/',
       addRootSlash: false
     };
 
