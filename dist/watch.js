@@ -2,20 +2,44 @@
 
 var browserSync   = require('browser-sync');
 var path          = require('path');
-var watch          = require('gulp-watch');
+var watch         = require('gulp-watch');
 var scriptsModule = null;
 var serverConfig  = null;
 var gulp          = null;
+var del           = require('del');
+
+var watchFolderOptions  = {
+  events: ['addDir', 'unlinkDir'],
+  read: false
+}
 
 function isOnlyChange(file) {
   return file.event === 'change';
 }
 
+function removed(file) {
+  return file.event === 'unlink';
+}
+
+function removeFile(options, event){
+  var fullDest  = options.tmp + '/serve/' + path.relative(options.src, event.path).replace(/\.\.\//g, '');
+  del([fullDest.replace(/\.[^\.]+$/, '.*')]);
+}
+
 function watchFiles (options){
-  watch([options.src + '/*.html', 'bower.json'], function(){
+  watch([options.src + '/*.html', 'bower.json'], function(event){
     gulp.start('inject');
+
   });
 
+  watch([options.src + '/app/**'], watchFolderOptions, function(event){
+    if (event.event === 'unlinkDir'){
+      var fullDest  = options.tmp + '/serve/' + path.relative(options.src, event.path).replace(/\.\.\//g, '');
+      del([fullDest + "/**"]);
+    }else{
+      gulp.start('inject');
+    }
+  });
 
   watch([
     options.src + '/app/**/*.css',
@@ -23,8 +47,12 @@ function watchFiles (options){
   ], function(event) {
     if(isOnlyChange(event)) {
       gulp.start('styles');
-    } else {
+    } else if (removed(event)){
+      removeFile(options, event)
+
+    }else{
       gulp.start('inject');
+
     }
   });
 
@@ -32,12 +60,17 @@ function watchFiles (options){
     options.src + '/app/**/*.js',
     options.src + '/app/**/*.coffee'
   ], function(event) {
+
     if(isOnlyChange(event)) {
       var fullDest  = options.tmp + '/serve/' + path.relative(options.src, event.path).replace(/\.\.\//g, '');
       fullDest      = path.dirname( fullDest );
-      scriptsModule.buildScripts({ src: event.path, dest: fullDest, buildOptions: options })
-    } else {
+      scriptsModule.buildScripts({ src: event.path, dest: fullDest, buildOptions: options });
+    } else if (removed(event)){
+      removeFile(options, event);
+
+    }else{
       gulp.start('inject');
+
     }
   });
 
@@ -55,9 +88,13 @@ function watchFiles (options){
     if(isOnlyChange(event)) {
       var fullDest  = options.tmp + '/serve/' + path.relative(options.src, event.path).replace(/\.\.\//g, '');
       fullDest      = path.dirname( fullDest );
-      scriptsModule.buildCJSX({ src: event.path, dest: fullDest, buildOptions: options })
-    } else {
+      scriptsModule.buildCJSX({ src: event.path, dest: fullDest, buildOptions: options });
+    } else if (removed(event)){
+      removeFile(options, event);
+
+    }else{
       gulp.start('inject');
+
     }
   });
 }
