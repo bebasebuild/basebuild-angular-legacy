@@ -35,11 +35,10 @@ require('basebuild-angular')(options);
 
 ```
 
-***Run***
 ## Use Gulp tasks
 
 * `gulp` or `gulp build` to build an optimized version of your application in `/dist`
-* `gulp serve` to launch a browser sync server on your source files
+* `gulp serve` or `gulp dev` to launch a browser sync server on your source files
 * `gulp serve:dist` to launch a server on your optimized application
 * `gulp test` to launch your unit tests with Karma
 * `gulp test:auto` to launch your unit tests with Karma in watch mode
