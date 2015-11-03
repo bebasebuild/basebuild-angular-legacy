@@ -47,7 +47,6 @@
     "gulp-watch": "^4.3.5",
     "http-proxy": "~1.8.0",
     "jshint-stylish": "~1.0.0",
-    "karma": "~0.12.31",
     "lodash": "~3.10.0",
     "main-bower-files": "~2.5.0",
     "merge-stream": "~0.1.7",
