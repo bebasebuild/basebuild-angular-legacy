@@ -10,6 +10,7 @@ var chalk = require('chalk');
 module.exports = function(options) {
   var gulp  = require(options.modulesData['gulp'].uses);
   var karma = require(options.modulesData['karma'].uses);
+  var baseBuildUtils = require(options.modulesData['utils'].uses)(options);
 
   function listFiles(callback) {
 
@@ -64,7 +65,7 @@ module.exports = function(options) {
       }
 
       if(typeof karma.Server !== 'function'){
-        chalk.red('Please update karma to v0.13 to continue...');
+        console.log(baseBuildUtils.getBaseBuildName() + chalk.red('Please update karma to v0.13 to continue...'));
         process.exit(1);
       }
 
