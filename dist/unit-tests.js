@@ -5,6 +5,7 @@ var $ = require('gulp-load-plugins')();
 var wiredep = require('wiredep');
 var concat = require('concat-stream');
 var _ = require('lodash');
+var chalk = require('chalk');
 
 module.exports = function(options) {
   var gulp  = require(options.modulesData['gulp'].uses);
@@ -47,30 +48,39 @@ module.exports = function(options) {
       }));
   }
 
-  function runTests (testOptions) {
+  function runTests (testOptions, options) {
     listFiles(function(files) {
+
       var karmaModuleData   = options.modulesData['karma'];
       var karmaConfFileName = process.cwd() + '/' + karmaModuleData.configFile;
-
-      karma.server.start({
+      var server            = null;
+      var karmaOptions      = {
         configFile:  karmaConfFileName,
         files: files,
         singleRun: testOptions.singleRun,
         autoWatch: !testOptions.singleRun,
         browsers : testOptions.browsers,
         basePath : process.cwd()
-      }, function(){ testOptions.done() });
+      }
+
+      if(typeof karma.Server !== 'function'){
+        chalk.red('Please update karma to v0.13 to continue...');
+        process.exit(1);
+      }
+
+      server = new karma.Server(karmaOptions, function(){ testOptions.done() });
+      server.start();
     });
   }
 
   gulp.task('test', ['scripts'], function(done) {
     var testConfig = _.extend(options.modulesData['unitTests'].testConfig, {done : done});
-    runTests(testConfig);
+    runTests(testConfig, options);
   });
 
   gulp.task('test:auto', ['watchTests'], function(done) {
     var testAutoConfig = _.extend(options.modulesData['unitTests'].testAutoConfig, {done : done});
-    runTests(testAutoConfig);
+    runTests(testAutoConfig, options);
   });
 
 };
