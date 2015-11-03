@@ -12,7 +12,7 @@
     "gulp": "~3.8.10",
     "gulp-util": "~3.0.2",
     "wrench": "~1.5.8",
-    "karma": "~0.12.31"
+    "karma": "0.13"
   },
   "optionalDependencies": {
     "karma-nyan-reporter": "0.2.2",
