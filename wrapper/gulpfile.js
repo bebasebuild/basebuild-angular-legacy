@@ -52,8 +52,8 @@ options.modulesData = {
 }
 
 if(gutil.env.prod){
-  options.modulesData.gulp  = 'gulp'
-  options.modulesData.karma = 'karma'
+  options.modulesData.gulp.uses  = 'gulp'
+  options.modulesData.karma.uses = 'karma'
 }
 
 /*
