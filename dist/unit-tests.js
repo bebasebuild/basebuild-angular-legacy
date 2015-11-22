@@ -55,14 +55,12 @@ module.exports = function(options) {
       var karmaModuleData   = options.modulesData['karma'];
       var karmaConfFileName = process.cwd() + '/' + karmaModuleData.configFile;
       var server            = null;
-      var karmaOptions      = {
-        configFile:  karmaConfFileName,
-        files: files,
-        singleRun: testOptions.singleRun,
-        autoWatch: !testOptions.singleRun,
-        browsers : testOptions.browsers,
-        basePath : process.cwd()
-      }
+      var karmaOptions      = _.extend({
+        configFile :  karmaConfFileName,
+        files      : files,
+        autoWatch  : !testOptions.singleRun,
+        basePath   : process.cwd()
+      }, testOptions);
 
       if(typeof karma.Server !== 'function'){
         console.log(baseBuildUtils.getBaseBuildName() + chalk.red('Please update karma to v0.13 to continue...'));
