@@ -1,7 +1,5 @@
-> Build tool for AngularJS projects as a node module to be reusable, easy maintenance and able to update.
-
-## References
-Base build angular is based at 0.11.0 version of [gulp-angular](https://github.com/Swiip/generator-gulp-angular/releases) yeoman generator with some improvements.
+## Description
+Build tool for AngularJS projects as a [node module](https://www.npmjs.com/package/basebuild-angular) to be reusable, easy maintenance and able to update in the way "write once, use everywhere".
 
 ## Installation
 `[sudo] npm install basebuild-angular`
@@ -54,3 +52,6 @@ require('basebuild-angular')(options);
 * *e2e test (protractor)* : out of the box e2e test configuration with protractor
 * *browser sync* : full-featured development web server with livereload and devices sync
 * *angular-templatecache* : all HTML partials will be converted to JS to be bundled in the application
+
+## Credit
+Based on v0.11.0 of [gulp-angular](https://github.com/Swiip/generator-gulp-angular/releases/tag/v0.11.0) yeoman generator with my improvements.
