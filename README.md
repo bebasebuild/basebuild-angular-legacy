@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/basebuild-angular.svg)](https://badge.fury.io/js/basebuild-angular)
+
 ## Description
 Build tool for AngularJS projects as a [node module](https://www.npmjs.com/package/basebuild-angular) to be reusable, easy maintenance and able to update in the way "write once, use everywhere".
 
@@ -52,6 +54,11 @@ require('basebuild-angular')(options);
 * *e2e test (protractor)* : out of the box e2e test configuration with protractor
 * *browser sync* : full-featured development web server with livereload and devices sync
 * *angular-templatecache* : all HTML partials will be converted to JS to be bundled in the application
+
+## Stats
+[![NPM](https://nodei.co/npm-dl/basebuild-angular.png)](https://nodei.co/npm/basebuild-angular/)
+[![NPM](https://nodei.co/npm/basebuild-angular.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/basebuild-angular/)
+
 
 ## Credit
 Based on v0.11.0 of [gulp-angular](https://github.com/Swiip/generator-gulp-angular/releases/tag/v0.11.0) yeoman generator with my improvements.
