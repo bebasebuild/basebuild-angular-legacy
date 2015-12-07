@@ -56,7 +56,7 @@ require('basebuild-angular')(options);
 * *angular-templatecache* : all HTML partials will be converted to JS to be bundled in the application
 
 ## Stats
-[![NPM](https://nodei.co/npm-dl/basebuild-angular.png)](https://nodei.co/npm/basebuild-angular/)
+[![NPM](https://nodei.co/npm-dl/basebuild-angular.png?months=3&height=3)](https://nodei.co/npm/basebuild-angular/)
 [![NPM](https://nodei.co/npm/basebuild-angular.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/basebuild-angular/)
 
 
