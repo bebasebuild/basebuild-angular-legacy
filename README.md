@@ -1,4 +1,7 @@
-[![npm version](https://badge.fury.io/js/basebuild-angular.svg)](https://badge.fury.io/js/basebuild-angular)
+[![npm version](https://badge.fury.io/js/basebuild-angular.svg)](https://www.npmjs.com/package/basebuild-angular)
+[![npm downloads](https://img.shields.io/npm/dt/basebuild-angular.svg)](https://www.npmjs.com/package/basebuild-angular)
+[![npm downloads](https://img.shields.io/npm/dm/basebuild-angular.svg)](https://www.npmjs.com/package/basebuild-angular)
+
 
 ## Description
 Build tool for AngularJS projects as a [node module](https://www.npmjs.com/package/basebuild-angular) to be reusable, easy maintenance and able to update in the way "write once, use everywhere".
