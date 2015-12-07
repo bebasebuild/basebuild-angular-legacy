@@ -67,13 +67,3 @@ if(gutil.env.prod){
 }
 
 require(basebuildMainFile)(options);
-
-
-/*
-  ==========================
-  Default Task
-  ==========================
-*/
-gulp.task('default', ['clean'], function () {
-    gulp.start('build');
-});
