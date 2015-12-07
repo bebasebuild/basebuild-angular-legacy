@@ -25,10 +25,10 @@ options.modulesData = {
   //   uses: 'newModule.js'
   // },
   gulp : {
-    uses: '../wrapper/node_modules/gulp'
+    uses: '../demo/node_modules/gulp'
   },
   karma: {
-    uses: '../wrapper/node_modules/karma'
+    uses: '../demo/node_modules/karma'
   },
   server : {
     routes : {
@@ -45,8 +45,8 @@ options.modulesData = {
     jdbc : {
       url      : 'jdbc:h2:tcp://192.168.99.100/sonar'
     },
-    projectKey     : 'io.timeoutzero:basebuild-angular-wrapper',
-    projectName    : 'basebuild angular wrapper',
+    projectKey     : 'io.timeoutzero:basebuild-angular-demo',
+    projectName    : 'basebuild angular demo',
     projectVersion : '1.0.2',
   }
 }
