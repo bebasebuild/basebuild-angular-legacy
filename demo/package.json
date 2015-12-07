@@ -3,15 +3,14 @@
   "private": "true",
   "version": "0.0.1",
   "dependencies": {
-    "basebuild-angular": "0.9.2"
+    "basebuild-angular": "0.9.3"
   },
   "scripts": {
     "test": "gulp test"
   },
   "devDependencies": {
-    "gulp": "~3.8.10",
+    "gulp": "3.9.0",
     "gulp-util": "~3.0.2",
-    "wrench": "~1.5.8",
     "karma": "0.13"
   },
   "optionalDependencies": {
