@@ -7,7 +7,7 @@
 Build tool for AngularJS projects as a [node module](https://www.npmjs.com/package/basebuild-angular) to be reusable, easy maintenance and able to update in the way "write once, use everywhere".
 
 ## Installation
-`[sudo] npm install basebuild-angular`
+`[sudo] npm install basebuild-angular --save`
 
 
 ## Usage
