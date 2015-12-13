@@ -1,4 +1,8 @@
-var gutil  = require('gulp-util');
+
+
+var nodePlugins = require('gulp-load-plugins')({
+  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del', '!gulp']
+});
 
 module.exports = function(){
 
@@ -54,8 +58,8 @@ module.exports = function(){
   */
   defaultOptions.errorHandler = function(title) {
     return function(err) {
-      gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
-      gutil.beep();
+      nodePlugins.util.log(nodePlugins.util.colors.red('[' + title + ']'), err.toString());
+      nodePlugins.util.beep();
       this.emit('end');
     };
   };
@@ -102,6 +106,14 @@ module.exports = function(){
       defaultOptions.src + '/app/project/styles/**/*.scss'
     ]
   };
+
+  /*
+    ==========================
+    Plugins
+    ==========================
+    Plugins are lazy loaded but in practice you won't notice any difference (https://www.npmjs.com/package/gulp-load-plugins)
+  */
+  defaultOptions.plugins =  nodePlugins;
 
 
   /*
@@ -355,7 +367,6 @@ module.exports = function(){
     defaultOptions.modulesData[key].isDefault = true;
     defaultOptions.modulesData[key].isEnabled = true;
     defaultOptions.modulesData[key].uses = defaultOptions.modulesData[key].defaultValue;
-
   }
 
 
