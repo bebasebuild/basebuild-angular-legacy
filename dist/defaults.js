@@ -8,49 +8,73 @@ module.exports = function(){
     ==========================
   */
   var defaultOptions = {
+    
+    // ************* Main folders ****************
+
+    // Main angular module of project. 
+    // Will be used on $templateCache provider when generate partials.
     mainAngularModule : 'MainAngularModule',
+    
+    
+    // ************* Main folders ****************
+
+    // Source folder, where source code is present.
     src               : 'src',
-    dist              : 'builds/release',
+
+    // Temporary development folder, where code is present on development.
     tmp               : 'builds/dev',
+
+    // Production folder, where source code is present on final version.
+    dist              : 'builds/release',
+    
+    // Location for e2e tests
     e2e               : 'e2e',
+
+    // Location of bower_components folder
     bowerComponents   : 'bower_components',
+
+
+    // ************* Eviroment Location ****************
 
     srcEnv            : 'builds/dev/serve/',
     tmpEnv            : 'builds/dev/serve/',
     distEnv           : 'builds/release/',
 
-    componentSrc      : '',
-    componentDest     : '',
-    componentDist     : '',
-    componentName     : '',
 
-    errorHandler      : function(title) {
-      return function(err) {
-        gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
-        gutil.beep();
-        this.emit('end');
-      };
-    },
-
-    wiredep: {
-      directory: 'bower_components',
-      exclude: [
-        /bootstrap-sass-official\/.*\.js/,
-        /bootstrap\.css/,
-        'bower_components/angular-input-masks'
-      ]
-    },
-
+    // ************* Dev Phase ****************
     devTasks: ['dev', 'watch', 'watchTests', 'serve', 'serve:e2e']
 
   };
 
 
-   /*
+  /*
+    ==========================
+    Stream Errors
+    ==========================
+  */
+  defaultOptions.errorHandler = function(title) {
+    return function(err) {
+      gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
+      gutil.beep();
+      this.emit('end');
+    };
+  };
+
+
+  /*
     ==========================
     wiredep
     ==========================
   */
+  defaultOptions.wiredep = {
+    directory: 'bower_components',
+    exclude: [
+      /bootstrap-sass-official\/.*\.js/,
+      /bootstrap\.css/,
+      'bower_components/angular-input-masks'
+    ]
+  };
+
   defaultOptions.wiredep.src = defaultOptions.tmp + '/serve/index.html'
 
   /*
@@ -104,6 +128,7 @@ module.exports = function(){
   }
   */
   defaultOptions.modulesData = {
+    
     /*
     
     moduleExample: {
@@ -120,7 +145,6 @@ module.exports = function(){
     
     */
   
-
 
     /*
       utils Module
@@ -181,7 +205,7 @@ module.exports = function(){
     scripts: {
       defaultValue : './scripts.js',
 
-      // Pattern for scripts only present on development phase
+      // Pattern for scripts only present on development phase (dev tasks)
       devScripts: [
         defaultOptions.tmp + '/serve/app/**/*.dev*.js',
       ],
