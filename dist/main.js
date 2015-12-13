@@ -3,21 +3,25 @@ var _     = require('lodash');
 var chalk = require('chalk');
 var gutil = require('gulp-util');
 
-module.exports = function(options){
 
+var basebuildMainScript = function(options){
 
   var defaultOptions = require('./defaults.js')();
   options            = _.defaultsDeep(options, defaultOptions);
+
+  // Set default options in global options to never require ./defaults.js more than once
+  options.defaultOptions = defaultOptions;
+
   var baseBuildUtils = require(defaultOptions.modulesData['utils'].uses)(options);
   var baseBuildName  = baseBuildUtils.getBaseBuildName();
-
+  var packageJSON    = require('../package.json');
   /*
     ==========================
     Imaginations
     ==========================
   */
-  console.log( '\n   ' + baseBuildUtils.getTimeoutZeroName() + ' is a ' + baseBuildUtils.getRedsparkName() + ' imagination,'  );
-  console.log( '   ' + baseBuildUtils.getBaseBuildName(true) + ' is a ' + baseBuildUtils.getTimeoutZeroName() + ' imagination...\n');
+  // console.log( '\n   ' + baseBuildUtils.getTimeoutZeroName() + ' is a ' + baseBuildUtils.getRedsparkName() + ' imagination,'  );
+  console.log( '\n   ' + baseBuildUtils.getBaseBuildName(true) + ' -- v' + packageJSON.version + '\n');
 
   /*
     ==========================
@@ -56,3 +60,11 @@ module.exports = function(options){
 
   console.log('\n');
 }
+
+
+/*
+  ==========================
+  Export
+  ==========================
+*/
+module.exports = basebuildMainScript;
