@@ -1,3 +1,5 @@
+> Build tool for AngularJS projects. Gulp scripts as a component! \o/
+
 [![npm version](https://badge.fury.io/js/basebuild-angular.svg)](https://www.npmjs.com/package/basebuild-angular)
 [![npm downloads](https://img.shields.io/npm/dt/basebuild-angular.svg)](https://www.npmjs.com/package/basebuild-angular)
 [![npm downloads](https://img.shields.io/npm/dm/basebuild-angular.svg)](https://www.npmjs.com/package/basebuild-angular)
