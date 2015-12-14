@@ -42,13 +42,17 @@ function getRedsparkName(){
   ==========================
 */
 module.exports = function(options) {
+
+  /*
+   * Required resources
+   */
+  defaultOptions = options.defaultOptions;
   options        = options;
-  defaultOptions = require('./defaults.js')(options);
 
   return {
-    requireModule    : requireModule,
-    getBaseBuildName : getBaseBuildName,
+    requireModule      : requireModule,
+    getBaseBuildName   : getBaseBuildName,
     getTimeoutZeroName : getTimeoutZeroName,
-    getRedsparkName : getRedsparkName
+    getRedsparkName    : getRedsparkName
   }
 }

@@ -1,14 +1,37 @@
 'use strict';
 
-var $ = require('gulp-load-plugins')({
-  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del', '!gulp']
-});
-var _ = require('lodash');
-var defaultOptions = require('./defaults.js')();
 
+/*
+ * Resources
+ */
+var $              = null; // Plugins
+var _              = require('lodash');
+var defaultOptions = null;
+var gulp           = null;
+
+
+/*
+ * Module
+ */
 module.exports = function(options) {
-  var gulp = require(options.modulesData['gulp'].uses);
 
+  /*
+   * Required resources
+   */
+  defaultOptions = options.defaultOptions;
+  gulp           = require(options.modulesData['gulp'].uses);
+  $              = options.plugins;
+
+
+  /*
+   * Tasks
+   */
+  
+  /*
+    @name partials
+    @description Converts all html to a single file of Javascript, 
+      bundles everything with angular.module(options.mainAngularModule).run and uses $templateCache for each template.
+   */
   gulp.task('partials', function () {
 
     return gulp.src([
@@ -26,6 +49,7 @@ module.exports = function(options) {
       }))
       .pipe(gulp.dest(options.tmp + '/serve/partials/'));
   });
+
 
   gulp.task('copyEnviroments', ['scripts'], function(){
     var isDevTask = _.contains(options.devTasks, $.util.env._[0]);
