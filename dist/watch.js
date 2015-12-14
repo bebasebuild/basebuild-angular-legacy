@@ -27,6 +27,7 @@ function removeFile(options, event){
 }
 
 function watchFiles (options){
+
   watch([options.src + '/*.html', 'bower.json'], function(event){
     gulp.start('inject');
 
@@ -36,9 +37,9 @@ function watchFiles (options){
     if (event.event === 'unlinkDir'){
       var fullDest  = options.tmp + '/serve/' + path.relative(options.src, event.path).replace(/\.\.\//g, '');
       del([fullDest + "/**"]);
-    }else{
-      gulp.start('inject');
     }
+
+    gulp.start('inject');
   });
 
   watch([
