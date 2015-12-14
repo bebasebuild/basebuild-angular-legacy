@@ -1,3 +1,12 @@
+ ```
+  ____                 _           _ _     _         _                      _            
+ | __ )  __ _ ___  ___| |__  _   _(_) | __| |       / \   _ __   __ _ _   _| | __ _ _ __ 
+ |  _ \ / _` / __|/ _ \ '_ \| | | | | |/ _` |_____ / _ \ | '_ \ / _` | | | | |/ _` | '__|
+ | |_) | (_| \__ \  __/ |_) | |_| | | | (_| |_____/ ___ \| | | | (_| | |_| | | (_| | |   
+ |____/ \__,_|___/\___|_.__/ \__,_|_|_|\__,_|    /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|   
+                                                                |___/                    
+```
+
 > Build tool for AngularJS projects. Gulp scripts as a component! \o/
 
 [![npm version](https://badge.fury.io/js/basebuild-angular.svg)](https://www.npmjs.com/package/basebuild-angular)
