@@ -37,7 +37,7 @@ module.exports = function(options) {
 
     injectPaths = injectPaths.concat(scriptsPattern).concat(exceptFiles);
 
-    console.log("injectPaths: ", injectPaths);
+    // console.log("injectPaths: ", injectPaths);
 
     var injectScripts = gulp.src(injectPaths).pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'));
 
