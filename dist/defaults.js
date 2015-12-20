@@ -220,11 +220,13 @@ module.exports = function(){
       // Pattern for scripts only present on development phase (dev tasks)
       devScripts: [
         defaultOptions.tmp + '/serve/app/**/*.dev*.js',
+        '!' + defaultOptions.tmp + '/serve/app/**/*.prod*.js',
       ],
 
       // Pattern for scripts only present on production phase
       prodScripts: [
-        defaultOptions.tmp + '/serve/app/**/*.prod*.js'
+        defaultOptions.tmp + '/serve/app/**/*.prod*.js',
+        '!' + defaultOptions.tmp + '/serve/app/**/*.dev*.js',
       ]
     },
 

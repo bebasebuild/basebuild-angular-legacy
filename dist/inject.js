@@ -8,6 +8,8 @@ var wiredep = require('wiredep').stream;
 module.exports = function(options) {
   var gulp         = require(options.modulesData['gulp'].uses);
   var serverConfig = options.modulesData['server'];
+  var isDevTask    = _.contains(options.devTasks, $.util.env._[0]);
+  var scriptsPattern = [];
 
   gulp.task('inject', ['scripts', 'styles', 'copyEnviroments'], function () {
     var injectStyles = gulp.src([
@@ -21,13 +23,21 @@ module.exports = function(options) {
       '!{' + options.src + ',' + options.tmp + '/serve}/app/**/*.env.js'
     ];
 
+
+    if(isDevTask){
+      scriptsPattern = _.compact( scriptsPattern.concat(options.modulesData.scripts.devScripts) );
+    } else {
+      scriptsPattern = _.compact( scriptsPattern.concat(options.modulesData.scripts.prodScripts) );
+    }
+
+    
     var exceptFiles = _.map(options.specFiles, function(file){
       return '!' + file;
     });
 
-    injectPaths = injectPaths.concat(exceptFiles);
+    injectPaths = injectPaths.concat(scriptsPattern).concat(exceptFiles);
 
-    // console.log("injectPaths: ", injectPaths);
+    console.log("injectPaths: ", injectPaths);
 
     var injectScripts = gulp.src(injectPaths).pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'));
 
@@ -38,23 +48,29 @@ module.exports = function(options) {
       addRootSlash: false
     };
 
-    var explicitInjectScripts = null;
-    var explicitInjectOptions = _.clone(injectOptions);
-    var isDevTask             = _.contains(options.devTasks, $.util.env._[0]);
+    var envInjectScripts      = null;
+    var envInjectOptions      = _.clone(injectOptions);
+    envInjectOptions.starttag = '<!-- inject:env -->';
 
     if( isDevTask ){
-      explicitInjectScripts = gulp.src(options.modulesData.scripts.devScripts);
-      explicitInjectOptions.starttag = '<!-- inject:dev -->';
+      envInjectScripts = gulp.src([
+        '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.env.js',
+        '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.dev.env.js',
+        '!{' + options.src + ',' + options.tmp + '/serve}/app/**/*.prod.env.js'
+      ]);
     } else {
-      explicitInjectScripts = gulp.src(options.modulesData.scripts.prodScripts);
-      explicitInjectOptions.starttag = '<!-- inject:prod -->';
+      envInjectScripts = gulp.src([
+        '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.env.js',
+        '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.prod.env.js',
+        '!{' + options.src + ',' + options.tmp + '/serve}/app/**/*.dev.env.js'
+      ]);
     }
 
     return gulp.src(options.src + '/*.html')
       .pipe($.inject(injectStyles, injectOptions))
       .pipe($.inject(injectScripts, injectOptions))
       .pipe(wiredep(options.wiredep))
-      .pipe($.inject(explicitInjectScripts, explicitInjectOptions))
+      .pipe($.inject(envInjectScripts, envInjectOptions))
       .pipe( $.if(!serverConfig.isEnabled, $.replace('../' + options.bowerComponents, options.bowerComponents)) )
       .pipe(gulp.dest(options.tmp + '/serve'));
 
