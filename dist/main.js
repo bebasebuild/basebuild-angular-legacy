@@ -15,13 +15,20 @@ var basebuildMainScript = function(options){
   var baseBuildUtils = require(defaultOptions.modulesData['utils'].uses)(options);
   var baseBuildName  = baseBuildUtils.getBaseBuildName();
   var packageJSON    = require('../package.json');
+  
   /*
     ==========================
     Imaginations
     ==========================
   */
-  // console.log( '\n   ' + baseBuildUtils.getTimeoutZeroName() + ' is a ' + baseBuildUtils.getRedsparkName() + ' imagination,'  );
-  console.log( '\n   ' + baseBuildUtils.getBaseBuildName(true) + ' -- v' + packageJSON.version + '\n');
+  console.log('\n\n');
+  console.log(' ____                 _             _     _         '  + chalk.red('_                      _            ')     );
+  console.log('| __ )  __ _ ___  ___| |__  _   _(_) | __| |       '   + chalk.red('/ \\   _ __   __ _ _   _| | __ _ _ __ ')    );
+  console.log('|  _ \\ / _` / __|/ _ | `_ \\| | | | | |/ _` |_____ '  + chalk.red('/ _ \\ |  `_ \\ / _`| | | | |/ _` | __|') );
+  console.log('| |_) | (_| \\__ \\  __/ |_) | |_| | | | (_| |_____'   + chalk.red('/ ___ \\| | | | (_| | |_| | | (_| | |   ')  );
+  console.log('|____/ \\__,_|___/\\___|_.__/ \\__,_|_|_|\\__,_|    '  + chalk.red('/_/   \\_\\_| |_|\\__, |\\__,_|_|\\__,_|_|   ') );
+  console.log('                                                 '     + chalk.red('               |___/ ' + chalk.green('v' + packageJSON.version)) );    
+  console.log('\n\n');
 
   /*
     ==========================
@@ -53,7 +60,7 @@ var basebuildMainScript = function(options){
 
     }
 
-    !moduleData.notLogOnStart && moduleData.isEnabled  !== false && console.log( baseBuildName + useMode + category + chalk.magenta(value) + ' module');
+    !moduleData.notLogOnStart && moduleData.isEnabled  !== false && console.log( baseBuildName + useMode + category + chalk.magenta(key) + ' module as ' + chalk.magenta(value) );
 
 
   }
