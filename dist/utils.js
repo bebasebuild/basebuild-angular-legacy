@@ -18,7 +18,7 @@ function requireModule (key) {
 }
 
 function getBaseBuildName(onlyText){
-  var text = chalk.bgWhite( chalk.black('[ ' + 'Base Build ' + chalk.underline.red('Angular') + ' ]') ) + ' ';
+  var text =  chalk.white('[ ' + 'Base Build ' + chalk.underline.red('Angular') + ' ]')  + ' ';
 
   if(onlyText){
     text = chalk.white( 'Base Build ' + chalk.underline.red('Angular') );
