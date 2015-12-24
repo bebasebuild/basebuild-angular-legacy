@@ -1,8 +1,10 @@
 
 
 var nodePlugins = require('gulp-load-plugins')({
-  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del', '!gulp']
+  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del', '!gulp', 'lodash']
 });
+
+var _ = nodePlugins.lodash;
 
 module.exports = function(){
 
@@ -60,7 +62,7 @@ module.exports = function(){
     return function(err) {
       nodePlugins.util.log(nodePlugins.util.colors.red('[' + title + ']'), err.toString());
       nodePlugins.util.beep();
-      this.emit('end');
+      _.isFunction(this.emit) && this.emit('end');
     };
   };
 
