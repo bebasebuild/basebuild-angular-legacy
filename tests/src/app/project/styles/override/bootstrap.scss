@@ -1,0 +1,120 @@
+$caret-width-base: 4px;
+
+.form-control {
+  @include boxShadow(none);
+  @include borderRadius(0);
+}
+
+input, .input-group-addon {
+  @include borderRadius(0);
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.btn:focus, .btn:active:focus{
+  outline: 0 none;
+}
+
+.btn-primary, .btn-primary[disabled] {
+  background-color: $btn-primary;
+  border-color: darken( $btn-primary, 5% );
+  color: #ffffff;
+
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.open > .dropdown-toggle.btn-primary,
+.btn-primary[disabled]:hover,
+.btn-primary[disabled]:focus,
+.btn-primary[disabled]:active,
+.btn-primary[disabled].active {
+  background-color: darken( $btn-primary, 5% );
+  border-color: darken( $btn-primary, 5% );
+  color: #ffffff;
+}
+
+.btn-primary:active, .btn-primary.active, .btn-primary:active:hover, .btn-primary:active:not(:hover) {
+  background-color: darken( $btn-primary, 10% );
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background-color: $btn-secondary;
+  border-color: darken( $btn-secondary, 5% );
+  color: #ffffff;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active,
+
+.open > .dropdown-toggle.btn-secondary,
+.btn-secondary[disabled]:hover,
+.btn-secondary[disabled]:focus,
+.btn-secondary[disabled]:active,
+.btn-secondary[disabled].active {
+  background-color: darken( $btn-secondary, 5% );
+  border-color: darken( $btn-secondary, 5% );
+  color: #ffffff;
+}
+
+.btn-secondary:active, .btn-secondary.active, .btn-secondary:active:hover, .btn-secondary:active:not(:hover){
+  background-color: darken( $btn-secondary, 10% );
+  box-shadow: none;
+}
+
+.row {
+  margin-left  : 0;
+  margin-right : 0
+}
+
+// all browsers except IE8
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top:   $caret-width-base dashed;
+  border-right: $caret-width-base solid transparent;
+  border-left:  $caret-width-base solid transparent;
+}
+
+// IE8
+*+html .caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top:   $caret-width-base solid;
+  border-right: $caret-width-base solid transparent;
+  border-left:  $caret-width-base solid transparent;
+}
+
+.form-horizontal .form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.modal-footer {
+  border-top: none;
+}
+
+.btn-primary[disabled],
+.btn-primary[disabled]:hover,
+.btn-primary[disabled]:focus,
+.btn-primary[disabled]:active,
+.btn-primary[disabled].active
+.btn-secondary[disabled]:hover,
+.btn-secondary[disabled]:focus,
+.btn-secondary[disabled]:active,
+.btn-secondary[disabled].active{
+  text-shadow:none;
+  filter: none !important;
+  color: #fff;
+}

@@ -1,0 +1,32 @@
+{
+  "name": "basebuild-wrapper",
+  "private": "true",
+  "version": "0.0.1",
+  "dependencies": {
+    "basebuild-angular": "0.11.0",
+    "karma-browserify": "4.4.2",
+    "karma-requirejs": "0.2.2",
+    "requirejs": "2.1.22"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "devDependencies": {
+    "gulp": "3.9.0",
+    "gulp-util": "~3.0.2",
+    "karma": "0.13"
+  },
+  "optionalDependencies": {
+    "karma-nyan-reporter": "0.2.2",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-phantomjs-launcher": "0.2.1",
+    "karma-coverage": "^0.4.2",
+    "karma-jasmine": "~0.3.1",
+    "karma-ng-html2js-preprocessor": "~0.1.2",
+    "karma-verbose-reporter": "0.0.2",
+    "karma-dhtml-reporter": "^0.2.5"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}

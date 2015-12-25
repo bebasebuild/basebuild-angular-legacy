@@ -7,7 +7,7 @@ module.exports = function(config) {
 
     logLevel: config.LOG_ERROR,
 
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'browserify'],
 
     // files : [
     //   "builds/dev/serve/app/**/*.js"
@@ -71,11 +71,14 @@ module.exports = function(config) {
       'karma-coverage',
       "karma-chrome-launcher",
       "karma-dhtml-reporter",
-      'karma-nyan-reporter'
+      'karma-nyan-reporter',
+      'karma-browserify'
     ],
 
     preprocessors: {
-      'src/**/*.html'   : ['ng-html2js']
+      'src/**/*.html'   : ['ng-html2js'],
+      '../dist/**/*.js' : ['coverage', 'browserify' ],
+      '../node_modules/chalk/index.js' : ['browserify']
     },
 
     // generates the coverage
@@ -83,7 +86,7 @@ module.exports = function(config) {
       // 'progress',
       'nyan',
       // 'html',
-      'DHTML',
+      // 'DHTML',
       'coverage'
     ],
 
@@ -105,7 +108,14 @@ module.exports = function(config) {
 
   };
 
+  if(process.env.app){
+    configuration.preprocessors['builds/dev/serve/{app,components}/**/!(*spec|*mock).js'] = ['coverage'];
+  } 
+
   console.log('config files', config.files);
+
+
+
 
 
   // This block is needed to execute Chrome on Travis

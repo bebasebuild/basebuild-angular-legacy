@@ -1,0 +1,57 @@
+
+// =============
+// Manual Imports
+// =============
+@import "project/styles/mixins/_mixins";
+@import "project/styles/utils/_utils";
+@import "project/styles/fonts/_fonts";
+@import "project/styles/placeholderSelectors/_placeholderSelectors";
+@import "project/styles/override/_override";
+
+
+// TODO move this code to another file
+.ui-selectable {
+  img, div, ul, li{
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+// TODO move this code to another file
+.sidebar {
+  width: 220px;
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  min-height: 1px;
+  background-color: $lightPanelColor;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.body-wrapper {
+  background-color: $third-color;
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 220px;
+  right: 0;
+  padding-top: 30px;
+  overflow: auto;
+}
+
+.header-wrapper {
+  max-height: 60px;
+}
+
+
+// =============
+// Auto Imports
+// =============
+/* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
+   all your sass files automatically */
+// injector
+// endinjector
