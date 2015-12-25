@@ -56,6 +56,22 @@ if(gutil.env.prod){
   options.modulesData.karma.uses = 'karma'
 }
 
+if(!gutil.env.demo){
+  options.modulesData.unitTests = {
+    addDeps: [
+      '../dist/utils.js',
+      '../specs/*.js',
+      '../node_modules/chalk/index.js'
+      // 'builds/dev/serve/app/**/variables.env.js'
+    ],
+
+    excludeFiles: [
+      'builds/dev/serve/app/**/init.dev.env.js',
+      'builds/dev/serve/app/**/init.prod.env.js'
+    ]
+  };
+}
+
 /*
   ==========================
   Read gulp files
