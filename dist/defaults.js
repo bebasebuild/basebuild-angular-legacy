@@ -251,6 +251,9 @@ module.exports = function(){
 
       // Pattern for additional dependencies that must be injected in tests
       addDeps      : [],
+
+      // Pattern to exclude files in tests
+      excludeFiles : [],
       
       // Karma settings for "test" task
       testConfig   : {
