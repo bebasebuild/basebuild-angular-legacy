@@ -23,10 +23,10 @@ module.exports = function(options) {
   var additionalDeps = options.modulesData['unitTests'].addDeps || [];
   var specFiles      = options.specFiles || [];
   var envFiles       = {
-   all: options.tmp + '/serve/app/**/*.env.js',
-   dev: options.tmp + '/serve/app/**/*.dev.env.js',
-   prod: options.tmp + '/serve/app/**/*.prod.env.js',
-   found: []
+   all   : options.tmp + '/serve/app/**/*.env.js',
+   dev   : options.tmp + '/serve/app/**/*.dev.env.js',
+   prod  : options.tmp + '/serve/app/**/*.prod.env.js',
+   found : []
   };
 
   var htmlFiles = [
@@ -36,7 +36,13 @@ module.exports = function(options) {
   var srcFiles = [
     options.tmp + '/serve/app/**/*.js'
   ].concat(specFiles.map(function(file) {
-    return '!' + file;
+    var pattern = '!' + file;
+
+    if(_.isObject(file) && file.pattern){
+      pattern = '!' + file.pattern; 
+    }
+
+    return pattern;
   }));
 
   srcFiles.unshift(envFiles.all);
@@ -46,8 +52,6 @@ module.exports = function(options) {
   } else {
     srcFiles = srcFiles.concat(options.modulesData.scripts.devScripts);
   }
-
-  console.log('srcFiles', srcFiles)
 
   excludeFiles = excludeFiles.map(function(file) {
     return '!' + file;
