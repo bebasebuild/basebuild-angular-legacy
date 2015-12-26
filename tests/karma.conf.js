@@ -7,7 +7,7 @@ module.exports = function(config) {
 
     logLevel: config.LOG_ERROR,
 
-    frameworks: ['jasmine', 'browserify'],
+    frameworks: ['jasmine', 'requirejs'],
 
     // files : [
     //   "builds/dev/serve/app/**/*.js"
@@ -72,13 +72,12 @@ module.exports = function(config) {
       "karma-chrome-launcher",
       "karma-dhtml-reporter",
       'karma-nyan-reporter',
-      'karma-browserify'
+      'karma-requirejs'
     ],
 
     preprocessors: {
       'src/**/*.html'   : ['ng-html2js'],
-      '../dist/**/*.js' : ['coverage', 'browserify' ],
-      '../node_modules/chalk/index.js' : ['browserify']
+      '../dist/**/*.js' : ['coverage'],
     },
 
     // generates the coverage

@@ -20,14 +20,13 @@ var options = {
 */
 
 options.modulesData = {
-  // newModule: {
-  //   uses: 'newModule.js'
-  // },
+  
   gulp : {
     uses: '../tests/node_modules/gulp'
   },
   karma: {
-    uses: '../tests/node_modules/karma'
+    uses: '../tests/node_modules/karma',
+    isEnabled: false
   },
  
   sonar: {
@@ -40,6 +39,10 @@ options.modulesData = {
     projectKey     : 'io.timeoutzero:basebuild-angular-tests',
     projectName    : 'basebuild angular tests',
     projectVersion : '1.0.0',
+  },
+
+  unitTests: {
+    uses: 'gulp/unitTests.js'
   }
 }
 
@@ -48,20 +51,24 @@ if(gutil.env.prod){
   options.modulesData.karma.uses = 'karma'
 }
 
-if(!gutil.env.demo){
-  options.modulesData.unitTests = {
-    addDeps: [
-      { pattern: '../dist/utils.js', included: false},
-      // { pattern: '../node_modules/**/*.js', included: false},
-      '../specs/*.js',
-    ],
+// if(!gutil.env.demo){
+//   options.modulesData.unitTests = {
+//     addDeps: [
+//       '../dist/utils.js',
+//       // '../node_modules/chalk/index.js',
+//       '../node_modules/**/*.js',
+//       // { pattern: '../node_modules/**/*.js', included: false},
+//       '../specs/*.js'
+//     ],
 
-    excludeFiles: [
-      'builds/dev/serve/app/**/init.dev.env.js',
-      'builds/dev/serve/app/**/init.prod.env.js'
-    ]
-  };
-}
+//     excludeFiles: [
+//       'builds/dev/serve/app/**/init.dev.env.js',
+//       'builds/dev/serve/app/**/init.prod.env.js'
+//     ]
+//   };
+// }
+
+
 
 /*
   ==========================
