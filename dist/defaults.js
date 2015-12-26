@@ -1,7 +1,7 @@
 
 
 var nodePlugins = require('gulp-load-plugins')({
-  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del', '!gulp', 'lodash']
+  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del', '!gulp', 'lodash', 'chalk']
 });
 
 var _ = nodePlugins.lodash;
