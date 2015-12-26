@@ -1,11 +1,10 @@
 
 
-/*
-  ==========================
-  Exports
-  ==========================
-*/
-module.exports = function(options) {
+/**
+ * Basebuild utils module, to work with common module's functions 
+ * @param {Object} options Merged options between default and user options
+ */
+var UtilsModule = function(options) {
 
   /*
    * Required resources
@@ -38,6 +37,12 @@ module.exports = function(options) {
     return module;
   }
 
+
+  /**
+   * Get colored basebuild name
+   * @param  {Booles} onlyText if true so will return the name without '[]' wrapper
+   * @return {String} basebuild name
+   */
   function getBaseBuildName(onlyText){
     var text =  chalk.white('[ ' + 'Base Build ' + chalk.underline.red('Angular') + ' ]')  + ' ';
 
@@ -48,14 +53,27 @@ module.exports = function(options) {
     return text;
   }
 
+  /**
+   * Get colored TimeoutZero's name
+   * @return {String} TimeoutZero's name
+   */
   function getTimeoutZeroName(){
     return chalk.white('Timeout') + chalk.cyan('Zero');
   }
 
+
+  /**
+   * Get colored redspark's name
+   * @return {String} redspark's name
+   */
   function getRedsparkName(){
     return chalk.white( chalk.red('red')  + 'spark' )
   }
 
+
+  /**
+   * API
+   */
   return {
     requireModule      : requireModule,
     getBaseBuildName   : getBaseBuildName,
@@ -63,3 +81,9 @@ module.exports = function(options) {
     getRedsparkName    : getRedsparkName
   }
 }
+
+
+/**
+ * Module exports
+ */
+module.exports = UtilsModule;
