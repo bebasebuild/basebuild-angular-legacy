@@ -31,7 +31,7 @@ var UtilsModule = function(options) {
     if(data.isDefault){
       module = require(moduleName);
     } else {
-      module = require(process.cwd() + moduleName);
+      module = require(process.cwd() + '/' + moduleName);
     }
 
     return module;
