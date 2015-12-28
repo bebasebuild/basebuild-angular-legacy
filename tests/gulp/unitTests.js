@@ -8,7 +8,6 @@ module.exports = function(options) {
   var gulp      = require('gulp');
   var mocha     = require('gulp-mocha');
   var istanbul  = require('gulp-istanbul');
-  var $         = options.plugins;
 
 
   function runTests (argument) {
@@ -20,7 +19,7 @@ module.exports = function(options) {
   function setupCoverage () {
     return gulp.src('../dist/**/*.js')
       .pipe(istanbul())
-      .pipe(istanbul.hookRequire());
+      .pipe(istanbul.hookRequire()).on('error', options.errorHandler('Coverage'));
   }
 
   gulp.task('setup-coverage', [], setupCoverage);
@@ -30,4 +29,5 @@ module.exports = function(options) {
   gulp.task('test:auto', ['watchTests', 'test', 'setup-coverage'], function(){
     return gulp.watch(options.tmp + '/**/*.js', runTests);
   });
+ 
 }
