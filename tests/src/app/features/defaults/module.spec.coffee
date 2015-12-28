@@ -111,6 +111,7 @@
         ]
 
         for plugin in gulpPlugins then expect(defaultOptions.plugins).to.have.property(plugin)
+        return
         
 
       it 'Contains all third-party plugins loaded in basebuild', ->
@@ -133,3 +134,4 @@
         ]
 
         for plugin in thirdPartyPlugins then expect(defaultOptions.plugins).to.have.property(plugin)
+        return
