@@ -18,12 +18,13 @@
     sinon              = require 'sinon'
     chai               = require 'chai'
     assert             = chai.assert
+    expect             = chai.expect
 
 
     ###*
      * Tests
     ###
-    describe 'Provides a default error handler: ', ->
+    describe 'Provides a default error handler... ', ->
       beepStup = null
       logStub  = null
 
@@ -73,3 +74,62 @@
         
 
       
+
+    describe 'Provides node plugins to use as option...', ->
+
+      it 'Being an object as API', -> 
+        expect(defaultOptions.plugins).to.be.a('object')
+
+      it 'Contains all gulp plugins in basebuild (gulp-* pattern loaded for gulp-load-plugins)', ->
+        gulpPlugins = [
+          "angularFilesort"
+          "angularTemplatecache"
+          "cjsx"
+          "coffee"
+          "coffeelint"
+          "concat"
+          "csso"
+          "filter"
+          "flatten"
+          "if"
+          "inject"
+          "jshint"
+          "minifyHtml"
+          "ngAnnotate"
+          "protractor"
+          "rename"
+          "replace"
+          "rev"
+          "revReplace"
+          "sass"
+          "size"
+          "sourcemaps"
+          "uglify"
+          "useref"
+          "util"
+          "watch"
+        ]
+
+        for plugin in gulpPlugins then expect(defaultOptions.plugins).to.have.property(plugin)
+        
+
+      it 'Contains all third-party plugins loaded in basebuild', ->
+        thirdPartyPlugins = [
+          "browserSync"
+          "browserSyncSpa"
+          "concatStream"
+          "del"
+          "httpProxy"
+          "jshintStylish"
+          "lodash"
+          "mainBowerFiles"
+          "mergeStream"
+          "protractor"
+          "requireDir"
+          "shelljs"
+          "uglifySaveLicense"
+          "wiredep"
+          "chalk"
+        ]
+
+        for plugin in thirdPartyPlugins then expect(defaultOptions.plugins).to.have.property(plugin)
