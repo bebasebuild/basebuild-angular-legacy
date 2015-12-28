@@ -1,14 +1,15 @@
 'use strict';
 
-var gulp   = require('gulp');
-var gutil  = require('gulp-util');
+var gulp              = require('gulp');
+var gutil             = require('gulp-util');
+var basebuildMainFile = '../dist/main.js';
 
 /*
   ==========================
-  Basic Options
+  Basic basebuildOptions
   ==========================
 */
-var options = {
+var basebuildOptions = {
   mainAngularModule : 'BaseBuildTests'
 };
 
@@ -19,7 +20,7 @@ var options = {
   ==========================
 */
 
-options.modulesData = {
+basebuildOptions.modulesData = {
   
   gulp : {
     uses: '../tests/node_modules/gulp'
@@ -47,27 +48,10 @@ options.modulesData = {
 }
 
 if(gutil.env.prod){
-  options.modulesData.gulp.uses  = 'gulp'
-  options.modulesData.karma.uses = 'karma'
+  basebuildOptions.modulesData.gulp.uses  = 'gulp';
+  basebuildOptions.modulesData.karma.uses = 'karma';
+  basebuildMainFile                       = 'basebuild-angular';
 }
-
-// if(!gutil.env.demo){
-//   options.modulesData.unitTests = {
-//     addDeps: [
-//       '../dist/utils.js',
-//       // '../node_modules/chalk/index.js',
-//       '../node_modules/**/*.js',
-//       // { pattern: '../node_modules/**/*.js', included: false},
-//       '../specs/*.js'
-//     ],
-
-//     excludeFiles: [
-//       'builds/dev/serve/app/**/init.dev.env.js',
-//       'builds/dev/serve/app/**/init.prod.env.js'
-//     ]
-//   };
-// }
-
 
 
 /*
@@ -75,9 +59,6 @@ if(gutil.env.prod){
   Read gulp files
   ==========================
 */
-var basebuildMainFile = '../dist/main.js';
-if(gutil.env.prod){
-  basebuildMainFile = 'basebuild-angular';
-}
 
-require(basebuildMainFile)(options);
+
+require(basebuildMainFile)(basebuildOptions);
