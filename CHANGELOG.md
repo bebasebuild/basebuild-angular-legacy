@@ -1,6 +1,6 @@
 ## v0.11.5
 ### Fixes
-|Description|Commits
+Description|Commits
 --- | --- | ---
 Injection on default options for chalk and lodash plugins | [lodash commit](https://github.com/TimeoutZero/BaseBuildAngular/commit/8aed622fd45815ab03ebf1562aed9ebfd2fd86b5) and  [chalk commit](https://github.com/TimeoutZero/BaseBuildAngular/commit/68a6bd0a07ac67ce10756f1dd9d87076e5f17e85)
 `/` bugfix for require a external module by `requireModule` method of `utils` module |[commit](https://github.com/TimeoutZero/BaseBuildAngular/commit/052883e736b0e8e5b31e795904382ece441388c0)
@@ -9,12 +9,12 @@ Apply pattern for objects in `specFiles` | [commit](https://github.com/TimeoutZe
 Call `emit` function on `defaultOptions.errorHandler` only when it exists | [commit](https://github.com/TimeoutZero/BaseBuildAngular/commit/8aed622fd45815ab03ebf1562aed9ebfd2fd86b5)
 
 ### Features
-|Description|Commits
+Description|Commits
 --- | --- | ---
 New property `excludeFiles` on `unitTests` module to exclude files in tests | [implementation](https://github.com/TimeoutZero/BaseBuildAngular/commit/0c5b1222d39d0740c02bafa0e134f29c81e889f7) and  [default options](https://github.com/TimeoutZero/BaseBuildAngular/commit/6a927fd94ee7b249d9712ac76b9b7c39766c2644)
 
 ### Improvements
-|Description|Commits
+Description|Commits
 --- | --- | ---
 Some basebuild tests with `mocha, chai and sinon` | [f5aabc6](https://github.com/TimeoutZero/BaseBuildAngular/commit/f5aabc649fb4703e4f335ce3a57f52a0e6da1384), [28740a6](https://github.com/TimeoutZero/BaseBuildAngular/commit/28740a6b9280eb0b21fb4cb5b74e15ff59d09999) and [4a51463](https://github.com/TimeoutZero/BaseBuildAngular/commit/4a51463f63b305ef69201e68447342e6d7db8a61)
 Utils module coverage in 100% | [commit](https://github.com/TimeoutZero/BaseBuildAngular/commit/a04b71417802943b2a0abd8f389de62a8868d849)
