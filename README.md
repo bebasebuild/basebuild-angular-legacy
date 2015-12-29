@@ -24,6 +24,8 @@ Build tool for AngularJS projects as a [node module](https://www.npmjs.com/packa
 
 
 ## Usage
+In your `gulpfile` you can declare the options which you want to use or modify in basesebuild. To start you only need to `require` `basebuild-angular` passing the options as parameter.
+
 ***Gulpfile***
 ```javascript
 
