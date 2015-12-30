@@ -80,7 +80,7 @@
       it 'Being an object as API', -> 
         expect(defaultOptions.plugins).to.be.a('object')
 
-      it 'Contains all gulp plugins in basebuild (gulp-* pattern loaded for gulp-load-plugins)', ->
+      it 'Contains all gulp plugins in basebuild (gulp-* pattern loaded for gulp-load-plugins)', (done) ->
         gulpPlugins = [
           "angularFilesort"
           "angularTemplatecache"
@@ -111,10 +111,10 @@
         ]
 
         for plugin in gulpPlugins then expect(defaultOptions.plugins).to.have.property(plugin)
-        return
+        done()
         
 
-      it 'Contains all third-party plugins loaded in basebuild', ->
+      it 'Contains all third-party plugins loaded in basebuild', (done) ->
         thirdPartyPlugins = [
           "browserSync"
           "browserSyncSpa"
@@ -134,4 +134,4 @@
         ]
 
         for plugin in thirdPartyPlugins then expect(defaultOptions.plugins).to.have.property(plugin)
-        return
+        done()
