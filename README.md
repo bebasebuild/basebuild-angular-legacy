@@ -9,9 +9,10 @@
 
 > Build tool for AngularJS projects. Gulp scripts as a component! \o/
 
-[![npm version](https://badge.fury.io/js/basebuild-angular.svg)](https://www.npmjs.com/package/basebuild-angular)
-[![npm downloads](https://img.shields.io/npm/dt/basebuild-angular.svg)](https://www.npmjs.com/package/basebuild-angular)
-[![npm downloads](https://img.shields.io/npm/dm/basebuild-angular.svg)](https://www.npmjs.com/package/basebuild-angular)
+[![basebuild](https://img.shields.io/badge/basebuild-angular-red.svg?style=flat-square)](https://www.npmjs.com/package/basebuild-angular)
+[![npm version](https://img.shields.io/npm/v/basebuild-angular.svg?style=flat-square)](https://www.npmjs.com/package/basebuild-angular)
+[![npm downloads](https://img.shields.io/npm/dt/basebuild-angular.svg?style=flat-square)](https://www.npmjs.com/package/basebuild-angular)
+[![npm downloads](https://img.shields.io/npm/dm/basebuild-angular.svg?style=flat-square)](https://www.npmjs.com/package/basebuild-angular)
 
 
 ## Description
