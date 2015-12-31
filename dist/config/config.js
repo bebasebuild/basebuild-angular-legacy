@@ -32,6 +32,11 @@ var ConfigModule = function() {
     return options;
   }
 
+  /**
+   Merges user options with default
+   * @param  {Object} options user options
+   * @param  {Object} options merged with default options 
+   */
   function mergeWithDefaultOptions (options) {
     return _.defaultsDeep(options, defaultOptions);
   }
