@@ -25,7 +25,7 @@
      * Imports
     ###
     _              = require "#{basebuildNodeModules}/lodash"
-    defaultOptions = do require "#{distPath}/defaults"
+    defaultOptions = do require "#{distPath}/config/defaults"
 
     mergedOptions  = _.defaultsDeep(userOptions, defaultOptions)
 

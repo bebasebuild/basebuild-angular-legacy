@@ -12,7 +12,7 @@
     ###*
      * Imports
     ###
-    defaultOptions = require("#{distPath}/defaults")()
+    defaultOptions = require("#{distPath}/config/defaults")()
     _              = defaultOptions.plugins.lodash
 
     sinon              = require 'sinon'
