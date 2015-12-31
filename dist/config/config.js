@@ -1,8 +1,7 @@
 
 
 /**
- * Basebuild utils module, to work with common module's functions 
- * @param {Object} options Merged options between default and user options
+ * Basebuild config module, to setup everything before start working
  */
 var ConfigModule = function() {
 
@@ -18,13 +17,23 @@ var ConfigModule = function() {
   /*
    * Methods
    */
-  function mergeWithDefaultOptions (options) {
-    options = _.defaultsDeep(options, defaultOptions);
+  
+  /**
+   Prepares everything to start
+   * @param  {Object} options user options
+   * @return {Object} user options, merged with default options and analyzed by necessary files
+   */
+  function setup (options) {
+    options = mergeWithDefaultOptions(options);
 
     // Set default options in global options to never require ./defaults.js more than once
     options.defaultOptions = defaultOptions;
 
     return options;
+  }
+
+  function mergeWithDefaultOptions (options) {
+    return _.defaultsDeep(options, defaultOptions);
   }
 
 
@@ -33,6 +42,7 @@ var ConfigModule = function() {
    */
   return {
     defaultOptions          : defaultOptions,
+    setup                   : setup,
     mergeWithDefaultOptions : mergeWithDefaultOptions
   }
 }

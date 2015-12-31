@@ -11,7 +11,7 @@ var basebuildMainScript = function(options){
    * Config phase
    */
   var configModule   = require('./config/config.js')();
-  options            = configModule.mergeWithDefaultOptions(options);
+  options            = configModule.setup(options);
   var defaultOptions = options.defaultOptions;
 
 
