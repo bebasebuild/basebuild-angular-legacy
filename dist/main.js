@@ -6,12 +6,19 @@ var gutil = require('gulp-util');
 
 var basebuildMainScript = function(options){
 
-  var defaultOptions = require('./defaults.js')();
-  options            = _.defaultsDeep(options, defaultOptions);
 
-  // Set default options in global options to never require ./defaults.js more than once
-  options.defaultOptions = defaultOptions;
+  /**
+   * Config phase
+   */
+  var configModule   = require('./config/config.js')();
+  options            = configModule.mergeWithDefaultOptions(options);
+  var defaultOptions = options.defaultOptions;
 
+
+  
+  /**
+   * Utils
+   */
   var baseBuildUtils = require(defaultOptions.modulesData['utils'].uses)(options);
   var baseBuildName  = baseBuildUtils.getBaseBuildName();
   var packageJSON    = require('../package.json');
