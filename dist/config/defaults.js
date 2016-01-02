@@ -78,14 +78,13 @@ module.exports = function(){
   */
   defaultOptions.wiredep = {
     directory: 'bower_components',
+    src      : defaultOptions.tmp + '/serve/index.html'
     exclude: [
       /bootstrap-sass-official\/.*\.js/,
       /bootstrap\.css/,
       'bower_components/angular-input-masks'
     ]
   };
-
-  defaultOptions.wiredep.src = defaultOptions.tmp + '/serve/index.html'
 
   /*
     ==========================
