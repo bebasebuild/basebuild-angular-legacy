@@ -19,7 +19,7 @@ var ConfigModule = function() {
    */
   
   /**
-   Prepares everything to start
+   Prepares options to start
    * @param  {Object} options user options
    * @return {Object} user options, merged with default options and analyzed by necessary files
    */
