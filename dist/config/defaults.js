@@ -78,7 +78,7 @@ module.exports = function(){
   */
   defaultOptions.wiredep = {
     directory: 'bower_components',
-    src      : defaultOptions.tmp + '/serve/index.html'
+    src      : defaultOptions.tmp + '/serve/index.html',
     exclude: [
       /bootstrap-sass-official\/.*\.js/,
       /bootstrap\.css/,
@@ -96,7 +96,7 @@ module.exports = function(){
     defaultOptions.tmp + '/**/*.spec.js',
     defaultOptions.src + '/**/*.mock.js',
     defaultOptions.tmp + '/**/*.mock.js'
-  ]
+  ];
 
   /*
     ==========================
@@ -107,7 +107,6 @@ module.exports = function(){
     stylesFromIndexImport: [
       defaultOptions.src + '/app/index.scss',
       defaultOptions.src + '/app/vendor.scss',
-      //defaultOptions.src + '/app/' + defaultOptions.componentName,
       defaultOptions.src + '/app/project/styles/**/*.scss'
     ]
   };
