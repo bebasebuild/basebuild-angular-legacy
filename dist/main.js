@@ -5,22 +5,7 @@ var gutil = require('gulp-util');
 
 
 var basebuildMainScript = function(options){
-
-
-  /**
-   * Config phase
-   */
-  var configModule   = require('./config/config.js')();
-  options            = configModule.setup(options);
-  var defaultOptions = options.defaultOptions;
-
-
   
-  /**
-   * Utils
-   */
-  var baseBuildUtils = require(defaultOptions.modulesData['utils'].uses)(options);
-  var baseBuildName  = baseBuildUtils.getBaseBuildName();
   var packageJSON    = require('../package.json');
   
   /*
@@ -36,6 +21,19 @@ var basebuildMainScript = function(options){
   console.log('|____/ \\__,_|___/\\___|_.__/ \\__,_|_|_|\\__,_|    '  + chalk.red('/_/   \\_\\_| |_|\\__, |\\__,_|_|\\__,_|_|   ') );
   console.log('                                                 '     + chalk.red('               |___/ ' + chalk.green('v' + packageJSON.version)) );    
   console.log('\n\n');
+
+  /**
+   * Config phase
+   */
+  var configModule   = require('./config/config.js')();
+  options            = configModule.setup(options);
+  var defaultOptions = options.defaultOptions;
+  
+  /**
+   * Utils
+   */
+  var baseBuildUtils = require(defaultOptions.modulesData['utils'].uses)(options);
+  var baseBuildName  = baseBuildUtils.getBaseBuildName();
 
   /*
     ==========================

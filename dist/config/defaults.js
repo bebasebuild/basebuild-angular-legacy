@@ -379,6 +379,13 @@ module.exports = function(){
   }
 
 
+  // Migrate properties
+  defaultOptions.migrate = {
+    active : true,
+    trace: false
+  }
+
+
   return defaultOptions;
 
 }

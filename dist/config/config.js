@@ -8,9 +8,10 @@ var ConfigModule = function() {
   /*
    * Required resources
    */
-  var defaultOptions = require('./defaults.js')();
-  var chalk          = require('chalk');
-  var _              = require('lodash');
+  var defaultOptions = require('./defaults.js')(),
+      chalk          = require('chalk'),
+      _              = require('lodash')
+      migrateModule  = null ;
 
 
 
@@ -24,10 +25,15 @@ var ConfigModule = function() {
    * @return {Object} user options, merged with default options and analyzed by necessary files
    */
   function setup (options) {
+    var userOptions = options;
     options = mergeWithDefaultOptions(options);
 
     // Set default options in global options to never require ./defaults.js more than once
     options.defaultOptions = defaultOptions;
+
+    migrateModule = require('./migrate.js')(userOptions, options);
+    migrateModule.setup();
+    migrateModule.migrate();
 
     return options;
   }
