@@ -29,15 +29,15 @@ var MigrateModule = function(options, mergedOptions) {
 
 
   function migrate() {
-    migrateWarnProp({
-      obj         : mergedOptions.modulesData['scripts'],
-      prop        : 'isEnabled',
-      msg         : getMessage({
-        type        : 'soonTo',
-        dotLocation : 'modulesData.scripts',
-        newValue    : 'active'
-      })
-    });
+    // migrateWarnProp({
+    //   obj         : mergedOptions.modulesData['scripts'],
+    //   prop        : 'isEnabled',
+    //   msg         : getMessage({
+    //     type        : 'soonTo',
+    //     dotLocation : 'modulesData.scripts',
+    //     newValue    : 'active'
+    //   })
+    // });
   }
 
 
