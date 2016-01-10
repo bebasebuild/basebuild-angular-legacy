@@ -4,6 +4,8 @@
  * Basebuild migrate module, to prevent 
  */
 var MigrateModule = function(options, mergedOptions) {
+
+
   var options       = options || null,
     utilsModule     = require('../' + mergedOptions.modulesData['utils'].uses)(options),
     mergedOptions   = mergedOptions || null,
@@ -13,10 +15,10 @@ var MigrateModule = function(options, mergedOptions) {
 
 
   var migrateMessages = {
-    soon      : '($dotLocation) and will be removed soon',
-    soonTo    : '($dotLocation) and will be removed soon, use $newValue instead',
-    removed   : '($dotLocation) has been removed',
-    removedTo : '($dotLocation) has been removed, use $newValue instead',
+    soon      : 'and will be removed soon',
+    soonTo    : 'and will be removed soon, use $newValue instead',
+    removed   : 'has been removed',
+    removedTo : 'has been removed, use $newValue instead',
   };
 
 
@@ -29,15 +31,38 @@ var MigrateModule = function(options, mergedOptions) {
 
 
   function migrate() {
-    // migrateWarnProp({
-    //   obj         : mergedOptions.modulesData['scripts'],
-    //   prop        : 'isEnabled',
-    //   msg         : getMessage({
-    //     type        : 'soonTo',
-    //     dotLocation : 'modulesData.scripts',
-    //     newValue    : 'active'
-    //   })
-    // });
+    migrateGeneralOptions();
+    migrateModulesOptions();
+  }
+
+
+  function migrateGeneralOptions(){
+
+  }
+
+  function migrateModulesOptions(){
+
+    /**
+     * Common settings
+     */
+    for(var moduleKey in mergedOptions.modulesData){
+
+      /**
+       * isEnabled has changed to "active"
+       * @type {Boolean}
+       */
+      // migrateWarnProp({
+      //   obj         : mergedOptions.modulesData[moduleKey],
+      //   prop        : 'isEnabled',
+      //   dotLocation : 'modulesData.' + moduleKey,
+      //   msg         : getMessage({
+      //     type        : 'soonTo',
+      //     newValue    : 'active'
+      //   })
+      // });
+
+    }
+
   }
 
 
@@ -53,12 +78,12 @@ var MigrateModule = function(options, mergedOptions) {
   }
 
 
-  function migrateWarn(msg, prop) {
+  function migrateWarn(msg, prop, dotLocation) {
     if ( !warnedAbout[ msg ] ) {
       warnedAbout[ msg ] = true;
       migrateWarnings.push( msg );
       if ( console && console.warn ) {
-        console.warn( utilsModule.getBaseBuildName() + $.chalk.yellow( "Migrate warning: " + $.chalk.red(prop) + " is deprecated " + msg) );
+        console.warn( utilsModule.getBaseBuildName() + $.chalk.yellow( "Migrate warning: property " + $.chalk.red(prop) + " of " + $.chalk.red(dotLocation) + " is deprecated " + msg) );
         if ( mergedOptions.migrate.trace && console.trace ) {
           console.trace();
         }
@@ -73,11 +98,11 @@ var MigrateModule = function(options, mergedOptions) {
           configurable: true,
           enumerable: true,
           get: function() {
-            migrateWarn( args.msg, args.prop );
+            migrateWarn( args.msg, args.prop, args.dotLocation );
             return args.value;
           },
           set: function( newValue ) {
-            migrateWarn( args.msg, args.prop );
+            migrateWarn( args.msg, args.prop, args.dotLocation );
             args.value = newValue;
           }
         });
