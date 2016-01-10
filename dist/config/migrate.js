@@ -4,7 +4,7 @@
  * Basebuild migrate module, to prevent 
  */
 var MigrateModule = function(options, mergedOptions) {
-
+  'use strict';
 
   var options       = options || null,
     utilsModule     = require('../' + mergedOptions.modulesData['utils'].uses)(options),
