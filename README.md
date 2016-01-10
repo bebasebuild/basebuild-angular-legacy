@@ -18,7 +18,7 @@
 
 
 ## Description
-Build tool for AngularJS projects as a [node module](https://www.npmjs.com/package/basebuild-angular) to be reusable, easy maintenance and able to update in the way "write once, use everywhere".
+Build tool for AngularJS projects as a [node module](https://www.npmjs.com/package/basebuild-angular) to be reusable and able to update. Write once, use everywhere! ;)
 
 ## Installation
 ```
@@ -81,4 +81,4 @@ require('basebuild-angular')(options);
 
 
 ## Credit
-Based on v0.11.0 of [gulp-angular](https://github.com/Swiip/generator-gulp-angular/releases/tag/v0.11.0) yeoman generator with my improvements.
+Based on [gulp-angular](https://github.com/Swiip/generator-gulp-angular/releases/tag/v0.11.0) yeoman generator with my improvements.
