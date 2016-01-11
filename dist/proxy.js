@@ -39,6 +39,7 @@ module.exports = function(options) {
   }
 
 
+
   /*
    * The proxy middleware is an Express middleware added to BrowserSync to
    * handle backend request and proxy them to your backend.
@@ -52,9 +53,11 @@ module.exports = function(options) {
      * for your needs. If you can, you could also check on a context in the url which
      * may be more reliable but can't be generic.
      */
-    if (moduleOptions.regexNext.test(req.url)
-      || req.url == "/"
-      || (/^(?=.*\bcompany\b)(?=.*\burl\b).*$/.test(req.url) && req.url.indexOf('app/setup') == -1))  {
+  
+
+
+
+    if (moduleOptions.regexNext.test(req.url))  {
       next();
     } else {
       proxy.web(req, res);
