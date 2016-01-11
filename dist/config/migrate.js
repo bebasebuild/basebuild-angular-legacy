@@ -63,6 +63,25 @@ var MigrateModule = function(options, mergedOptions) {
 
     }
 
+
+    /**
+     * Proxy Module
+     */
+
+    /**
+     * regexNext has changed to "nextTest"
+     */
+    migrateWarnProp({
+      obj         : mergedOptions.modulesData['proxy'],
+      prop        : 'regexNext',
+      dotLocation : 'modulesData.proxy',
+      value       : mergedOptions.modulesData['proxy'].next,
+      msg         : getMessage({
+        type        : 'removedTo',
+        newValue    : 'next'
+      })
+    });
+
   }
 
 
