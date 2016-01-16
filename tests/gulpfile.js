@@ -44,6 +44,10 @@ basebuildOptions.modulesData = {
 
   unitTests: {
     uses: 'gulp/unitTests.js'
+  },
+
+  proxy: {
+    uses : 'gulp/multiProxy.js'
   }
 }
 

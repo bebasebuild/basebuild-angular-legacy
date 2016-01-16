@@ -41,12 +41,25 @@
     <!--======================-->
     <div ui-view class='main-view'></div>
 
+
+
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- run `gulp inject` to automatically populate bower script dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
 
+    <script type="text/javascript">
+        $.ajax({
+            type: 'GET',
+            url: 'python1/truco.js'
+        });
+
+         $.ajax({
+            type: 'GET',
+            url: 'python2/seis.js'
+        });
+    </script>
    
     <!-- inject:env -->
     <!-- only explicit env scripts will be automatically inserted here -->
