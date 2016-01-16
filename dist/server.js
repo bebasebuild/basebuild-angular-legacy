@@ -9,8 +9,8 @@ var util = require('util');
 module.exports = function(options) {
 
   var gulp           = require(options.modulesData['gulp'].uses);
-  var middleware     = require(options.modulesData['proxy'].uses)(options);
   var baseBuildUtils = require(options.modulesData['utils'].uses)(options);
+  var middleware     = baseBuildUtils.requireModule('proxy')(options);
 
   function logBSStart (argument) {
     console.log(baseBuildUtils.getBaseBuildName() + 'Starting BrowserSync...');
