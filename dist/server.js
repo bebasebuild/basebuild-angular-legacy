@@ -10,8 +10,8 @@ module.exports = function(options) {
 
   var gulp           = require(options.modulesData['gulp'].uses);
   var baseBuildUtils = require(options.modulesData['utils'].uses)(options);
-  var middleware     = baseBuildUtils.requireModule('proxy')(options);
-
+  var middlewares    = baseBuildUtils.requireModule('proxy')(options).middlewares;
+  
   function logBSStart (argument) {
     console.log(baseBuildUtils.getBaseBuildName() + 'Starting BrowserSync...');
   }
@@ -30,8 +30,8 @@ module.exports = function(options) {
     };
 
 
-    if(middleware.length > 0) {
-      server.middleware = middleware;
+    if(middlewares.length > 0) {
+      server.middleware = middlewares;
     }
 
     browserSync.instance = browserSync.init({

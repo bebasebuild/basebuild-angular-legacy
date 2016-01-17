@@ -1,8 +1,8 @@
  /*jshint unused:false */
 
-var proxy = null;
-var httpProxy = require('http-proxy');
-
+var proxy        = null;
+var httpProxy    = require('http-proxy');
+var middlewares  = []
 
 module.exports = function(options) {
 
@@ -20,21 +20,24 @@ module.exports = function(options) {
    * Used to test the context of request
    * @type {Regex, Function}
    */
-  var nextOption = moduleOptions.next;
-  var nextTest   = null;
+  var preventWhen = moduleOptions.preventWhen;
+  var nextTest    = null;
 
 
   /**
    * Contains all middlewares
    * @type {Array}
    */
-  var proxies = [];
-
-
+  middlewares  = moduleOptions.middleware ? moduleOptions.middleware : [];
+  
+  var proxyRequest = _.isFunction(moduleOptions.onProxyRequest) ? moduleOptions.onProxyRequest : onProxyRequest;
+  var proxyError   = _.isFunction(moduleOptions.onProxyError)   ? moduleOptions.onProxyError   : onProxyError;
+  
+  
   /**
    * Executed only if the module is enabled
    */
-  if(!proxy && moduleOptions.isEnabled){
+  if(moduleOptions.isEnabled){
 
     proxy = httpProxy.createProxyServer({
       target: proxyTarget
@@ -47,11 +50,7 @@ module.exports = function(options) {
      * @param  {Object} req      Request
      * @param  {Object} res      Response
      */
-    proxy.on('proxyReq', function(proxyReq, req, res) {
-      proxyReq.setHeader('Access-Control-Allow-Origin', proxyTarget);
-
-      console.log(chalk.green('[Proxy]'), 'Request made to:', proxyTarget + req.url);
-    });
+    proxy.on('proxyReq', proxyRequest);
 
 
     /**
@@ -60,47 +59,61 @@ module.exports = function(options) {
      * @param  {Object} req      Request
      * @param  {Object} res      Response
      */
-    proxy.on('error', function(error, req, res) {
-      res.writeHead(500, {
-        'Content-Type': 'text/plain'
-      });
-
-      console.error(chalk.red('[Proxy]'), error);
-    });
+    proxy.on('error', proxyError);
 
     /**
      * Sets the middleware
      * @type {Array}
      */
-    proxies = [proxyMiddleware];
+    middlewares = [proxyMiddleware];
 
 
 
     /**
      * Checks the type of modulesData.proxy.next
      */
-    if(_.isRegExp(nextOption)){
-      nextTest = validateRegexNext;
-    } else if(_.isFunction(nextOption)){
-      nextTest = validateNextFunction;
+    nextTest = getValidateFunction(preventWhen, 'preventWhen');
+
+
+  }
+
+  function getValidateFunction(option, propertyLaber){
+    var validateFunction = null;
+
+    if(_.isRegExp(option)){
+      validateFunction = validateRegexRequest;
+    } else if(_.isFunction(option)){
+      validateFunction = validateRequestFunction;
     } else {
-      console.error(chalk.red('[Proxy]'), 'Iligal type for property \"next\"');
+      throw new Error(chalk.red('[Proxy] ') + 'Iligal type for property "' + propertyLaber + '"');
     }
 
-
+    return validateFunction;
 
   }
 
 
-  function validateNextFunction(req, res, next){
-    return nextOption(req, res, next)
+  function validateRequestFunction(func, req, res){
+    return func(req, res)
   }
 
 
-  function validateRegexNext(req, res, next){
-    return nextOption.test(req.url)
+  function validateRegexRequest(regex, req, res, next){
+    return regex.test(req.url)
   }
 
+  function onProxyRequest (proxyReq, req, res) {
+    proxyReq.setHeader('Access-Control-Allow-Origin', proxyTarget);
+    console.log(chalk.green('[Proxy]'), 'Request made to:', proxyTarget + req.url);
+  }
+
+  function onProxyError(error, req, res) {
+    res.writeHead(500, {
+      'Content-Type': 'text/plain'
+    });
+
+    console.error(chalk.red('[Proxy]'), error);
+  }
 
   /*
    * The proxy middleware is an Express middleware added to BrowserSync to
@@ -115,12 +128,22 @@ module.exports = function(options) {
      * for your needs. If you can, you could also check on a context in the url which
      * may be more reliable but can't be generic.
      */
-    if (nextTest(req, res, next))  {
+    if (nextTest(preventWhen, req, res))  {
       next();
     } else {
       proxy.web(req, res);
     }
   }
 
-  return proxies;
+  return { 
+    middlewares             : middlewares,
+    getValidateFunction     : getValidateFunction,
+    validateRequestFunction : validateRequestFunction,
+    validateRegexRequest    : validateRegexRequest,
+    onProxyRequest          : proxyRequest,
+    onProxyError            : proxyError,
+    defaults: {
+      middleware: proxyMiddleware
+    }
+  };
 };

@@ -17,8 +17,8 @@ var MigrateModule = function(options, mergedOptions) {
   var migrateMessages = {
     soon      : 'and will be removed soon',
     soonTo    : 'and will be removed soon, use $newValue instead',
-    removed   : 'has been removed',
-    removedTo : 'has been removed, use $newValue instead',
+    removed   : 'and has been removed',
+    removedTo : 'and has been removed, use $newValue instead',
   };
 
 
@@ -75,10 +75,25 @@ var MigrateModule = function(options, mergedOptions) {
       obj         : mergedOptions.modulesData['proxy'],
       prop        : 'regexNext',
       dotLocation : 'modulesData.proxy',
-      value       : mergedOptions.modulesData['proxy'].next,
+      value       : mergedOptions.modulesData['proxy'].regexNext,
       msg         : getMessage({
         type        : 'removedTo',
         newValue    : 'next'
+      })
+    });
+
+
+    /**
+     * next has changed to "preventWhen"
+     */
+    migrateWarnProp({
+      obj         : mergedOptions.modulesData['proxy'],
+      prop        : 'next',
+      dotLocation : 'modulesData.proxy',
+      value       : mergedOptions.modulesData['proxy'].next,
+      msg         : getMessage({
+        type        : 'removedTo',
+        newValue    : 'preventWhen'
       })
     });
 

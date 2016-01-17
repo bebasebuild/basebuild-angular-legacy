@@ -210,7 +210,7 @@ module.exports = function(){
       target    : 'http://localhost:8080',
 
       // All Requests are tested with this regex to prevent the proxy when it's considered true
-      next: /\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff|woff2|cur|json)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/
+      preventWhen: /\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff|woff2|cur|json)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/
     },
 
 
