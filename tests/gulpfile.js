@@ -46,15 +46,18 @@ basebuildOptions.modulesData = {
     uses: 'gulp/unitTests.js'
   },
 
-  proxy: {
-    uses : 'gulp/multiProxy.js'
-  }
 }
 
 if(gutil.env.prod){
   basebuildOptions.modulesData.gulp.uses  = 'gulp';
   basebuildOptions.modulesData.karma.uses = 'karma';
   basebuildMainFile                       = 'basebuild-angular';
+}
+
+if(gutil.env.proxies){
+  options.modulesData.proxy = {
+    uses : 'gulp/multiProxy.js'
+  }
 }
 
 

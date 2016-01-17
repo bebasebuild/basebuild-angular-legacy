@@ -56,7 +56,7 @@ module.exports = function(options) {
         var nextOption = proxySettings.next || moduleOptions.next;
 
      
-        (function(proxySettings, proxy, nextOption){
+        (function(proxyName, proxySettings, proxy, nextOption){
           /**
            * By pass to proxy
            * @type {[type]}
@@ -72,7 +72,7 @@ module.exports = function(options) {
           httpProxies[proxyName].on('proxyReq', function(proxyReq, req, res) {
             proxyReq.setHeader('Access-Control-Allow-Origin', proxySettings.target);
 
-            console.log(chalk.green('[Proxy]'), 'Request made to:', proxySettings.target + req.url);
+            console.log(chalk.green('[Proxy]'), 'Request made to' + proxyName, ' as ' , proxySettings.target + req.url);
           });
 
 
@@ -132,7 +132,7 @@ module.exports = function(options) {
           }
 
           middlewares.push(proxyMiddleware);
-        })(proxySettings, httpProxies[proxyName], nextOption);
+        })(proxyName, proxySettings, httpProxies[proxyName], nextOption);
 
 
       }
