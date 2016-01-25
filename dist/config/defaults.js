@@ -296,7 +296,7 @@ module.exports = function(){
       // Creates routes to access files 
       routes       : {
         '/bower_components': 'bower_components'
-      },
+      }
     },
 
 
