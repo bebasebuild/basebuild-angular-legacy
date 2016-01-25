@@ -48,6 +48,10 @@ basebuildOptions.modulesData = {
 
   proxy: {
     isEnabled: false
+  },
+
+  e2eTest: {
+    isEnabled: false
   }
 
 }
