@@ -37,6 +37,7 @@
     proxyRequest = {}
     req          = null
     res          = null
+    error        = null
 
     ###*
      * Tests
@@ -58,19 +59,47 @@
       
 
       beforeEach ->
-        module       = moduleExports(mergedOptions)
+        module                 = moduleExports(mergedOptions)
         proxyRequest.setHeader = sinon.stub()
-        logStub      = console.log = sinon.stub() 
-        req          = url: 'xpto'
-        res          = {}
-      
+        sinon.stub(console, 'log') 
+        req                    = url: '/xpto'
+        res                    = {}
+        
+        # Execute
+        module.onProxyRequest(proxyRequest, req, res)
+
       afterEach ->
         proxyRequest.setHeader.reset()
-        logStub.reset()
-      
+        console.log.restore()
+
       it 'Sets CORS headers', ->
-        module.onProxyRequest(proxyRequest, req, res)
         assert.isTrue proxyRequest.setHeader.calledOnce
+      
+      it 'Logs', ->
+        assert.isTrue console.log.calledOnce
+
+    describe 'On proxy error', ->
+
+      beforeEach ->
+        sinon.stub(console, 'error') 
+        module                 = moduleExports(mergedOptions)
+        req                    = url: 'xpto'
+        res                    = {
+          writeHead : sinon.stub()
+        }
+        error                  = 'Cannot connect'
+        
+        # Execute
+        module.onProxyError(error, req, res)
+      
+      afterEach ->
+        console.error.restore()
+      
+      it 'Writes head', ->
+        assert.isTrue res.writeHead.calledOnce
+
+      it 'Logs', -> 
+        assert.isTrue console.error.calledOnce
     
       
         

@@ -25,16 +25,14 @@
      * Tests
     ###
     describe 'Provides a default error handler... ', ->
-      beepStup = null
-      logStub  = null
 
       beforeEach ->
-        logStub  = defaultOptions.plugins.util.log  = sinon.stub()
-        beepStup = defaultOptions.plugins.util.beep = sinon.stub()
+        sinon.stub(defaultOptions.plugins.util, 'log')
+        sinon.stub(defaultOptions.plugins.util, 'beep')
 
       afterEach ->
-        logStub.reset()
-        beepStup.reset()
+        defaultOptions.plugins.util.log.restore()
+        defaultOptions.plugins.util.beep.restore()
 
 
       it 'Returns a function when invoked to be a callback on tasks errors', ->
@@ -49,16 +47,16 @@
         
         errorHandler(errorMessage)
 
-        assert.isTrue logStub.calledOnce
-        assert.isTrue logStub.calledWith(redCustomTitle, errorMessage)
+        assert.isTrue defaultOptions.plugins.util.log.calledOnce
+        assert.isTrue defaultOptions.plugins.util.log.calledWith(redCustomTitle, errorMessage)
 
       it 'Beeps the terminal to alert the developer', ->
         
         defaultOptions.errorHandler('whatever')('error')
-        defaultOptions.plugins.util.log  = sinon.stub()
+        
         
 
-        assert.isTrue beepStup.called
+        assert.isTrue defaultOptions.plugins.util.beep.called
 
       it 'Emits end of the stream when invoked', ->
         @emit = () ->
