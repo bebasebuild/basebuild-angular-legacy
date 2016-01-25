@@ -46,6 +46,10 @@ basebuildOptions.modulesData = {
     uses: 'gulp/unitTests.js'
   },
 
+  proxy: {
+    isEnabled: false
+  }
+
 }
 
 if(gutil.env.prod){
