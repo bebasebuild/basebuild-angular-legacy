@@ -75,15 +75,17 @@ require('basebuild-angular')(options);
 * *browser sync* : full-featured development web server with livereload and devices sync
 * *angular-templatecache* : all HTML partials will be converted to JS to be bundled in the application
 
-## Built-in Supported Technologies
+## Built-in Supported Technologies and Features
 - Gulp
 - Bower
 - BrowserSync
+- Proxies
 - Javascript
 - CoffeeScript
 - CJSX
 - AngularJs
 - SASS
+- Sonar
 
 ## Stats
 [![NPM](https://nodei.co/npm-dl/basebuild-angular.png?months=3&height=3)](https://nodei.co/npm/basebuild-angular/)
