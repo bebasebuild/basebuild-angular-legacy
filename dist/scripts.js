@@ -15,7 +15,7 @@ function buildScripts (params) {
   var src           = params.src     || options.src;
 
   var coffeeFilter  = $.filter('**/*.coffee');
-  var jsFilter      =  $.filter(['**/*.js', '!**/*.env.js']);
+  var jsFilter      =  $.filter(['**/*.js']);
 
   return gulp.src(src)
     .pipe(coffeeFilter)
