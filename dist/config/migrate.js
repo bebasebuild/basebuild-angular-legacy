@@ -1,7 +1,7 @@
 
 
 /**
- * Basebuild migrate module, to prevent 
+ * Basebuild migrate module, to prevent
  */
 var MigrateModule = function(options, mergedOptions) {
   'use strict';
@@ -11,7 +11,7 @@ var MigrateModule = function(options, mergedOptions) {
     mergedOptions   = mergedOptions || null,
     warnedAbout     = {},
     migrateWarnings = [],
-    $               = mergedOptions.plugins;  
+    $               = mergedOptions.plugins;
 
 
   var migrateMessages = {
@@ -26,7 +26,7 @@ var MigrateModule = function(options, mergedOptions) {
   }
 
   function setMergedOptions(mergedOptions){
-    mergedOptions = mergedOptions; 
+    mergedOptions = mergedOptions;
   }
 
 
@@ -78,7 +78,7 @@ var MigrateModule = function(options, mergedOptions) {
       value       : mergedOptions.modulesData['proxy'].regexNext,
       msg         : getMessage({
         type        : 'removedTo',
-        newValue    : 'next'
+        newValue    : 'preventWhen'
       })
     });
 
