@@ -15,7 +15,7 @@ function buildScripts (params) {
   var src           = params.src     || options.src;
 
   var coffeeFilter  = $.filter('**/*.coffee');
-  var jsFilter      =  $.filter(['**/*.js']);
+  var jsFilter      =  $.filter('**/*.js');
 
   return gulp.src(src)
     .pipe(coffeeFilter)
@@ -28,8 +28,6 @@ function buildScripts (params) {
     .pipe(jsFilter)
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe(browserSync.reload({ stream: true }))
-    .pipe($.size())
     .pipe(jsFilter.restore())
     .pipe(gulp.dest(dest))
     .pipe(browserSync.reload({ stream: true }))
