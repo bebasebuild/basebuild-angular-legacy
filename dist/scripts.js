@@ -8,21 +8,32 @@ var cjsx = require('gulp-cjsx');
 
 
 function buildScripts (params) {
-  var params  = params         || {};
-  var options = params.buildOptions || {};
-  var gulp    = require(options.modulesData['gulp'].uses);
-  var dest    = params.dest    || options.tmp + '/serve/app';
-  var src     = params.src     || options.src + '/app/**/*.coffee';
+  var params        = params         || {};
+  var options       = params.buildOptions || {};
+  var gulp          = require(options.modulesData['gulp'].uses);
+  var dest          = params.dest    || options.tmp + '/serve/app';
+  var src           = params.src     || options.src;
+
+  var coffeeFilter  = $.filter('**/*.coffee');
+  var jsFilter      =  $.filter(['**/*.js', '!**/*.env.js']);
 
   return gulp.src(src)
-      .pipe($.sourcemaps.init())
-      .pipe($.coffeelint())
-      .pipe($.coffeelint.reporter())
-      .pipe($.coffee()).on('error', options.errorHandler('CoffeeScript'))
-      .pipe($.sourcemaps.write())
-      .pipe(gulp.dest(dest))
-      .pipe(browserSync.reload({ stream: true }))
-      .pipe($.size());
+    .pipe(coffeeFilter)
+    .pipe($.sourcemaps.init())
+    .pipe($.coffeelint())
+    .pipe($.coffeelint.reporter())
+    .pipe($.coffee()).on('error', options.errorHandler('CoffeeScript'))
+    .pipe($.sourcemaps.write())
+    .pipe(coffeeFilter.restore())
+    .pipe(jsFilter)
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('jshint-stylish'))
+    .pipe(browserSync.reload({ stream: true }))
+    .pipe($.size())
+    .pipe(jsFilter.restore())
+    .pipe(gulp.dest(dest))
+    .pipe(browserSync.reload({ stream: true }))
+    .pipe($.size());
 
 }
 
