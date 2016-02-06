@@ -92,9 +92,7 @@ module.exports = function(){
     ==========================
   */
   defaultOptions.specFiles = [
-    defaultOptions.src + '/**/*.spec.js',
     defaultOptions.tmp + '/**/*.spec.js',
-    defaultOptions.src + '/**/*.mock.js',
     defaultOptions.tmp + '/**/*.mock.js'
   ];
 
