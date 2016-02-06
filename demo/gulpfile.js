@@ -48,6 +48,10 @@ options.modulesData = {
       'builds/dev/serve/app/**/init.dev.env.js',
       'builds/dev/serve/app/**/init.prod.env.js'
     ]
+  },
+
+  proxy: {
+    isEnabled: false
   }
 }
 
