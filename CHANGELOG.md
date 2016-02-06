@@ -1,3 +1,10 @@
+## v0.12.3
+### Fixes
+Description | Commits
+|---|---
+Prevent proxy when request is to root path / | #25 
+
+
 ## v0.12.2
 ### Fixes
 |Description|Commits
