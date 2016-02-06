@@ -10,7 +10,8 @@ var wrench = require('wrench');
   ==========================
 */
 var options = {
-  mainAngularModule : 'BaseBuildWrapper'
+  mainAngularModule : 'BaseBuildWrapper',
+  debug             : true
 };
 
 
