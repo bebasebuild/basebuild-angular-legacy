@@ -1,3 +1,54 @@
+## v0.12.2
+### Fixes
+|Description|Commits
+--- | --- | ---
+Added treatment of warnings and errors for CoffeeScript and JavaScript - Thanks [@lucrod1](https://github.com/lucrod1) | #23 
+Prevent duplicate scripts on inject | #24 
+
+
+### Features
+|Description|Commits
+--- | --- | ---
+Removing `specFiles` from src on default options | #24 
+
+### Improvements
+|Description|Commits
+--- | --- | ---
+Some tests | #18 
+
+## v0.12.1
+### Features
+|Description|Commits
+--- | --- | ---
+***BREAKING CHANGE*** - [Proxy] Migrates "next" property to "preventWhen"|  #13 
+
+### Improvements
+|Description|Commits
+--- | --- | ---
+Some unit tests | #18 
+
+
+## v0.12.0
+### Fixes
+|Description|Commits
+--- | --- | ---
+Loading all modules declared in package.json to defaultOptions.plugins | [commit](https://github.com/TimeoutZero/BaseBuildAngular/commit/32faff548abc1260d3d693f58ad4d1d393419268)
+
+### Features
+|Description|Commits
+--- | --- | ---
+Creating config phase, manage the deprecated syntax (private config module) | #12 
+***BREAKING CHANGE*** - [Proxy] Changing from regexNext to "next" and also support regex and function as valid value |  #13 
+
+### Improvements
+|Description|Commits
+--- | --- | ---
+Some unit tests | #18 
+Adding an editor config file | [commit](https://github.com/TimeoutZero/BaseBuildAngular/commit/e625d8b072049a62bb7ce6367ee3157d52accb6f)
+Update README.md with new badges | [commit](https://github.com/TimeoutZero/BaseBuildAngular/commit/a8dc4e14d735d2cee94b6c5f28a2bd20ac7cffd3)
+Updates gulp-load-plugins to v1.1.0 | [commit](https://github.com/TimeoutZero/BaseBuildAngular/commit/ee531309a4b8217befcea99c69f832d975cb02b4)
+Changing package description | [commit](https://github.com/TimeoutZero/BaseBuildAngular/commit/70341b1208e120137fdeff30f83ecc86e5940885)
+
 ## v0.11.5
 ### Fixes
 Description|Commits
