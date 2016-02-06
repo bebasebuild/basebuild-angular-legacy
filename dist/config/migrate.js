@@ -1,7 +1,7 @@
 
 
 /**
- * Basebuild migrate module, to prevent
+ * Basebuild migrate module, to manage deprecated syntax
  */
 var MigrateModule = function(options, mergedOptions) {
   'use strict';
