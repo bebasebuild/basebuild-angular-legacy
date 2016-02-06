@@ -70,6 +70,30 @@ var UtilsModule = function(options) {
     return chalk.white( chalk.red('red')  + 'spark' )
   }
 
+  /*
+   * Logs information only on debug mode
+   */
+  function debugLog (title, label) {
+    title = '\n' + getBaseBuildName() + chalk.cyan('[' + chalk.magenta(' DEBUG ') + title + ' ]');
+    return function(){
+      if(options.debug){
+        var args  = Array.prototype.slice.call(arguments);
+        var label = arguments[0];
+        delete arguments[0];
+        
+        label     = chalk.yellow(label);
+
+        console.log(title, label);
+        for(var key in arguments){
+          var item = arguments[key];
+          console.log(chalk.magenta(' ARG ' + key + ' '), item);
+        }
+
+        console.log('\n');
+      }
+    }
+  }
+
 
   /**
    * API
@@ -78,7 +102,8 @@ var UtilsModule = function(options) {
     requireModule      : requireModule,
     getBaseBuildName   : getBaseBuildName,
     getTimeoutZeroName : getTimeoutZeroName,
-    getRedsparkName    : getRedsparkName
+    getRedsparkName    : getRedsparkName,
+    debugLog           : debugLog
   }
 }
 

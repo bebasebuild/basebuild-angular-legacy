@@ -96,19 +96,7 @@ module.exports = function(){
     defaultOptions.tmp + '/**/*.mock.js'
   ];
 
-  /*
-    ==========================
-    Custom Excludes
-    ==========================
-  */
-  defaultOptions.excludes = {
-    stylesFromIndexImport: [
-      defaultOptions.src + '/app/index.scss',
-      defaultOptions.src + '/app/vendor.scss',
-      defaultOptions.src + '/app/project/styles/**/*.scss'
-    ]
-  };
-
+  
   /*
     ==========================
     Plugins
@@ -238,7 +226,8 @@ module.exports = function(){
       Works with SASS (*.scss) files
     */
     styles: { 
-      defaultValue : './styles.js'    
+      defaultValue : './styles.js',
+      mainFile: defaultOptions.src + '/app/index.scss',
     },
 
 
@@ -367,6 +356,21 @@ module.exports = function(){
 
   // deprecated for a while
   defaultOptions.modules = {};
+
+
+  /*
+    ==========================
+    Custom Excludes
+    ==========================
+  */
+  defaultOptions.excludes = {
+    stylesFromIndexImport: [
+      defaultOptions.modulesData.styles.mainFile,
+      defaultOptions.src + '/app/vendor.scss',
+      defaultOptions.src + '/app/project/styles/**/*.scss'
+    ]
+  };
+
 
 
   // Common initial properties
