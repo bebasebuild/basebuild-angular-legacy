@@ -1,33 +1,44 @@
 'use strict';
 
-var browserSync = require('browser-sync');
 
-var $ = require('gulp-load-plugins')();
+/**
+ * Basebuild styles module, to manage stylesheets
+ */
+var StylesModule = function(options) {
 
-var wiredep = require('wiredep').stream;
+  /*
+   * Required resources
+   */
+  var gulp          = require(options.modulesData['gulp'].uses);
+  var moduleOptions = options.modulesData['styles'];
+  var utilsModule   = require(options.modulesData['utils'].uses)(options); 
+  var $             = options.plugins;
+  var browserSync   = $.browserSync;
+  var wiredep       = $.wiredep.stream;
+  var debugLog      = utilsModule.debugLog('SASS');
 
-module.exports = function(options) {
-  var gulp = require(options.modulesData['gulp'].uses);
+  var sassOptions      = {},
+    injectFiles        = [],
+    excludesFromImport = [],
+    injectOptions      = {};
 
-  gulp.task('styles', function () {
-    var sassOptions = {
+
+  /*
+   * Methods
+   */
+  
+  function setup (argument) {
+    sassOptions = {
       style: 'expanded'
     };
 
-    var injectFiles = [
+    injectFiles = [
       options.src + '/app/**/*.scss'
     ];
 
-    var excludesFromImport = options.excludes && options.excludes.stylesFromIndexImport ? options.excludes.stylesFromIndexImport : [];
+    excludesFromImport = options.excludes && options.excludes.stylesFromIndexImport ? options.excludes.stylesFromIndexImport : [];
 
-    injectFiles = injectFiles.concat( excludesFromImport.map(function(excludeFromImport){
-      return "!" + excludeFromImport;
-    }));
-
-    injectFiles = gulp.src(injectFiles, { read: false });
-
-
-    var injectOptions = {
+    injectOptions = {
       transform: function(filePath) {
         filePath = filePath.replace(options.src + '/app/', '');
         return '@import \'' + filePath + '\';';
@@ -37,13 +48,33 @@ module.exports = function(options) {
       addRootSlash: false
     };
 
-    var indexFilter = $.filter('index.scss');
-    var vendorFilter = $.filter('vendor.scss');
+    injectFiles = injectFiles.concat( excludesFromImport.map(function(excludeFromImport){
+      return "!" + excludeFromImport;
+    }));
+    
+    debugLog('setup - injectFiles and injectOptions', injectFiles, injectOptions);
+    
+    injectFiles = gulp.src(injectFiles, { read: false });
 
-    return gulp.src([
-      options.src + '/app/index.scss',
+
+    
+  }
+
+  function processStyles () {
+    setup();
+
+    var mainFileName = $.lodash.last(moduleOptions.mainFile.split('/'));
+    var indexFilter  = $.filter(mainFileName);
+    var vendorFilter = $.filter('vendor.scss');
+    var src          = [
+      moduleOptions.mainFile,
       options.src + '/app/vendor.scss'
-    ])
+    ];
+
+    debugLog('processStyles - mainFileName', mainFileName);
+    debugLog('processStyles - src', src);
+
+    return gulp.src(src)
       .pipe(indexFilter)
       .pipe($.inject(injectFiles, injectOptions))
       .pipe(indexFilter.restore())
@@ -55,5 +86,19 @@ module.exports = function(options) {
       .pipe($.sourcemaps.write())
       .pipe(gulp.dest(options.tmp + '/serve/app/'))
       .pipe(browserSync.reload({ stream: true }));
-  });
+  }
+
+  /*
+   * Tasks
+   */
+  gulp.task('styles', processStyles);
+
+  return {
+    processStyles: processStyles
+  }
 };
+
+/*
+ * Module exports
+ */
+module.exports = StylesModule;
