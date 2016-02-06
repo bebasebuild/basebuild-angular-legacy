@@ -12,10 +12,10 @@ function buildScripts (params) {
   var options       = params.buildOptions || {};
   var gulp          = require(options.modulesData['gulp'].uses);
   var dest          = params.dest    || options.tmp + '/serve/app';
-  var src           = params.src     || options.src;
+  var src           = params.src     || [options.src + '/app/**/*.coffee', options.src + '/app/**/*.js'];
 
   var coffeeFilter  = $.filter('**/*.coffee');
-  var jsFilter      =  $.filter('**/*.js');
+  var jsFilter      = $.filter('**/*.js');
 
   return gulp.src(src)
     .pipe(coffeeFilter)

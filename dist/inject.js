@@ -19,7 +19,7 @@ module.exports = function(options) {
 
 
     var injectPaths   = [
-      '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.js',
+      options.tmp + '/serve/app/**/*.js',
       '!{' + options.src + ',' + options.tmp + '/serve}/app/**/*.env.js'
     ];
 
@@ -54,15 +54,15 @@ module.exports = function(options) {
 
     if( isDevTask ){
       envInjectScripts = gulp.src([
-        '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.env.js',
-        '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.dev.env.js',
-        '!{' + options.src + ',' + options.tmp + '/serve}/app/**/*.prod.env.js'
+        options.tmp + '/serve/app/**/*.env.js',
+        options.tmp + '/serve/app/**/*.dev.env.js',
+        '!' + options.tmp + '/serve/app/**/*.prod.env.js'
       ]);
     } else {
       envInjectScripts = gulp.src([
-        '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.env.js',
-        '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.prod.env.js',
-        '!{' + options.src + ',' + options.tmp + '/serve}/app/**/*.dev.env.js'
+        options.tmp + '/serve/app/**/*.env.js',
+        options.tmp + '/serve/app/**/*.prod.env.js',
+        '!' + options.tmp + '/serve/app/**/*.dev.env.js'
       ]);
     }
 
