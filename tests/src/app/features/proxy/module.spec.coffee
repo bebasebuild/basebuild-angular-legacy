@@ -102,7 +102,15 @@
         assert.isTrue console.error.calledOnce
     
       
+    describe 'Proxy', ->
+
+      it 'Do not set middlewares when module is not enabled', ->
+        mergedOptions.modulesData.proxy.isEnabled = no
+        module = moduleExports(mergedOptions)
+
+        assert.isTrue _.isEmpty(module.middlewares)
         
+      
 
         
 
