@@ -9,7 +9,7 @@
   "latedef": true,
   "newcap": true,
   "noarg": true,
-  "quotmark": "single",
+  "quotmark": "ignore",
   "regexp": true,
   "undef": true,
   "unused": true,
@@ -18,7 +18,9 @@
   "smarttabs": true,
   "white": true,
   "validthis": true,
+  "eqnull" : "ignore",
   "globals": {
+    "$"      : false,
     "angular": false,
     // Angular Mocks
     "inject": false,
