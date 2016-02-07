@@ -30,7 +30,7 @@ function buildScripts (params) {
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe(jsFilter.restore())
     .pipe(gulp.dest(dest))
-    .pipe(browserSync.reload({ stream: true }))
+    .pipe(browserSync.stream({ match: '**/*.js' }))
     .pipe($.size());
 
 }
@@ -45,7 +45,7 @@ function buildCJSX (params) {
   return gulp.src(src)
     .pipe(cjsx({bare: true}).on('error', options.errorHandler('CoffeeScriptX')))
     .pipe(gulp.dest(dest))
-    .pipe(browserSync.reload({ stream: true }))
+    .pipe(browserSync.stream({ match: '**/*.js' }))
     .pipe($.size());
 }
 

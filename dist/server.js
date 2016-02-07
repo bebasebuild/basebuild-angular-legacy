@@ -1,17 +1,29 @@
 'use strict';
 
 
-var browserSync = require('browser-sync');
-var browserSyncSpa = require('browser-sync-spa');
 
+var browserSync = null;
 var util = require('util');
 
 module.exports = function(options) {
 
+  /*
+   * Required resources
+   */
   var gulp           = require(options.modulesData['gulp'].uses);
   var baseBuildUtils = require(options.modulesData['utils'].uses)(options);
   var middlewares    = baseBuildUtils.requireModule('proxy')(options).middlewares;
-  
+  var moduleOptions  = options.modulesData['server'];
+  var $              = options.plugins;  
+  browserSync        = $.browserSync;
+  var browserSyncSpa = $.browserSyncSpa;
+  var debugLog       = baseBuildUtils.debugLog('SERVER');
+
+  debugLog('moduleOptions', moduleOptions);
+
+  /*
+   * Methods
+   */
   function logBSStart (argument) {
     console.log(baseBuildUtils.getBaseBuildName() + 'Starting BrowserSync...');
   }
@@ -45,6 +57,10 @@ module.exports = function(options) {
     selector: '[ng-app]'// Only needed for angular apps
   }));
 
+
+  /*
+   * Tasks
+   */
   gulp.task('serve', ['watch'], function () {
     logBSStart();
     browserSyncInit([options.tmp + '/serve', options.src]);

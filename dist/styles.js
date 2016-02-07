@@ -85,7 +85,7 @@ var StylesModule = function(options) {
       .pipe($.sass(sassOptions)).on('error', options.errorHandler('Sass'))
       .pipe($.sourcemaps.write())
       .pipe(gulp.dest(options.tmp + '/serve/app/'))
-      .pipe(browserSync.reload({ stream: true }));
+      .pipe(browserSync.stream({ match: '**/*.css' }));
   }
 
   /*
