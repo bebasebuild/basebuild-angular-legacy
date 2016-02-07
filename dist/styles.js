@@ -65,7 +65,7 @@ var StylesModule = function(options) {
 
     var mainFileName = $.lodash.last(moduleOptions.mainFile.split('/'));
     var indexFilter  = $.filter(mainFileName);
-    var vendorFilter = $.filter('vendor.scss');
+    var vendorFilter = $.filter([mainFileName, 'vendor.scss']);
     var src          = [
       moduleOptions.mainFile,
       options.src + '/app/vendor.scss'
