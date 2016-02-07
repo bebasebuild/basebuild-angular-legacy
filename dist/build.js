@@ -18,9 +18,11 @@ module.exports = function(options) {
   /*
    * Required resources
    */
-  defaultOptions = options.defaultOptions;
-  gulp           = require(options.modulesData['gulp'].uses);
-  $              = options.plugins;
+  defaultOptions    = options.defaultOptions;
+  gulp              = require(options.modulesData['gulp'].uses);
+  $                 = options.plugins;
+  var utilsModule   = require(options.modulesData['utils'].uses)(options); 
+  var debugLog      = utilsModule.debugLog('BUILD');
 
 
   /*
@@ -38,10 +40,8 @@ module.exports = function(options) {
       options.src + '/app/**/*.html',
       options.tmp + '/serve/app/**/*.html'
     ])
-      .pipe($.minifyHtml({
-        empty: true,
-        spare: true,
-        quotes: true
+      .pipe($.htmlmin({
+        collapseWhitespace: true
       }))
       .pipe($.angularTemplatecache('templateCacheHtml.js', {
         module: options.mainAngularModule,
@@ -91,11 +91,8 @@ module.exports = function(options) {
       .pipe($.useref())
       .pipe($.revReplace())
       .pipe(htmlFilter)
-      .pipe($.minifyHtml({
-        empty: true,
-        spare: true,
-        quotes: true,
-        conditionals: true
+      .pipe($.htmlmin({
+        collapseWhitespace: true
       }))
       .pipe(htmlFilter.restore())
       .pipe(gulp.dest(options.dist + '/'))
