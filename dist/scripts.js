@@ -18,6 +18,10 @@ function buildScripts (params) {
   var jsFilter      = $.filter('**/*.js');
 
   return gulp.src(src)
+    .pipe(jsFilter)
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('jshint-stylish'))
+    .pipe(jsFilter.restore())
     .pipe(coffeeFilter)
     .pipe($.sourcemaps.init())
     .pipe($.coffeelint())
@@ -25,10 +29,6 @@ function buildScripts (params) {
     .pipe($.coffee()).on('error', options.errorHandler('CoffeeScript'))
     .pipe($.sourcemaps.write())
     .pipe(coffeeFilter.restore())
-    .pipe(jsFilter)
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe(jsFilter.restore())
     .pipe(gulp.dest(dest))
     .pipe(browserSync.stream({ match: '**/*.js' }))
     .pipe($.size());
