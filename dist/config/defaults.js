@@ -217,7 +217,19 @@ module.exports = function(){
       prodScripts: [
         defaultOptions.tmp + '/serve/app/**/*.prod*.js',
         '!' + defaultOptions.tmp + '/serve/app/**/*.dev*.js',
-      ]
+      ],
+
+      coffee: {
+        lint: {
+          active: true
+        }
+      },
+
+      js: {
+        lint: {
+          active: true
+        }
+      }
     },
 
 

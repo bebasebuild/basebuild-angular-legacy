@@ -14,18 +14,21 @@ function buildScripts (params) {
   var dest          = params.dest    || options.tmp + '/serve/app';
   var src           = params.src     || [options.src + '/app/**/*.coffee', options.src + '/app/**/*.js'];
 
+  var hasJsLint     = options.modulesData['scripts'].js.lint.active;
+  var hasCoffeeLint = options.modulesData['scripts'].coffee.lint.active;
+
   var coffeeFilter  = $.filter('**/*.coffee');
   var jsFilter      = $.filter('**/*.js');
 
   return gulp.src(src)
     .pipe(jsFilter)
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
+    .pipe($.if(hasJsLint, $.jshint()))
+    .pipe($.if(hasJsLint, $.jshint.reporter('jshint-stylish')))
     .pipe(jsFilter.restore())
     .pipe(coffeeFilter)
     .pipe($.sourcemaps.init())
-    .pipe($.coffeelint())
-    .pipe($.coffeelint.reporter())
+    .pipe($.if(hasCoffeeLint, $.coffeelint()))
+    .pipe($.if(hasCoffeeLint, $.coffeelint.reporter()))
     .pipe($.coffee()).on('error', options.errorHandler('CoffeeScript'))
     .pipe($.sourcemaps.write())
     .pipe(coffeeFilter.restore())
