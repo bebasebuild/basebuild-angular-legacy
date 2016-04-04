@@ -11,7 +11,7 @@ module.exports = function(options){
 
     // gulp source doesn't matter, all files are referenced in options object above
     return gulp.src('thisFileDoesNotExist.js', { read: false })
-      .pipe($.sonar(options.modulesData))
+      .pipe($.sonar(options.modulesData['sonar']))
       .on('error', $.util.log);
 
   });
