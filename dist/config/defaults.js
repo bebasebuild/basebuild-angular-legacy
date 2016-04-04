@@ -255,6 +255,9 @@ module.exports = function(){
 
       // Pattern to exclude files in tests
       excludeFiles : [],
+
+      //Custom .html files that can be injected in tests
+      htmlFiles    : [defaultOptions.src + '/**/*.html'],
       
       // Karma settings for "test" task
       testConfig   : {

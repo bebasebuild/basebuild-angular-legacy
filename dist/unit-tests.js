@@ -22,16 +22,13 @@ module.exports = function(options) {
   var excludeFiles   = options.modulesData['unitTests'].excludeFiles || [];
   var additionalDeps = options.modulesData['unitTests'].addDeps || [];
   var specFiles      = options.specFiles || [];
+  var htmlFiles      = options.modulesData['unitTests'].htmlFiles || [];
   var envFiles       = {
    all   : options.tmp + '/serve/app/**/*.env.js',
    dev   : options.tmp + '/serve/app/**/*.dev.env.js',
    prod  : options.tmp + '/serve/app/**/*.prod.env.js',
    found : []
   };
-
-  var htmlFiles = [
-    options.src + '/**/*.html'
-  ];
 
   var srcFiles = [
     options.tmp + '/serve/app/**/*.js'
