@@ -1,9 +1,8 @@
 'use strict';
 
-
-var $ = require('gulp-load-plugins')();
-
 module.exports = function(options){
+
+  var $ = options.plugins;
 
   var gulp  = require(options.modulesData.gulp.uses);
 
@@ -11,7 +10,7 @@ module.exports = function(options){
 
     // gulp source doesn't matter, all files are referenced in options object above
     return gulp.src('thisFileDoesNotExist.js', { read: false })
-      .pipe($.sonar(options.modulesData['sonar']))
+      .pipe($.sonar({sonar: options.modulesData['sonar']}))
       .on('error', $.util.log);
 
   });
