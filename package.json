@@ -44,7 +44,7 @@
     "gulp-useref": "~1.1.0",
     "gulp-util": "~3.0.2",
     "gulp-watch": "^4.3.5",
-    "h-gulp-sonar": "2.0.1",
+    "gulp-sonar": "^2.1.0",
     "http-proxy": "~1.8.0",
     "jshint-stylish": "~1.0.0",
     "lodash": "~3.10.0",
