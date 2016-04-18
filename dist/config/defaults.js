@@ -222,6 +222,10 @@ module.exports = function(){
       coffee: {
         lint: {
           active: true
+        },
+        
+        sourcemaps: {
+          active: true
         }
       },
 
@@ -229,9 +233,7 @@ module.exports = function(){
         lint: {
           active: true
         }
-      },
-
-      sourcemaps: true
+      }
     },
 
 

@@ -17,7 +17,7 @@ function buildScripts (params) {
   var hasJsLint     = options.modulesData['scripts'].js.lint.active;
   var hasCoffeeLint = options.modulesData['scripts'].coffee.lint.active;
 
-  var hasSourceMaps = options.modulesData['scripts'].sourcemaps;
+  var hasSourceMaps = options.modulesData['scripts'].coffee.sourcemaps.active;
 
   var coffeeFilter  = $.filter('**/*.coffee');
   var jsFilter      = $.filter('**/*.js');
