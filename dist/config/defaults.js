@@ -222,6 +222,10 @@ module.exports = function(){
       coffee: {
         lint: {
           active: true
+        },
+        
+        sourcemaps: {
+          active: true
         }
       },
 
