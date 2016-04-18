@@ -17,6 +17,8 @@ function buildScripts (params) {
   var hasJsLint     = options.modulesData['scripts'].js.lint.active;
   var hasCoffeeLint = options.modulesData['scripts'].coffee.lint.active;
 
+  var hasSourceMaps = options.modulesData['scripts'].sourcemaps;
+
   var coffeeFilter  = $.filter('**/*.coffee');
   var jsFilter      = $.filter('**/*.js');
 
@@ -26,11 +28,11 @@ function buildScripts (params) {
     .pipe($.if(hasJsLint, $.jshint.reporter('jshint-stylish')))
     .pipe(jsFilter.restore())
     .pipe(coffeeFilter)
-    .pipe($.sourcemaps.init())
+    .pipe($.if(hasSourceMaps, $.sourcemaps.init()))
     .pipe($.if(hasCoffeeLint, $.coffeelint()))
     .pipe($.if(hasCoffeeLint, $.coffeelint.reporter()))
     .pipe($.coffee()).on('error', options.errorHandler('CoffeeScript'))
-    .pipe($.sourcemaps.write())
+    .pipe($.if(hasSourceMaps, $.sourcemaps.write()))
     .pipe(coffeeFilter.restore())
     .pipe(gulp.dest(dest))
     .pipe(browserSync.stream({ match: '**/*.js' }))

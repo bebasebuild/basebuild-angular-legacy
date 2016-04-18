@@ -229,7 +229,9 @@ module.exports = function(){
         lint: {
           active: true
         }
-      }
+      },
+
+      sourcemaps: true
     },
 
 
