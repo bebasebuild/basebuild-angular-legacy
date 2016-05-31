@@ -122,6 +122,13 @@ module.exports = function(options) {
         errorHandler(browser);
         errorHandler(err);
       });
+      server.on('run_complete', function(browser, results){
+        if(results.failed > 0 && testOptions.singleRun){
+          var err = new Error('Some tests are failing');
+          errorHandler(err);
+          process.exit(1);
+        }
+      });
       server.start();
     }
   
