@@ -1,4 +1,5 @@
 
+var _              = require('lodash');
 var defaultsDeep   = _.partialRight(_.merge, function recursiveDefaults () {
   // Ensure dates and arrays are not recursively merged
   if (_.isArray(arguments[0]) || _.isDate(arguments[0])) {
@@ -17,7 +18,6 @@ var ConfigModule = function() {
    */
   var defaultOptions = require('./defaults.js')(),
       chalk          = require('chalk'),
-      _              = require('lodash')
       migrateModule  = null ;
 
 
