@@ -1,7 +1,7 @@
 
 
 /**
- * Basebuild utils module, to work with common module's functions 
+ * Basebuild utils module, to work with common module's functions
  * @param {Object} options Merged options between default and user options
  */
 var UtilsModule = function(options) {
@@ -80,13 +80,14 @@ var UtilsModule = function(options) {
         var args  = Array.prototype.slice.call(arguments);
         var label = arguments[0];
         delete arguments[0];
-        
+
         label     = chalk.yellow(label);
 
         console.log(title, label);
         for(var key in arguments){
           var item = arguments[key];
-          console.log(chalk.magenta(' ARG ' + key + ' '), item);
+          console.log(chalk.magenta('\n ARG ' + key + ' '));
+          console.log(item);
         }
 
         console.log('\n');
