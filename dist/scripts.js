@@ -12,7 +12,7 @@ function buildScripts (params) {
   var options       = params.buildOptions || {};
   var gulp          = require(options.modulesData['gulp'].uses);
   var dest          = params.dest    || options.tmp + '/serve/app';
-  var src           = params.src     || [options.src + '/app/**/*.coffee', options.src + '/app/**/*.js'];
+  var src           = params.src     || [options.src + '/app/**/*.coffee', options.src + '/app/**/*.js', options.src + '/app/**/*.cjsx'];
 
   var hasJsLint     = options.modulesData['scripts'].js.lint.active;
   var hasCoffeeLint = options.modulesData['scripts'].coffee.lint.active;
@@ -21,12 +21,15 @@ function buildScripts (params) {
 
   var coffeeFilter  = $.filter('**/*.coffee');
   var jsFilter      = $.filter('**/*.js');
+  var cjsxFilter    = $.filter('**/*.cjsx');
 
   return gulp.src(src)
+
     .pipe(jsFilter)
     .pipe($.if(hasJsLint, $.jshint()))
     .pipe($.if(hasJsLint, $.jshint.reporter('jshint-stylish')))
     .pipe(jsFilter.restore())
+
     .pipe(coffeeFilter)
     .pipe($.if(hasSourceMaps, $.sourcemaps.init()))
     .pipe($.if(hasCoffeeLint, $.coffeelint()))
@@ -34,26 +37,16 @@ function buildScripts (params) {
     .pipe($.coffee()).on('error', options.errorHandler('CoffeeScript'))
     .pipe($.if(hasSourceMaps, $.sourcemaps.write()))
     .pipe(coffeeFilter.restore())
-    .pipe(gulp.dest(dest))
-    .pipe(browserSync.stream({ match: '**/*.js' }))
-    .pipe($.size());
 
-}
-
-function buildCJSX (params) {
-  var params  = params              || {};
-  var options = params.buildOptions || {};
-  var gulp    = require(options.modulesData['gulp'].uses);
-  var dest    = params.dest    || options.tmp + '/serve/app';
-  var src     = params.src     || options.src + '/app/**/*.cjsx';
-
-  return gulp.src(src)
+    .pipe(cjsxFilter)
     .pipe(cjsx({bare: true}).on('error', options.errorHandler('CoffeeScriptX')))
+    .pipe(cjsxFilter.restore())
+
     .pipe(gulp.dest(dest))
     .pipe(browserSync.stream({ match: '**/*.js' }))
     .pipe($.size());
-}
 
+}
 
 var Scripts = function(buildOptions) {
 
@@ -67,12 +60,9 @@ var Scripts = function(buildOptions) {
     return buildCJSX({buildOptions: buildOptions})
   });
 
-  var exports = {
-    buildScripts: buildScripts,
-    buildCJSX   : buildCJSX
+  return {
+    buildScripts: buildScripts
   };
-
-  return exports;
 };
 
 module.exports = Scripts;
