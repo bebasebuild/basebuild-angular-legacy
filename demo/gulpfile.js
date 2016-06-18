@@ -9,8 +9,7 @@ var gutil  = require('gulp-util');
   ==========================
 */
 var options = {
-  mainAngularModule : 'BaseBuildWrapper',
-  debug             : true
+  mainAngularModule : 'BaseBuildWrapper'
 };
 
 
@@ -40,7 +39,7 @@ options.modulesData = {
     },
     projectKey     : 'io.timeoutzero:basebuild-angular-demo',
     projectName    : 'basebuild angular demo',
-    projectVersion : '1.0.2',
+    projectVersion : '1.0.2'
   },
 
   unitTests: {

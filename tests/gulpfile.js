@@ -21,7 +21,7 @@ var basebuildOptions = {
 */
 
 basebuildOptions.modulesData = {
-  
+
   gulp : {
     uses: '../tests/node_modules/gulp'
   },
@@ -29,7 +29,7 @@ basebuildOptions.modulesData = {
     uses: '../tests/node_modules/karma',
     isEnabled: false
   },
- 
+
   sonar: {
     host         : {
       url : 'http://192.168.99.100:9000'
@@ -39,7 +39,7 @@ basebuildOptions.modulesData = {
     },
     projectKey     : 'io.timeoutzero:basebuild-angular-tests',
     projectName    : 'basebuild angular tests',
-    projectVersion : '1.0.0',
+    projectVersion : '1.0.0'
   },
 
   unitTests: {
