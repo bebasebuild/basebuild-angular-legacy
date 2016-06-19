@@ -21,17 +21,17 @@ module.exports = function(options) {
   defaultOptions    = options.defaultOptions;
   gulp              = require(options.modulesData['gulp'].uses);
   $                 = options.plugins;
-  var utilsModule   = require(options.modulesData['utils'].uses)(options); 
+  var utilsModule   = require(options.modulesData['utils'].uses)(options);
   var debugLog      = utilsModule.debugLog('BUILD');
 
 
   /*
    * Tasks
    */
-  
+
   /*
     @name partials
-    @description Converts all html to a single file of Javascript, 
+    @description Converts all html to a single file of Javascript,
       bundles everything with angular.module(options.mainAngularModule).run and uses $templateCache for each template.
    */
   gulp.task('partials', function () {
@@ -70,9 +70,9 @@ module.exports = function(options) {
       addRootSlash: false
     };
 
-    var htmlFilter = $.filter('*.html');
-    var jsFilter   = $.filter(['**/*.js', '!**/*.env.js']);
-    var cssFilter  = $.filter('**/*.css');
+    var htmlFilter = $.filter('*.html',  { restore: true });
+    var jsFilter   = $.filter(['**/*.js', '!**/*.env.js'],  { restore: true });
+    var cssFilter  = $.filter('**/*.css',  { restore: true });
     var assets;
 
     return gulp.src(options.tmp + '/serve/*.html')
@@ -82,19 +82,19 @@ module.exports = function(options) {
       .pipe(jsFilter)
       .pipe($.ngAnnotate())
       .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', options.errorHandler('Uglify'))
-      .pipe(jsFilter.restore())
+      .pipe(jsFilter.restore)
       .pipe(cssFilter)
       .pipe($.replace('../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/', '../assets/fonts/'))
       .pipe($.csso())
-      .pipe(cssFilter.restore())
-      .pipe(assets.restore())
+      .pipe(cssFilter.restore)
+      .pipe(assets.restore)
       .pipe($.useref())
       .pipe($.revReplace())
       .pipe(htmlFilter)
       .pipe($.htmlmin({
         collapseWhitespace: true
       }))
-      .pipe(htmlFilter.restore())
+      .pipe(htmlFilter.restore)
       .pipe(gulp.dest(options.dist + '/'))
       .pipe($.size({ title: options.dist + '/', showFiles: true }));
   });

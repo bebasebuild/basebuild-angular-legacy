@@ -9,7 +9,8 @@ var gutil  = require('gulp-util');
   ==========================
 */
 var options = {
-  mainAngularModule : 'BaseBuildWrapper'
+  mainAngularModule : 'BaseBuildWrapper',
+  debug             : true
 };
 
 

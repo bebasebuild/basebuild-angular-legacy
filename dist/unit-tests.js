@@ -36,7 +36,7 @@ module.exports = function(options) {
     var pattern = '!' + file;
 
     if(_.isObject(file) && file.pattern){
-      pattern = '!' + file.pattern; 
+      pattern = '!' + file.pattern;
     }
 
     return pattern;
@@ -74,22 +74,22 @@ module.exports = function(options) {
 
   function listFiles(callback) {
     var filters = {
-      env : $.filter(envFiles.all),
-      src : $.filter(['**/*.js', '!**/*.env.js'])
+      env : $.filter(envFiles.all,  { restore: true }),
+      src : $.filter(['**/*.js', '!**/*.env.js'],  { restore: true })
     };
 
-    var onConcatStream = function(files) {    
+    var onConcatStream = function(files) {
       var filesToTest = concatFilesToTest( _.pluck(files, 'path') );
       callback(filesToTest);
     };
-  
+
     gulp.src( srcFiles )
       .pipe(filters.env)
       .pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'))
-      .pipe(filters.env.restore())
-      .pipe(filters.src)        
+      .pipe(filters.env.restore)
+      .pipe(filters.src)
       .pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'))
-      .pipe(filters.src.restore())
+      .pipe(filters.src.restore)
       .pipe(concat(onConcatStream));
   }
 
@@ -131,9 +131,9 @@ module.exports = function(options) {
       });
       server.start();
     }
-  
+
     listFiles(runKarmaServer);
-      
+
   }
 
   gulp.task('test', ['scripts'], function(done) {

@@ -50,7 +50,7 @@ module.exports = function(options) {
     ])
       .pipe(indexFilter)
       .pipe($.inject(injectFiles, injectOptions))
-      .pipe(indexFilter.restore())
+      .pipe(indexFilter.restore)
       // .pipe(vendorFilter)
       // .pipe(wiredep(options.wiredep))
       // .pipe(vendorFilter.restore())

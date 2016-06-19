@@ -19,16 +19,16 @@ function buildScripts (params) {
 
   var hasSourceMaps = options.modulesData['scripts'].coffee.sourcemaps.active;
 
-  var coffeeFilter  = $.filter('**/*.coffee');
-  var jsFilter      = $.filter('**/*.js');
-  var cjsxFilter    = $.filter('**/*.cjsx');
+  var coffeeFilter  = $.filter('**/*.coffee',  { restore: true });
+  var jsFilter      = $.filter('**/*.js'    ,  { restore: true });
+  var cjsxFilter    = $.filter('**/*.cjsx'  ,  { restore: true });
 
   return gulp.src(src)
 
     .pipe(jsFilter)
     .pipe($.if(hasJsLint, $.jshint()))
     .pipe($.if(hasJsLint, $.jshint.reporter('jshint-stylish')))
-    .pipe(jsFilter.restore())
+    .pipe(jsFilter.restore)
 
     .pipe(coffeeFilter)
     .pipe($.if(hasSourceMaps, $.sourcemaps.init()))
@@ -36,11 +36,11 @@ function buildScripts (params) {
     .pipe($.if(hasCoffeeLint, $.coffeelint.reporter()))
     .pipe($.coffee()).on('error', options.errorHandler('CoffeeScript'))
     .pipe($.if(hasSourceMaps, $.sourcemaps.write()))
-    .pipe(coffeeFilter.restore())
+    .pipe(coffeeFilter.restore)
 
     .pipe(cjsxFilter)
     .pipe(cjsx({bare: true}).on('error', options.errorHandler('CoffeeScriptX')))
-    .pipe(cjsxFilter.restore())
+    .pipe(cjsxFilter.restore)
 
     .pipe(gulp.dest(dest))
     .pipe(browserSync.stream({ match: '**/*.js' }))
