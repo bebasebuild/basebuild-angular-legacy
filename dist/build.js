@@ -77,17 +77,22 @@ module.exports = function(options) {
 
     return gulp.src(options.tmp + '/serve/*.html')
       .pipe($.inject(partialsInjectFile, partialsInjectOptions))
+
       .pipe(assets = $.useref.assets())
       .pipe($.rev())
+
       .pipe(jsFilter)
       .pipe($.ngAnnotate())
       .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', options.errorHandler('Uglify'))
       .pipe(jsFilter.restore)
+
       .pipe(cssFilter)
       .pipe($.replace('../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/', '../assets/fonts/'))
       .pipe($.csso())
       .pipe(cssFilter.restore)
-      .pipe(assets.restore)
+
+      .pipe(assets.restore())
+
       .pipe($.useref())
       .pipe($.revReplace())
       .pipe(htmlFilter)
@@ -95,6 +100,7 @@ module.exports = function(options) {
         collapseWhitespace: true
       }))
       .pipe(htmlFilter.restore)
+
       .pipe(gulp.dest(options.dist + '/'))
       .pipe($.size({ title: options.dist + '/', showFiles: true }));
   });
