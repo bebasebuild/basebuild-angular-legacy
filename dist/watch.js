@@ -44,7 +44,8 @@ function watchFiles (options){
 
   watch([
     options.src + '/app/**/*.css',
-    options.src + '/app/**/*.scss'
+    options.src + '/app/**/*.scss',
+    options.src + '/app/**/*.cjsx'
   ], function(event) {
     if(isOnlyChange(event)) {
       gulp.start('styles');
@@ -82,22 +83,6 @@ function watchFiles (options){
       gulp.start('templates:tmp');
     }
   });
-
-  watch([
-    options.src + '/app/**/*.cjsx',
-  ], function(event) {
-    if(isOnlyChange(event)) {
-      var fullDest  = options.tmp + '/serve/' + path.relative(options.src, event.path).replace(/\.\.\//g, '');
-      fullDest      = path.dirname( fullDest );
-      scriptsModule.buildCJSX({ src: event.path, dest: fullDest, buildOptions: options });
-    } else if (removed(event)){
-      removeFile(options, event);
-
-    }else{
-      gulp.start('inject');
-
-    }
-  });
 }
 
 module.exports = function(options) {
@@ -115,7 +100,7 @@ module.exports = function(options) {
     watchFiles(options);
   });
 
-  gulp.task('watchTests', ['scripts', 'cjsx'],  function(){
+  gulp.task('watchTests', ['scripts'],  function(){
     watchFiles(options);
   });
 };

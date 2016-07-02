@@ -56,10 +56,6 @@ var Scripts = function(buildOptions) {
     return buildScripts({buildOptions: buildOptions});
   });
 
-  gulp.task('cjsx', function() {
-    return buildCJSX({buildOptions: buildOptions})
-  });
-
   return {
     buildScripts: buildScripts
   };
