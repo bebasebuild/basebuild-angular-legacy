@@ -44,8 +44,7 @@ function watchFiles (options){
 
   watch([
     options.src + '/app/**/*.css',
-    options.src + '/app/**/*.scss',
-    options.src + '/app/**/*.cjsx'
+    options.src + '/app/**/*.scss'
   ], function(event) {
     if(isOnlyChange(event)) {
       gulp.start('styles');
@@ -60,7 +59,8 @@ function watchFiles (options){
 
   watch([
     options.src + '/app/**/*.js',
-    options.src + '/app/**/*.coffee'
+    options.src + '/app/**/*.coffee',
+    options.src + '/app/**/*.cjsx'
   ], function(event) {
 
     if(isOnlyChange(event)) {
