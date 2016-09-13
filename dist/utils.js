@@ -44,10 +44,10 @@ var UtilsModule = function(options) {
    * @return {String} basebuild name
    */
   function getBaseBuildName(onlyText){
-    var text =  chalk.white('[ ' + 'Base Build ' + chalk.underline.red('Angular') + ' ]')  + ' ';
+    var text =  chalk.white('[ ' + 'basebuild ' + chalk.underline.red('angular') + ' ]')  + ' ';
 
     if(onlyText){
-      text = chalk.white( 'Base Build ' + chalk.underline.red('Angular') );
+      text = chalk.white( 'basebuild ' + chalk.underline.red('angular') );
     }
 
     return text;
