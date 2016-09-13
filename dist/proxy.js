@@ -135,7 +135,6 @@ module.exports = function(options) {
       next();
     } else {
       var target = proxyRules.match(req) || proxyTarget || null;
-      console.log('target.. ', target);
 
       if (target) {
         return proxy.web(req, res, {
