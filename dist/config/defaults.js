@@ -400,6 +400,9 @@ module.exports = function(){
     defaultOptions.modulesData[key].uses = defaultOptions.modulesData[key].defaultValue;
   }
 
+  defaultOptions.modulesData.e2eTest.isEnabled = false;
+  defaultOptions.modulesData.docs.isEnabled    = false;
+
 
   // Migrate properties
   defaultOptions.migrate = {

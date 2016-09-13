@@ -61,11 +61,6 @@ basebuildOptions.modulesData = {
       default: 'http://localhost:4000',
     }
   },
-
-  e2eTest: {
-    isEnabled: false
-  }
-
 }
 
 if(gutil.env.prod){
