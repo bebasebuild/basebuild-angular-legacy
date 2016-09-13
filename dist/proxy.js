@@ -1,8 +1,9 @@
- /*jshint unused:false */
+/*jshint unused:false */
 
-var proxy        = null;
-var httpProxy    = require('http-proxy');
-var middlewares  = []
+var proxy        = null,
+    httpProxy    = require('http-proxy'),
+    middlewares  = [],
+    HttpProxyRules = require('basebuild-proxy-rules');
 
 module.exports = function(options) {
 
@@ -15,6 +16,7 @@ module.exports = function(options) {
    * Location of your backend server
    */
   var proxyTarget   = moduleOptions.target;
+  var proxyRules    = new HttpProxyRules(moduleOptions.proxyRules || {});
 
   /**
    * Used to test the context of request
@@ -29,11 +31,11 @@ module.exports = function(options) {
    * @type {Array}
    */
   middlewares  = moduleOptions.middleware ? moduleOptions.middleware : [];
-  
+
   var proxyRequest = _.isFunction(moduleOptions.onProxyRequest) ? moduleOptions.onProxyRequest : onProxyRequest;
   var proxyError   = _.isFunction(moduleOptions.onProxyError)   ? moduleOptions.onProxyError   : onProxyError;
-  
-  
+
+
   /**
    * Executed only if the module is enabled
    */
@@ -102,9 +104,10 @@ module.exports = function(options) {
     return regex.test(req.url)
   }
 
-  function onProxyRequest (proxyReq, req, res) {
+  function onProxyRequest (proxyReq, req, res, options) {
     proxyReq.setHeader('Access-Control-Allow-Origin', proxyTarget);
-    console.log(chalk.green('[Proxy]'), 'Request made to:', proxyTarget + req.url);
+    console.log(chalk.green('[Proxy]'), 'Request made to:', chalk.magenta('host: '), options.target.href, chalk.magenta(' url: '), req.url);
+    // console.log(options);
   }
 
   function onProxyError(error, req, res) {
@@ -131,11 +134,20 @@ module.exports = function(options) {
     if (nextTest(preventWhen, req, res) || req.url === "/")  {
       next();
     } else {
-      proxy.web(req, res);
+      var target = proxyRules.match(req) || proxyTarget || null;
+      console.log('target.. ', target);
+
+      if (target) {
+        return proxy.web(req, res, {
+          target: target
+        });
+      } else {
+        next(); // Static file
+      }
     }
   }
 
-  return { 
+  return {
     middlewares             : middlewares,
     getValidateFunction     : getValidateFunction,
     validateRequestFunction : validateRequestFunction,

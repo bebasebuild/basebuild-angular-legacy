@@ -47,7 +47,19 @@ basebuildOptions.modulesData = {
   },
 
   proxy: {
-    isEnabled: false
+    // target: 'http://localhost:4000',
+
+    proxyRules: {
+      rules : {
+        '/python1/' : {
+          removePrefix: true,
+          target: 'http://localhost:9000'
+        },
+        '/python2/' : 'http://localhost:9001',
+      },
+
+      default: 'http://localhost:4000',
+    }
   },
 
   e2eTest: {
@@ -62,11 +74,11 @@ if(gutil.env.prod){
   basebuildMainFile                       = 'basebuild-angular';
 }
 
-if(gutil.env.proxies){
-  options.modulesData.proxy = {
-    uses : 'gulp/multiProxy.js'
-  }
-}
+// if(gutil.env.proxies){
+//   options.modulesData.proxy = {
+//     uses : 'gulp/multiProxy.js'
+//   }
+// }
 
 
 /*

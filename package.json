@@ -11,6 +11,7 @@
     "url": "git+https://github.com/TimeoutZero/BaseBuildAngular.git"
   },
   "dependencies": {
+    "basebuild-proxy-rules": "1.0.0",
     "browser-sync": "2.13.0",
     "browser-sync-spa": "1.0.3",
     "chalk": "1.1.1",
