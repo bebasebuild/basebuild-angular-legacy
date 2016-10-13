@@ -105,9 +105,8 @@ module.exports = function(options) {
   }
 
   function onProxyRequest (proxyReq, req, res, options) {
-    proxyReq.setHeader('Access-Control-Allow-Origin', proxyTarget);
-    console.log(chalk.green('[Proxy]'), 'Request made to:', chalk.magenta('host: '), options.target.href, chalk.magenta(' url: '), req.url);
-    // console.log(options);
+    proxyReq.setHeader('Access-Control-Allow-Origin', options.target.href);
+    console.log(chalk.green('[Proxy]'), 'Request made to...', chalk.magenta('host '), options.target.href, chalk.magenta(' url '), req.url);
   }
 
   function onProxyError(error, req, res) {
@@ -134,12 +133,9 @@ module.exports = function(options) {
     if (nextTest(preventWhen, req, res) || req.url === "/")  {
       next();
     } else {
-      var target = proxyRules.match(req) || proxyTarget || null;
-
-      if (target) {
-        return proxy.web(req, res, {
-          target: target
-        });
+      var proxySettings = proxyRules.match(req) || { target: proxyTarget };
+      if (proxySettings && proxySettings.target) {
+        proxy.web(req, res, proxySettings);
       } else {
         next(); // Static file
       }
