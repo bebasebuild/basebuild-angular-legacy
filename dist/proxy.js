@@ -130,15 +130,12 @@ module.exports = function(options) {
      * for your needs. If you can, you could also check on a context in the url which
      * may be more reliable but can't be generic.
      */
-    if (nextTest(preventWhen, req, res) || req.url === "/")  {
+    var proxySettings = proxyRules.match(req) || { target: proxyTarget };
+    var isStaticFile  = nextTest(preventWhen, req, res) || req.url === "/";
+    if ( isStaticFile && !proxySettings.forceRequest)  {
       next();
     } else {
-      var proxySettings = proxyRules.match(req) || { target: proxyTarget };
-      if (proxySettings && proxySettings.target) {
-        proxy.web(req, res, proxySettings);
-      } else {
-        next(); // Static file
-      }
+      proxy.web(req, res, proxySettings);
     }
   }
 
