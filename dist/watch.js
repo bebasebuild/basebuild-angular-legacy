@@ -7,6 +7,7 @@ var scriptsModule = null;
 var serverConfig  = null;
 var gulp          = null;
 var del           = require('del');
+var utils         = require('./utils');
 
 var watchFolderOptions  = {
   events: ['addDir', 'unlinkDir'],
@@ -86,10 +87,11 @@ function watchFiles (options){
 }
 
 module.exports = function(options) {
-
-  scriptsModule = require(options.modulesData['scripts'].uses)(options);
-  gulp          = require(options.modulesData['gulp'].uses);
-  serverConfig  = options.modulesData['server'];
+  utils = utils(options);
+  
+  scriptsModule = utils.requireModule('scripts')(options);
+  gulp          = utils.requireModule('gulp');
+  serverConfig  = utils.requireModule('server');
   var watchDeps = ['inject'];
 
   if(!serverConfig.isEnabled){
