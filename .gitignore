@@ -17,3 +17,5 @@ sonar.trace.db
 
 semantic/
 semantic.json
+
+.idea

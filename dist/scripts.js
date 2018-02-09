@@ -5,6 +5,8 @@ var browserSync = require('browser-sync');
 var $    = require('gulp-load-plugins')();
 var _    = require('lodash');
 var cjsx = require('gulp-cjsx');
+// var babel = require('gulp-babel');
+// var sourcemaps = require('gulp-sourcemaps');
 
 
 function buildScripts (params) {
@@ -28,6 +30,9 @@ function buildScripts (params) {
     .pipe(jsFilter)
     .pipe($.if(hasJsLint, $.jshint()))
     .pipe($.if(hasJsLint, $.jshint.reporter('jshint-stylish')))
+    // .pipe(sourcemaps.init())
+    // .pipe(babel())
+    // .pipe(sourcemaps.write('.'))
     .pipe(jsFilter.restore)
 
     .pipe(coffeeFilter)
