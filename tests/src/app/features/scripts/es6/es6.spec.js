@@ -50,17 +50,25 @@ describe('Scripts Module', function () {
     });
     
     
-    it('Should compile ES6 feature to ES5', function(done) {
+    it('Should compile ES6 features to ES5', function(done) {
       fs.readFile([mergedOptions.tmp, '/serve/app/features/scripts/es6/es6.js'].join(''), {encoding: 'utf8'}, callbackTest);
       
       function callbackTest(error, data) {
-        var array1Regex = /var\sarray1\s=\s\[1,\s2,\s3];/;
-        var array2Regex = /var\sarray2\s=\s\[\].concat\(array1\);/;
-        var fnRegex = /var\sfn\s=\sfunction\sfn\(\)\s\{\};/;
+        var hasVarArray1RegExp = /var\sarray1\s=\s\[1,\s2,\s3];/;
+        var hasVarArray2RegExp = /var\sarray2\s=\s\[\].concat\(array1\);/;
+        var hasFunctionRegExp = /var\sfn\s=\sfunction\sfn\(\)\s\{\};/;
         
-        assert.isTrue(array1Regex.test(data));
-        assert.isTrue(array2Regex.test(data));
-        assert.isTrue(fnRegex.test(data));
+        var hasConstRegExp = /const\sarray/;
+        var hasSpreadOperatorRegExp = /\[\.\.\.array1\];/;
+        var hasArrowFunctionRegExp = /\(\)=>\s\{/;
+        
+        assert.isTrue(hasVarArray1RegExp.test(data));
+        assert.isTrue(hasVarArray2RegExp.test(data));
+        assert.isTrue(hasFunctionRegExp.test(data));
+        
+        assert.isFalse(hasConstRegExp.test(data));
+        assert.isFalse(hasSpreadOperatorRegExp.test(data));
+        assert.isFalse(hasArrowFunctionRegExp.test(data));
         
         done();
       }
