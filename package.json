@@ -11,6 +11,8 @@
     "url": "git+https://github.com/TimeoutZero/BaseBuildAngular.git"
   },
   "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "basebuild-proxy-rules": "2.0.0-rc",
     "browser-sync": "2.13.0",
     "browser-sync-spa": "1.0.3",
@@ -19,6 +21,7 @@
     "del": "2.2.0",
     "gulp-angular-filesort": "1.1.1",
     "gulp-angular-templatecache": "1.9.1",
+    "gulp-babel": "^7.0.1",
     "gulp-cjsx": "3.0.0",
     "gulp-coffee": "2.3.1",
     "gulp-coffeelint": "0.4.0",

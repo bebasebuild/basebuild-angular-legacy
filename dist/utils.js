@@ -1,10 +1,15 @@
 
 
 /**
+ * Module exports
+ */
+module.exports = UtilsModule;
+
+/**
  * Basebuild utils module, to work with common module's functions
  * @param {Object} options Merged options between default and user options
  */
-var UtilsModule = function(options) {
+function UtilsModule(options) {
 
   /*
    * Required resources
@@ -107,9 +112,3 @@ var UtilsModule = function(options) {
     debugLog           : debugLog
   }
 }
-
-
-/**
- * Module exports
- */
-module.exports = UtilsModule;

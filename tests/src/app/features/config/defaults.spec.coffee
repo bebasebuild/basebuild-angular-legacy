@@ -42,19 +42,19 @@
         cleanCustomTitle  = 'MycleanCustomTitle'
         redCustomTitle    = '\u001b[31m[' + cleanCustomTitle + ']\u001b[39m'
         errorMessage      = 'ErrorXPTO'
-        
+
         errorHandler = defaultOptions.errorHandler(cleanCustomTitle)
-        
+
         errorHandler(errorMessage)
 
         assert.isTrue defaultOptions.plugins.util.log.calledOnce
         assert.isTrue defaultOptions.plugins.util.log.calledWith(redCustomTitle, errorMessage)
 
       it 'Beeps the terminal to alert the developer', ->
-        
+
         defaultOptions.errorHandler('whatever')('error')
-        
-        
+
+
 
         assert.isTrue defaultOptions.plugins.util.beep.called
 
@@ -68,14 +68,14 @@
         assert.isTrue @emit.calledWith('end')
         @emit.reset()
 
-      
-        
 
-      
+
+
+
 
     describe 'Provides node plugins to use as option...', ->
 
-      it 'Being an object as API', -> 
+      it 'Being an object as API', ->
         expect(defaultOptions.plugins).to.be.a('object')
 
       it 'Contains all gulp plugins in basebuild (gulp-* pattern loaded for gulp-load-plugins)', (done) ->
@@ -92,7 +92,7 @@
           "if"
           "inject"
           "jshint"
-          "minifyHtml"
+          "htmlmin"
           "ngAnnotate"
           "protractor"
           "rename"
@@ -110,7 +110,7 @@
 
         for plugin in gulpPlugins then expect(defaultOptions.plugins).to.have.property(plugin)
         done()
-        
+
 
       it 'Contains all third-party plugins loaded in basebuild', (done) ->
         thirdPartyPlugins = [

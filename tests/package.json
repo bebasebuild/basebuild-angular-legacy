@@ -28,8 +28,7 @@
     "karma-coverage": "^0.4.2",
     "karma-jasmine": "~0.3.1",
     "karma-ng-html2js-preprocessor": "~0.1.2",
-    "karma-verbose-reporter": "0.0.2",
-    "karma-dhtml-reporter": "^0.2.5"
+    "karma-verbose-reporter": "0.0.2"
   },
   "engines": {
     "node": ">=0.10.0"

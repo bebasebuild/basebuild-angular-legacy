@@ -44,11 +44,6 @@ module.exports = function(config) {
       foldAll: true, // reports start folded (only with preserveDescribeNesting)
     },
 
-    dhtmlReporter: {
-      'outputFile' : '/tests/dhtmlReport.html',
-      'exclusiveSections': true,
-      'openReportInBrowser': false
-    },
 
     ngHtml2JsPreprocessor: {
       stripPrefix: 'src/',
@@ -70,7 +65,6 @@ module.exports = function(config) {
       'karma-ng-html2js-preprocessor',
       'karma-coverage',
       "karma-chrome-launcher",
-      "karma-dhtml-reporter",
       'karma-nyan-reporter',
       'karma-requirejs'
     ],
@@ -109,7 +103,7 @@ module.exports = function(config) {
 
   if(process.env.app){
     configuration.preprocessors['builds/dev/serve/{app,components}/**/!(*spec|*mock).js'] = ['coverage'];
-  } 
+  }
 
   console.log('config files', config.files);
 

@@ -8,7 +8,7 @@ var cjsx = require('gulp-cjsx');
 
 
 function buildScripts (params) {
-  var params        = params         || {};
+  params            = params        || {};
   var options       = params.buildOptions || {};
   var gulp          = require(options.modulesData['gulp'].uses);
   var dest          = params.dest    || options.tmp + '/serve/app';
@@ -28,6 +28,9 @@ function buildScripts (params) {
     .pipe(jsFilter)
     .pipe($.if(hasJsLint, $.jshint()))
     .pipe($.if(hasJsLint, $.jshint.reporter('jshint-stylish')))
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.sourcemaps.write('.'))
     .pipe(jsFilter.restore)
 
     .pipe(coffeeFilter)
@@ -51,7 +54,7 @@ function buildScripts (params) {
 var Scripts = function(buildOptions) {
 
   var gulp    = require(buildOptions.modulesData['gulp'].uses);
-
+  
   gulp.task('scripts', function(){
     return buildScripts({buildOptions: buildOptions});
   });
