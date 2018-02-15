@@ -1,6 +1,6 @@
 {
   "name": "basebuild-angular",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "Build tool for AngularJS projects as a node module to be reusable and able to update. Write once, use everywhere! ;)",
   "main": "./dist/main.js",
   "files": [
