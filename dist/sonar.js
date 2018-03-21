@@ -6,12 +6,12 @@ module.exports = function(options){
 
   var gulp  = require(options.modulesData.gulp.uses);
 
-  gulp.task('sonar', ['test'], function(){
+  var sonarqubeScanner = require('sonarqube-scanner');
+
+  gulp.task('sonar', ['test'], function(done){
 
     // gulp source doesn't matter, all files are referenced in options object above
-    return gulp.src('thisFileDoesNotExist.js', { read: false })
-      .pipe($.sonar({sonar: options.modulesData['sonar']}))
-      .on('error', $.util.log);
+    sonarqubeScanner(options.modulesData['sonar'], done);
 
   });
 
