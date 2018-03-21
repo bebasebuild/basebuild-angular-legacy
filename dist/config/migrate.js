@@ -12,6 +12,7 @@ var MigrateModule = function(options, mergedOptions) {
     warnedAbout     = {},
     migrateWarnings = [],
     $               = mergedOptions.plugins;
+    $.chalk         = require('chalk');
 
 
   var migrateMessages = {

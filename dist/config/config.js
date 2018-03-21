@@ -1,4 +1,12 @@
 
+var _              = require('lodash');
+var defaultsDeep   = _.partialRight(_.merge, function recursiveDefaults () {
+  // Ensure dates and arrays are not recursively merged
+  if (_.isArray(arguments[0]) || _.isDate(arguments[0])) {
+    return arguments[0];
+  }
+  return _.merge(arguments[0], arguments[1], recursiveDefaults);
+});
 
 /**
  * Basebuild config module, to setup everything before start working
@@ -10,7 +18,6 @@ var ConfigModule = function() {
    */
   var defaultOptions = require('./defaults.js')(),
       chalk          = require('chalk'),
-      _              = require('lodash')
       migrateModule  = null ;
 
 
@@ -18,7 +25,7 @@ var ConfigModule = function() {
   /*
    * Methods
    */
-  
+
   /**
    Prepares options to start
    * @param  {Object} options user options
@@ -41,10 +48,10 @@ var ConfigModule = function() {
   /**
    Merges user options with default
    * @param  {Object} options user options
-   * @param  {Object} options merged with default options 
+   * @param  {Object} options merged with default options
    */
   function mergeWithDefaultOptions (options) {
-    return _.defaultsDeep(options, defaultOptions);
+    return defaultsDeep(options, defaultOptions);
   }
 
 

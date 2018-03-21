@@ -21,7 +21,7 @@ var basebuildOptions = {
 */
 
 basebuildOptions.modulesData = {
-  
+
   gulp : {
     uses: '../tests/node_modules/gulp'
   },
@@ -29,7 +29,7 @@ basebuildOptions.modulesData = {
     uses: '../tests/node_modules/karma',
     isEnabled: false
   },
- 
+
   sonar: {
     host         : {
       url : 'http://192.168.99.100:9000'
@@ -39,7 +39,7 @@ basebuildOptions.modulesData = {
     },
     projectKey     : 'io.timeoutzero:basebuild-angular-tests',
     projectName    : 'basebuild angular tests',
-    projectVersion : '1.0.0',
+    projectVersion : '1.0.0'
   },
 
   unitTests: {
@@ -47,13 +47,20 @@ basebuildOptions.modulesData = {
   },
 
   proxy: {
-    isEnabled: false
+    // target: 'http://localhost:4000',
+
+    proxyRules: {
+      rules : {
+        '/python1/' : {
+          removePrefix: true,
+          target: 'http://localhost:9000'
+        },
+        '/python2/' : 'http://localhost:9001',
+      },
+
+      default: 'http://localhost:4000',
+    }
   },
-
-  e2eTest: {
-    isEnabled: false
-  }
-
 }
 
 if(gutil.env.prod){
@@ -62,11 +69,11 @@ if(gutil.env.prod){
   basebuildMainFile                       = 'basebuild-angular';
 }
 
-if(gutil.env.proxies){
-  options.modulesData.proxy = {
-    uses : 'gulp/multiProxy.js'
-  }
-}
+// if(gutil.env.proxies){
+//   options.modulesData.proxy = {
+//     uses : 'gulp/multiProxy.js'
+//   }
+// }
 
 
 /*

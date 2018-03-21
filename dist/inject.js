@@ -8,6 +8,7 @@ var wiredep = require('wiredep').stream;
 module.exports = function(options) {
   var gulp         = require(options.modulesData['gulp'].uses);
   var serverConfig = options.modulesData['server'];
+  var injectConfig = options.modulesData['inject'];
   var isDevTask    = _.contains(options.devTasks, $.util.env._[0]);
   var scriptsPattern = [];
 
@@ -30,8 +31,8 @@ module.exports = function(options) {
       scriptsPattern = _.compact( scriptsPattern.concat(options.modulesData.scripts.prodScripts) );
     }
 
-    
-    var exceptFiles = _.map(options.specFiles, function(file){
+
+    var exceptFiles = _.map(options.specFiles.concat(injectConfig.ignore), function(file){
       return '!' + file;
     });
 

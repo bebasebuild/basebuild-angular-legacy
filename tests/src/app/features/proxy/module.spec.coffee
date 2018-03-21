@@ -8,11 +8,11 @@
     rootPath             = "../../../../../../.."
     distPath             = "#{rootPath}/dist"
     basebuildNodeModules = "#{rootPath}/node_modules"
-    userOptions          = 
-      modulesData: 
+    userOptions          =
+      modulesData:
         gulp:
           uses: '../tests/node_modules/gulp'
-        
+
         karma:
           isEnabled : no
 
@@ -56,17 +56,33 @@
         assert.property module, 'middlewares'
 
     describe 'On proxy request', ->
-      
+
 
       beforeEach ->
         module                 = moduleExports(mergedOptions)
         proxyRequest.setHeader = sinon.stub()
-        sinon.stub(console, 'log') 
+        sinon.stub(console, 'log')
         req                    = url: '/xpto'
         res                    = {}
-        
+        options                =
+          prependPath: true,
+          target:
+            protocol: 'https:',
+            slashes: true,
+            auth: null,
+            host: 'api.qa.gestta.com.br',
+            port: null,
+            hostname: 'api.qa.gestta.com.br',
+            hash: null,
+            search: null,
+            query: null,
+            pathname: '/',
+            path: '/',
+            href: 'https://api.qa.gestta.com.br/'
+          secure: false
+
         # Execute
-        module.onProxyRequest(proxyRequest, req, res)
+        module.onProxyRequest(proxyRequest, req, res, options)
 
       afterEach ->
         proxyRequest.setHeader.reset()
@@ -74,34 +90,34 @@
 
       it 'Sets CORS headers', ->
         assert.isTrue proxyRequest.setHeader.calledOnce
-      
+
       it 'Logs', ->
         assert.isTrue console.log.calledOnce
 
     describe 'On proxy error', ->
 
       beforeEach ->
-        sinon.stub(console, 'error') 
+        sinon.stub(console, 'error')
         module                 = moduleExports(mergedOptions)
         req                    = url: 'xpto'
         res                    = {
           writeHead : sinon.stub()
         }
         error                  = 'Cannot connect'
-        
+
         # Execute
         module.onProxyError(error, req, res)
-      
+
       afterEach ->
         console.error.restore()
-      
+
       it 'Writes head', ->
         assert.isTrue res.writeHead.calledOnce
 
-      it 'Logs', -> 
+      it 'Logs', ->
         assert.isTrue console.error.calledOnce
-    
-      
+
+
     describe 'Proxy', ->
 
       it 'Do not set middlewares when module is not enabled', ->
@@ -109,8 +125,8 @@
         module = moduleExports(mergedOptions)
 
         assert.isTrue _.isEmpty(module.middlewares)
-        
-      
 
-        
+
+
+
 

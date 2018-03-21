@@ -7,6 +7,7 @@ var scriptsModule = null;
 var serverConfig  = null;
 var gulp          = null;
 var del           = require('del');
+var utils         = require('./utils');
 
 var watchFolderOptions  = {
   events: ['addDir', 'unlinkDir'],
@@ -59,7 +60,8 @@ function watchFiles (options){
 
   watch([
     options.src + '/app/**/*.js',
-    options.src + '/app/**/*.coffee'
+    options.src + '/app/**/*.coffee',
+    options.src + '/app/**/*.cjsx'
   ], function(event) {
 
     if(isOnlyChange(event)) {
@@ -82,29 +84,14 @@ function watchFiles (options){
       gulp.start('templates:tmp');
     }
   });
-
-  watch([
-    options.src + '/app/**/*.cjsx',
-  ], function(event) {
-    if(isOnlyChange(event)) {
-      var fullDest  = options.tmp + '/serve/' + path.relative(options.src, event.path).replace(/\.\.\//g, '');
-      fullDest      = path.dirname( fullDest );
-      scriptsModule.buildCJSX({ src: event.path, dest: fullDest, buildOptions: options });
-    } else if (removed(event)){
-      removeFile(options, event);
-
-    }else{
-      gulp.start('inject');
-
-    }
-  });
 }
 
 module.exports = function(options) {
-
-  scriptsModule = require(options.modulesData['scripts'].uses)(options);
-  gulp          = require(options.modulesData['gulp'].uses);
-  serverConfig  = options.modulesData['server'];
+  utils = utils(options);
+  
+  scriptsModule = utils.requireModule('scripts')(options);
+  gulp          = utils.requireModule('gulp');
+  serverConfig  = utils.requireModule('server');
   var watchDeps = ['inject'];
 
   if(!serverConfig.isEnabled){
@@ -115,7 +102,7 @@ module.exports = function(options) {
     watchFiles(options);
   });
 
-  gulp.task('watchTests', ['scripts', 'cjsx'],  function(){
+  gulp.task('watchTests', ['scripts'],  function(){
     watchFiles(options);
   });
 };

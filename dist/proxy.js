@@ -1,8 +1,9 @@
- /*jshint unused:false */
+/*jshint unused:false */
 
-var proxy        = null;
-var httpProxy    = require('http-proxy');
-var middlewares  = []
+var proxy        = null,
+    httpProxy    = require('http-proxy'),
+    middlewares  = [],
+    HttpProxyRules = require('basebuild-proxy-rules');
 
 module.exports = function(options) {
 
@@ -15,6 +16,7 @@ module.exports = function(options) {
    * Location of your backend server
    */
   var proxyTarget   = moduleOptions.target;
+  var proxyRules    = new HttpProxyRules(moduleOptions.proxyRules || {});
 
   /**
    * Used to test the context of request
@@ -29,11 +31,11 @@ module.exports = function(options) {
    * @type {Array}
    */
   middlewares  = moduleOptions.middleware ? moduleOptions.middleware : [];
-  
+
   var proxyRequest = _.isFunction(moduleOptions.onProxyRequest) ? moduleOptions.onProxyRequest : onProxyRequest;
   var proxyError   = _.isFunction(moduleOptions.onProxyError)   ? moduleOptions.onProxyError   : onProxyError;
-  
-  
+
+
   /**
    * Executed only if the module is enabled
    */
@@ -102,9 +104,9 @@ module.exports = function(options) {
     return regex.test(req.url)
   }
 
-  function onProxyRequest (proxyReq, req, res) {
-    proxyReq.setHeader('Access-Control-Allow-Origin', proxyTarget);
-    console.log(chalk.green('[Proxy]'), 'Request made to:', proxyTarget + req.url);
+  function onProxyRequest (proxyReq, req, res, options) {
+    proxyReq.setHeader('Access-Control-Allow-Origin', options.target.href);
+    console.log(chalk.green('[Proxy]'), 'Request made to...', chalk.magenta('host '), options.target.href, chalk.magenta(' url '), req.url);
   }
 
   function onProxyError(error, req, res) {
@@ -128,14 +130,16 @@ module.exports = function(options) {
      * for your needs. If you can, you could also check on a context in the url which
      * may be more reliable but can't be generic.
      */
-    if (nextTest(preventWhen, req, res) || req.url === "/")  {
+    var proxySettings = proxyRules.match(req) || { target: proxyTarget };
+    var isStaticFile  = nextTest(preventWhen, req, res) || req.url === "/";
+    if ( isStaticFile && !proxySettings.forceRequest)  {
       next();
     } else {
-      proxy.web(req, res);
+      proxy.web(req, res, proxySettings);
     }
   }
 
-  return { 
+  return {
     middlewares             : middlewares,
     getValidateFunction     : getValidateFunction,
     validateRequestFunction : validateRequestFunction,

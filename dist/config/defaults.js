@@ -18,14 +18,14 @@ module.exports = function(){
     ==========================
   */
   var defaultOptions = {
-    
+
     // ************* Main folders ****************
 
-    // Main angular module of project. 
+    // Main angular module of project.
     // Will be used on $templateCache provider when generate partials.
     mainAngularModule : 'MainAngularModule',
-    
-    
+
+
     // ************* Main folders ****************
 
     // Source folder, where source code is present.
@@ -36,7 +36,7 @@ module.exports = function(){
 
     // Production folder, where source code is present on final version.
     dist              : 'builds/release',
-    
+
     // Location for e2e tests
     e2e               : 'e2e',
 
@@ -96,7 +96,7 @@ module.exports = function(){
     defaultOptions.tmp + '/**/*.mock.js'
   ];
 
-  
+
   /*
     ==========================
     Plugins
@@ -111,14 +111,14 @@ module.exports = function(){
     modules
     ==========================
   */
- 
+
   /*
-  Basebuild works with modules. There is one module for each feature,   
+  Basebuild works with modules. There is one module for each feature,
   Built-in modules: {
     utils     : {}
-    build     : {}     
-    e2eTest   : {}   
-    inject    : {}    
+    build     : {}
+    e2eTest   : {}
+    inject    : {}
     proxy     : {}
     scripts   : {}
     styles    : {}
@@ -130,13 +130,13 @@ module.exports = function(){
   }
   */
   defaultOptions.modulesData = {
-    
+
     /*
-    
+
     moduleExample: {
-      *** Basic built-in property ***  
+      *** Basic built-in property ***
       defaultValue : 'path/script.js'
-    
+
       *** Common options between modules ***
       uses          : 'path/script.js'
       notStart      : true || false,
@@ -144,35 +144,35 @@ module.exports = function(){
       isDefault     : true || false,
       isExternal    : true || false
     }
-    
+
     */
-  
+
 
     /*
       utils Module
       Access to general utilities of basebuild
     */
-    utils : { 
+    utils : {
       defaultValue : './utils.js'   ,
-      notLogOnStart: true 
+      notLogOnStart: true
     },
 
 
     /*
       build module
-      Responsible for production version of the project. 
+      Responsible for production version of the project.
     */
-    build: { 
-      defaultValue : './build.js'     
+    build: {
+      defaultValue : './build.js'
     },
 
 
     /*
       e2eTest module
-      Works in e2e tests. 
+      Works in e2e tests.
     */
-    e2eTest: { 
-      defaultValue : './e2e-tests.js' 
+    e2eTest: {
+      defaultValue : './e2e-tests.js'
     },
 
 
@@ -180,8 +180,9 @@ module.exports = function(){
       inject module
       Injects scripts and stylesheets automatically in index.html.
     */
-    inject: { 
-      defaultValue : './inject.js'    
+    inject: {
+      defaultValue : './inject.js',
+      ignore       : []
     },
 
 
@@ -196,7 +197,7 @@ module.exports = function(){
       target    : 'http://localhost:8080',
 
       // All Requests are tested with this regex to prevent the proxy when it's considered true
-      preventWhen: /\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff|woff2|cur|json)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/
+      preventWhen: /\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff|woff2|cur|json)(\?((r|v|rel|rev)=[\-\.\w]*)?)?(.+)?$/
     },
 
 
@@ -223,7 +224,7 @@ module.exports = function(){
         lint: {
           active: true
         },
-        
+
         sourcemaps: {
           active: true
         }
@@ -241,7 +242,7 @@ module.exports = function(){
       styles module
       Works with SASS (*.scss) files
     */
-    styles: { 
+    styles: {
       defaultValue : './styles.js',
       mainFile: defaultOptions.src + '/app/index.scss',
     },
@@ -262,13 +263,13 @@ module.exports = function(){
 
       //Custom .html files that can be injected in tests
       htmlFiles    : [defaultOptions.src + '/**/*.html'],
-      
+
       // Karma settings for "test" task
       testConfig   : {
-        
+
         // Run the tests only one single time
         singleRun : true,
-        
+
         browsers  : ['Chrome']
       },
 
@@ -287,8 +288,8 @@ module.exports = function(){
       watch module
       Wait for changes in files to react with some callback
     */
-    watch: { 
-      defaultValue : './watch.js'     
+    watch: {
+      defaultValue : './watch.js'
     },
 
 
@@ -299,7 +300,7 @@ module.exports = function(){
     server    : {
       defaultValue : './server.js',
 
-      // Creates routes to access files 
+      // Creates routes to access files
       routes       : {
         '/bower_components': 'bower_components'
       }
@@ -309,9 +310,9 @@ module.exports = function(){
     /*
       External module which will be the reference for gulp
     */
-    gulp: { 
-      defaultValue : 'gulp'  , 
-      notStart: true, 
+    gulp: {
+      defaultValue : 'gulp'  ,
+      notStart: true,
       isExternal: true
     },
 
@@ -398,6 +399,9 @@ module.exports = function(){
     defaultOptions.modulesData[key].isEnabled = true;
     defaultOptions.modulesData[key].uses = defaultOptions.modulesData[key].defaultValue;
   }
+
+  defaultOptions.modulesData.e2eTest.isEnabled = false;
+  defaultOptions.modulesData.docs.isEnabled    = false;
 
 
   // Migrate properties

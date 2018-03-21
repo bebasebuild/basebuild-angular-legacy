@@ -14,3 +14,8 @@ node_modules
 
 sonar.h2.db
 sonar.trace.db
+
+semantic/
+semantic.json
+
+.idea
