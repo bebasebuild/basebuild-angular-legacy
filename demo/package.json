@@ -5,7 +5,8 @@
   "dependencies": {
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "start": "gulp clean && gulp dev"
   },
   "devDependencies": {
     "gulp": "3.9.0",

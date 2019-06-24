@@ -19,3 +19,4 @@ semantic/
 semantic.json
 
 .idea
+demo/npm-debug.log
