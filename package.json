@@ -55,7 +55,7 @@
     "merge-stream": "0.1.7",
     "protractor": "1.7.0",
     "require-dir": "0.1.0",
-    "shelljs": "0.5.3",
+    "shelljs": "0.8.5",
     "sonarqube-scanner": "weslley39/sonar-scanner-npm",
     "uglify-save-license": "0.4.1",
     "wiredep": "4.0.0"
