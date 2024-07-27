@@ -1,7 +1,6 @@
 import debug from 'debug'
 import { resolve } from 'node:path'
-import { UserConfig, loadEnv } from 'vite'
-import { UserConfigFnObject } from 'vite'
+import { UserConfig, loadEnv, UserConfigFnObject } from 'vite'
 import { coffeeScritPlugin } from '../plugins/coffeeScript'
 
 const log = debug('basebuild-angular-legacy:vite-config')
