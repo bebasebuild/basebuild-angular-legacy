@@ -1,64 +1,57 @@
 {
-  "name": "basebuild-angular",
-  "version": "0.18.0",
+  "name": "basebuild-angular-legacy",
+  "version": "1.0.0.alpha.0",
   "description": "Build tool for AngularJS projects as a node module to be reusable and able to update. Write once, use everywhere! ;)",
-  "main": "./dist/main.js",
+  "main": "dist/core/index.js",
+  "module": "dist/core/index.js",
+  "types": "dist/types/core/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/core/index.js",
+      "types": "./dist/types/core/index.d.ts",
+      "require": "./dist/core/index.js"
+    },
+    "./core/*": {
+      "import": "./dist/core/*",
+      "types": "./dist/types/core/*",
+      "require": "./dist/core/*"
+    },
+    "./plugins": {
+      "import": "./dist/plugins/index.js",
+      "types": "./dist/types/plugins/index.js",
+      "require": "./dist/plugins/index.js"
+    },
+    "./plugins/*": {
+      "import": "./dist/plugins/*",
+      "types": "./dist/types/plugins/*",
+      "require": "./dist/plugins/*"
+    },
+    "./utils": {
+      "import": "./dist/utils/index.js",
+      "types": "./dist/types/utils/index.js",
+      "require": "./dist/utils/index.js"
+    },
+    "./utils/*": {
+      "import": "./dist/utils/*",
+      "types": "./dist/types/utils/*",
+      "require": "./dist/utils/*"
+    },
+    "./types/*": {
+      "types": "./dist/types/*"
+    },
+    "./package.json": "./package.json"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TimeoutZero/BaseBuildAngular.git"
   },
   "dependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "basebuild-proxy-rules": "2.0.0-rc",
-    "browser-sync": "2.13.0",
-    "browser-sync-spa": "1.0.3",
-    "chalk": "1.1.1",
-    "concat-stream": "1.5.1",
-    "del": "2.2.0",
-    "gulp-angular-filesort": "1.1.1",
-    "gulp-angular-templatecache": "1.9.1",
-    "gulp-babel": "^7.0.1",
-    "gulp-cjsx": "3.0.0",
-    "gulp-coffee": "2.3.1",
-    "gulp-coffeelint": "0.4.0",
-    "gulp-concat": "2.6.0",
-    "gulp-csso": "2.0.0",
-    "gulp-debug": "2.1.2",
-    "gulp-filter": "4.0.0",
-    "gulp-flatten": "0.3.0",
-    "gulp-htmlmin": "2.0.0",
-    "gulp-if": "1.2.5",
-    "gulp-inject": "4.1.0",
-    "gulp-jshint": "1.9.0",
-    "gulp-load-plugins": "1.2.4",
-    "gulp-ng-annotate": "2.0.0",
-    "gulp-protractor": "0.0.12",
-    "gulp-rename": "1.2.0",
-    "gulp-replace": "0.5.0",
-    "gulp-rev": "3.0.1",
-    "gulp-rev-replace": "0.3.1",
-    "gulp-sass": "2.0.3",
-    "gulp-size": "1.2.0",
-    "gulp-sourcemaps": "1.6.0",
-    "gulp-uglify": "1.1.0",
-    "gulp-useref": "1.1.0",
-    "gulp-util": "3.0.2",
-    "gulp-watch": "4.3.5",
-    "http-proxy": "1.8.0",
-    "jshint-stylish": "1.0.0",
-    "lodash": "3.10.0",
-    "main-bower-files": "2.5.0",
-    "merge-stream": "0.1.7",
-    "protractor": "1.7.0",
-    "require-dir": "0.1.0",
-    "shelljs": "0.5.3",
-    "sonarqube-scanner": "weslley39/sonar-scanner-npm",
-    "uglify-save-license": "0.4.1",
-    "wiredep": "4.0.0"
+    "@bebasebuild/basebuild": "3.0.0-alpha.0",
+    "coffeescript": "2.7.0"
   },
   "keywords": [
     "basebuild",
@@ -77,6 +70,6 @@
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=20.10.0"
   }
 }

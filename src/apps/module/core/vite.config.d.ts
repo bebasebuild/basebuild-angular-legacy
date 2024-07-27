@@ -1,0 +1,1 @@
+export { UserConfig as ViteUserConfig } from 'vite'
